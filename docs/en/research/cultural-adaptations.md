@@ -76,6 +76,42 @@ saves stay unchanged.
 
 ![The «Круглики» (kruhlyky) currency on the map](../../screenshots/studs-krugliky.jpg)
 
+### Why «круглики» (kruhlyky)
+
+In LEGO games the main currency is studs — the round bumps on top of a brick that burst out of everything
+you break. This game also calls them Treasure. There is no established Ukrainian word for them: the glossary
+research found no settled terminology for LEGO games in Steam guides, Ukrainian localization catalogues or
+set descriptions. So the name had to be chosen.
+
+| Option | Why not |
+|---|---|
+| **Скарб** ("treasure", used before 0.1.5) | a literal Treasure, but the game also has real treasures and artifacts. "Treasure Magnet" and "Treasure x2" mixed money up with valuables, and the plural ("double treasures") sounded odd |
+| **Шпильки / шипи** ("pins / spikes") | technically a translation of *stud*, but players read it as hairpins or thorns, not money |
+| **Цеглинки** ("bricks") | the game already has real bricks — build pieces and the **red bricks** that unlock extras; currency and pieces would share one word |
+| **Монети** ("coins") | close in meaning, but generic for any game; loses the LEGO character and the recognisable shape |
+
+**Круглики** ("little round ones") describes exactly what the player sees: a round, coin-like piece. It is a
+playful Ukrainian diminutive that matches the tone of the game, declines easily and combines well: «Магніт
+кругликів» (Stud Magnet), «Круглики x2», «Подвійні круглики!», «Круглики за ворогів» (Character Studs).
+It clashes with nothing else in the game, so one word covers both Studs and Treasure. The single deliberate
+exception is **какашковий скарб** (Poo Treasure) — the original's joke, worth keeping.
+
+### Why «Бонуси» (Bonuses), not «Чити» (Cheats)
+
+Extras is the menu where the modifiers bought with kruhlyky are switched on: the stud magnet, x2–x10
+multipliers, fast build, invincibility, silly effects. Options considered:
+
+| Option | Why not |
+|---|---|
+| **Додатково** ("Additional", before 0.1.5) | reads like "additional settings"; it is not clear there are rewards inside |
+| **Додатки** ("Add-ons") | in games and launchers this means DLC or apps |
+| **Чити** ("Cheats") | close in function, but the game presents these effects as earned rewards — unlocked with red bricks and bought with kruhlyky. "Cheat" implies cheating and does not suit a family game; the game also has a separate «Ввести код» (Enter Code) screen for real codes |
+| **Екстри** ("Extras" transliterated) | a calque not every player understands |
+
+**Бонуси** is a short word every gamer knows for "a reward on top". It fits the menu item and matches the
+rest of the texts: «Бонус розблоковано» (Extra Unlocked), «Бонус персонажа», «Бонусні круглики»,
+«Бонус за старе збереження».
+
 All these decisions are recorded in `translations/glossary.json` with the
 status `team-approved`. Terms with the status `low-proposal` (for example,
 «Мінікіт» for Minikit, «Жетон персонажа» for Character Token) are reasoned

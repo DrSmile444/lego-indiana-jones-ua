@@ -14,9 +14,10 @@ export default defineConfig({
   integrations: [
     starlight({
       title: {
-        uk: 'LEGO Індіана Джонс — українізатор',
-        en: 'LEGO Indiana Jones — Ukrainian localization',
+        uk: 'Українізатор LEGO Indiana Jones',
+        en: 'LEGO Indiana Jones Ukrainian localization',
       },
+      routeMiddleware: './src/routeData.ts',
       description:
         'Неофіційна українська локалізація LEGO Indiana Jones: The Original Adventures — текст, шрифти з ІіЇїЄєҐґ, текстури й меню ПК.',
       defaultLocale: 'root',

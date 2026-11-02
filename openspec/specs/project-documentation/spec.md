@@ -67,3 +67,10 @@ README SHALL contain a short English About section for international modders wit
 #### Scenario: Foreign modder
 - **WHEN** a modder who does not read Ukrainian opens the README
 - **THEN** they understand what the project is and find the technical documents
+
+### Requirement: Key game terms are explained
+The cultural adaptations document SHALL explain, in Ukrainian and English, why the currency is «круглики» and why the Extras menu is «Бонуси», listing the alternatives considered and why each was rejected.
+
+#### Scenario: A reader asks why not «Чити»
+- **WHEN** a reader opens the cultural adaptations page
+- **THEN** they find the considered options for the Extras menu, including «Чити», with the reasoning for «Бонуси»

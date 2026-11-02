@@ -49,9 +49,9 @@ Yes. The package only adds its own files (`scripts/UKRAINIAN.*`) and uses the st
 
 Delete the localization files — see [“Uninstalling”](/lego-indiana-jones-ua/en/install/#uninstalling). There is no need to reinstall the game.
 
-## Why «круглики», «Валєра» and «Пластун»?
+## Why «круглики», «Бонуси», «Валєра» and «Пластун»?
 
-We translated so that the game sounds natural in Ukrainian rather than like a calque. Studs became «круглики» (kruhlyky, “little round ones”), the Jungle Guide became «Валєра» (Valera) and the Boy Scout became «Пластун» (Plastun, the Ukrainian word for a scout). Every decision is explained in [cultural adaptations](/lego-indiana-jones-ua/en/adaptations/), and all terms are in the [glossary](/lego-indiana-jones-ua/en/glossary/).
+We translated so that the game sounds natural in Ukrainian rather than like a calque. Studs became «круглики» (kruhlyky, “little round ones”) and the Extras menu became «Бонуси» (Bonuses) rather than “Cheats”, the Jungle Guide became «Валєра» (Valera) and the Boy Scout became «Пластун» (Plastun, the Ukrainian word for a scout). Every decision is explained in [cultural adaptations](/lego-indiana-jones-ua/en/adaptations/), and all terms are in the [glossary](/lego-indiana-jones-ua/en/glossary/).
 
 ## Is this an official translation?
 
