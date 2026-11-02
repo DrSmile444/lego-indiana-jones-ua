@@ -1,0 +1,9 @@
+* text=auto eol=lf
+*.ps1 text eol=crlf
+*.json text eol=lf
+# Third-party binaries and Affinity projects are kept byte for byte.
+*.dll binary
+*.af binary
+*.png binary
+*.jpg binary
+native/vendor/** -text

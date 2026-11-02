@@ -1,0 +1,1860 @@
+{
+  "ENGLISH_CREDITS.TXT": {
+    "13": {
+      "kw": "heading",
+      "translate": true
+    },
+    "16": {
+      "kw": "title",
+      "translate": true
+    },
+    "19": {
+      "kw": "title",
+      "translate": true
+    },
+    "22": {
+      "kw": "title",
+      "translate": true
+    },
+    "25": {
+      "kw": "title",
+      "translate": true
+    },
+    "28": {
+      "kw": "title",
+      "translate": true
+    },
+    "31": {
+      "kw": "title",
+      "translate": true
+    },
+    "34": {
+      "kw": "title",
+      "translate": true
+    },
+    "37": {
+      "kw": "title",
+      "translate": true
+    },
+    "40": {
+      "kw": "title",
+      "translate": true
+    },
+    "43": {
+      "kw": "title",
+      "translate": true
+    },
+    "46": {
+      "kw": "title",
+      "translate": true
+    },
+    "49": {
+      "kw": "title",
+      "translate": true
+    },
+    "52": {
+      "kw": "title",
+      "translate": true
+    },
+    "56": {
+      "kw": "heading",
+      "translate": true
+    },
+    "64": {
+      "kw": "heading",
+      "translate": true
+    },
+    "68": {
+      "kw": "heading",
+      "translate": true
+    },
+    "73": {
+      "kw": "heading",
+      "translate": true
+    },
+    "87": {
+      "kw": "heading",
+      "translate": true
+    },
+    "106": {
+      "kw": "heading",
+      "translate": true
+    },
+    "120": {
+      "kw": "heading",
+      "translate": true
+    },
+    "125": {
+      "kw": "heading",
+      "translate": true
+    },
+    "129": {
+      "kw": "heading",
+      "translate": true
+    },
+    "133": {
+      "kw": "heading",
+      "translate": true
+    },
+    "140": {
+      "kw": "heading",
+      "translate": true
+    },
+    "145": {
+      "kw": "heading",
+      "translate": true
+    },
+    "157": {
+      "kw": "heading",
+      "translate": true
+    },
+    "161": {
+      "kw": "heading",
+      "translate": true
+    },
+    "166": {
+      "kw": "heading",
+      "translate": true
+    },
+    "170": {
+      "kw": "heading",
+      "translate": true
+    },
+    "174": {
+      "kw": "heading",
+      "translate": true
+    },
+    "178": {
+      "kw": "heading",
+      "translate": true
+    },
+    "187": {
+      "kw": "heading",
+      "translate": true
+    },
+    "191": {
+      "kw": "heading",
+      "translate": true
+    },
+    "195": {
+      "kw": "heading",
+      "translate": true
+    },
+    "199": {
+      "kw": "heading",
+      "translate": true
+    },
+    "210": {
+      "kw": "heading",
+      "translate": true
+    },
+    "214": {
+      "kw": "heading",
+      "translate": true
+    },
+    "218": {
+      "kw": "heading",
+      "translate": true
+    },
+    "222": {
+      "kw": "heading",
+      "translate": true
+    },
+    "226": {
+      "kw": "heading",
+      "translate": true
+    },
+    "231": {
+      "kw": "heading",
+      "translate": true
+    },
+    "292": {
+      "kw": "title",
+      "translate": true
+    },
+    "295": {
+      "kw": "title",
+      "translate": true
+    },
+    "298": {
+      "kw": "title",
+      "translate": true
+    },
+    "301": {
+      "kw": "title",
+      "translate": true
+    },
+    "304": {
+      "kw": "title",
+      "translate": true
+    },
+    "308": {
+      "kw": "heading",
+      "translate": true
+    },
+    "312": {
+      "kw": "heading",
+      "translate": true
+    },
+    "316": {
+      "kw": "heading",
+      "translate": true
+    },
+    "320": {
+      "kw": "heading",
+      "translate": true
+    },
+    "324": {
+      "kw": "heading",
+      "translate": true
+    },
+    "328": {
+      "kw": "heading",
+      "translate": true
+    },
+    "337": {
+      "kw": "heading",
+      "translate": true
+    },
+    "354": {
+      "kw": "heading",
+      "translate": true
+    },
+    "358": {
+      "kw": "heading",
+      "translate": true
+    },
+    "395": {
+      "kw": "heading",
+      "translate": true
+    },
+    "402": {
+      "kw": "heading",
+      "translate": true
+    },
+    "407": {
+      "kw": "heading",
+      "translate": true
+    },
+    "411": {
+      "kw": "heading",
+      "translate": true
+    },
+    "415": {
+      "kw": "heading",
+      "translate": true
+    },
+    "419": {
+      "kw": "heading",
+      "translate": true
+    },
+    "437": {
+      "kw": "heading",
+      "translate": true
+    },
+    "441": {
+      "kw": "heading",
+      "translate": true
+    },
+    "445": {
+      "kw": "heading",
+      "translate": true
+    },
+    "461": {
+      "kw": "heading",
+      "translate": true
+    },
+    "483": {
+      "kw": "heading",
+      "translate": true
+    },
+    "487": {
+      "kw": "heading",
+      "translate": true
+    },
+    "492": {
+      "kw": "heading",
+      "translate": true
+    },
+    "497": {
+      "kw": "heading",
+      "translate": true
+    },
+    "501": {
+      "kw": "heading",
+      "translate": true
+    },
+    "505": {
+      "kw": "heading",
+      "translate": true
+    },
+    "509": {
+      "kw": "heading",
+      "translate": true
+    },
+    "513": {
+      "kw": "heading",
+      "translate": true
+    },
+    "517": {
+      "kw": "heading",
+      "translate": true
+    },
+    "521": {
+      "kw": "heading",
+      "translate": true
+    },
+    "525": {
+      "kw": "heading",
+      "translate": true
+    },
+    "535": {
+      "kw": "heading",
+      "translate": true
+    },
+    "539": {
+      "kw": "heading",
+      "translate": true
+    },
+    "543": {
+      "kw": "heading",
+      "translate": true
+    },
+    "547": {
+      "kw": "heading",
+      "translate": true
+    },
+    "566": {
+      "kw": "heading",
+      "translate": true
+    },
+    "570": {
+      "kw": "heading",
+      "translate": true
+    },
+    "574": {
+      "kw": "heading",
+      "translate": true
+    },
+    "579": {
+      "kw": "heading",
+      "translate": true
+    },
+    "589": {
+      "kw": "heading",
+      "translate": true
+    },
+    "593": {
+      "kw": "heading",
+      "translate": true
+    },
+    "598": {
+      "kw": "heading",
+      "translate": true
+    },
+    "603": {
+      "kw": "heading",
+      "translate": true
+    },
+    "607": {
+      "kw": "heading",
+      "translate": true
+    },
+    "611": {
+      "kw": "heading",
+      "translate": true
+    },
+    "615": {
+      "kw": "heading",
+      "translate": true
+    },
+    "619": {
+      "kw": "heading",
+      "translate": true
+    },
+    "623": {
+      "kw": "heading",
+      "translate": true
+    },
+    "627": {
+      "kw": "heading",
+      "translate": true
+    },
+    "636": {
+      "kw": "heading",
+      "translate": true
+    },
+    "640": {
+      "kw": "heading",
+      "translate": true
+    },
+    "644": {
+      "kw": "heading",
+      "translate": true
+    },
+    "650": {
+      "kw": "heading",
+      "translate": true
+    },
+    "655": {
+      "kw": "heading",
+      "translate": true
+    },
+    "659": {
+      "kw": "heading",
+      "translate": true
+    },
+    "663": {
+      "kw": "heading",
+      "translate": true
+    },
+    "667": {
+      "kw": "heading",
+      "translate": true
+    },
+    "671": {
+      "kw": "heading",
+      "translate": true
+    },
+    "675": {
+      "kw": "heading",
+      "translate": true
+    },
+    "681": {
+      "kw": "heading",
+      "translate": true
+    },
+    "685": {
+      "kw": "heading",
+      "translate": true
+    },
+    "689": {
+      "kw": "heading",
+      "translate": true
+    },
+    "694": {
+      "kw": "heading",
+      "translate": true
+    },
+    "698": {
+      "kw": "heading",
+      "translate": true
+    },
+    "702": {
+      "kw": "heading",
+      "translate": true
+    },
+    "706": {
+      "kw": "heading",
+      "translate": true
+    },
+    "710": {
+      "kw": "heading",
+      "translate": true
+    },
+    "714": {
+      "kw": "heading",
+      "translate": true
+    },
+    "718": {
+      "kw": "heading",
+      "translate": true
+    },
+    "722": {
+      "kw": "heading",
+      "translate": true
+    },
+    "726": {
+      "kw": "heading",
+      "translate": true
+    },
+    "730": {
+      "kw": "heading",
+      "translate": true
+    },
+    "734": {
+      "kw": "heading",
+      "translate": true
+    },
+    "738": {
+      "kw": "heading",
+      "translate": true
+    },
+    "742": {
+      "kw": "heading",
+      "translate": true
+    },
+    "746": {
+      "kw": "heading",
+      "translate": true
+    },
+    "750": {
+      "kw": "heading",
+      "translate": true
+    },
+    "754": {
+      "kw": "heading",
+      "translate": true
+    },
+    "758": {
+      "kw": "heading",
+      "translate": true
+    },
+    "762": {
+      "kw": "heading",
+      "translate": true
+    },
+    "766": {
+      "kw": "heading",
+      "translate": true
+    },
+    "770": {
+      "kw": "heading",
+      "translate": true
+    },
+    "774": {
+      "kw": "heading",
+      "translate": true
+    },
+    "778": {
+      "kw": "heading",
+      "translate": true
+    },
+    "782": {
+      "kw": "heading",
+      "translate": true
+    },
+    "786": {
+      "kw": "heading",
+      "translate": true
+    },
+    "790": {
+      "kw": "heading",
+      "translate": true
+    },
+    "794": {
+      "kw": "heading",
+      "translate": true
+    },
+    "800": {
+      "kw": "heading",
+      "translate": true
+    },
+    "808": {
+      "kw": "heading",
+      "translate": true
+    },
+    "812": {
+      "kw": "heading",
+      "translate": true
+    },
+    "816": {
+      "kw": "heading",
+      "translate": true
+    },
+    "820": {
+      "kw": "heading",
+      "translate": true
+    },
+    "824": {
+      "kw": "heading",
+      "translate": true
+    },
+    "829": {
+      "kw": "heading",
+      "translate": true
+    },
+    "833": {
+      "kw": "heading",
+      "translate": true
+    },
+    "837": {
+      "kw": "heading",
+      "translate": true
+    },
+    "841": {
+      "kw": "heading",
+      "translate": true
+    },
+    "845": {
+      "kw": "heading",
+      "translate": true
+    },
+    "849": {
+      "kw": "heading",
+      "translate": true
+    },
+    "855": {
+      "kw": "heading",
+      "translate": true
+    },
+    "877": {
+      "kw": "heading",
+      "translate": true
+    },
+    "881": {
+      "kw": "heading",
+      "translate": true
+    },
+    "897": {
+      "kw": "heading",
+      "translate": true
+    },
+    "979": {
+      "kw": "heading",
+      "translate": true
+    }
+  },
+  "PC_ENGLISH_CREDITS.TXT": {
+    "13": {
+      "kw": "heading",
+      "translate": true
+    },
+    "16": {
+      "kw": "title",
+      "translate": true
+    },
+    "19": {
+      "kw": "title",
+      "translate": true
+    },
+    "22": {
+      "kw": "title",
+      "translate": true
+    },
+    "25": {
+      "kw": "title",
+      "translate": true
+    },
+    "28": {
+      "kw": "title",
+      "translate": true
+    },
+    "31": {
+      "kw": "title",
+      "translate": true
+    },
+    "34": {
+      "kw": "title",
+      "translate": true
+    },
+    "37": {
+      "kw": "title",
+      "translate": true
+    },
+    "40": {
+      "kw": "title",
+      "translate": true
+    },
+    "43": {
+      "kw": "title",
+      "translate": true
+    },
+    "46": {
+      "kw": "title",
+      "translate": true
+    },
+    "49": {
+      "kw": "title",
+      "translate": true
+    },
+    "52": {
+      "kw": "title",
+      "translate": true
+    },
+    "56": {
+      "kw": "heading",
+      "translate": true
+    },
+    "64": {
+      "kw": "heading",
+      "translate": true
+    },
+    "68": {
+      "kw": "heading",
+      "translate": true
+    },
+    "73": {
+      "kw": "heading",
+      "translate": true
+    },
+    "87": {
+      "kw": "heading",
+      "translate": true
+    },
+    "106": {
+      "kw": "heading",
+      "translate": true
+    },
+    "120": {
+      "kw": "heading",
+      "translate": true
+    },
+    "125": {
+      "kw": "heading",
+      "translate": true
+    },
+    "129": {
+      "kw": "heading",
+      "translate": true
+    },
+    "133": {
+      "kw": "heading",
+      "translate": true
+    },
+    "140": {
+      "kw": "heading",
+      "translate": true
+    },
+    "145": {
+      "kw": "heading",
+      "translate": true
+    },
+    "157": {
+      "kw": "heading",
+      "translate": true
+    },
+    "161": {
+      "kw": "heading",
+      "translate": true
+    },
+    "166": {
+      "kw": "heading",
+      "translate": true
+    },
+    "170": {
+      "kw": "heading",
+      "translate": true
+    },
+    "174": {
+      "kw": "heading",
+      "translate": true
+    },
+    "178": {
+      "kw": "heading",
+      "translate": true
+    },
+    "187": {
+      "kw": "heading",
+      "translate": true
+    },
+    "191": {
+      "kw": "heading",
+      "translate": true
+    },
+    "195": {
+      "kw": "heading",
+      "translate": true
+    },
+    "199": {
+      "kw": "heading",
+      "translate": true
+    },
+    "210": {
+      "kw": "heading",
+      "translate": true
+    },
+    "214": {
+      "kw": "heading",
+      "translate": true
+    },
+    "218": {
+      "kw": "heading",
+      "translate": true
+    },
+    "222": {
+      "kw": "heading",
+      "translate": true
+    },
+    "226": {
+      "kw": "heading",
+      "translate": true
+    },
+    "231": {
+      "kw": "heading",
+      "translate": true
+    },
+    "292": {
+      "kw": "title",
+      "translate": true
+    },
+    "295": {
+      "kw": "title",
+      "translate": true
+    },
+    "298": {
+      "kw": "title",
+      "translate": true
+    },
+    "301": {
+      "kw": "title",
+      "translate": true
+    },
+    "304": {
+      "kw": "title",
+      "translate": true
+    },
+    "308": {
+      "kw": "heading",
+      "translate": true
+    },
+    "312": {
+      "kw": "heading",
+      "translate": true
+    },
+    "316": {
+      "kw": "heading",
+      "translate": true
+    },
+    "320": {
+      "kw": "heading",
+      "translate": true
+    },
+    "324": {
+      "kw": "heading",
+      "translate": true
+    },
+    "328": {
+      "kw": "heading",
+      "translate": true
+    },
+    "337": {
+      "kw": "heading",
+      "translate": true
+    },
+    "346": {
+      "kw": "heading",
+      "translate": false
+    },
+    "353": {
+      "kw": "heading",
+      "translate": true
+    },
+    "357": {
+      "kw": "heading",
+      "translate": true
+    },
+    "394": {
+      "kw": "heading",
+      "translate": true
+    },
+    "401": {
+      "kw": "heading",
+      "translate": true
+    },
+    "406": {
+      "kw": "heading",
+      "translate": true
+    },
+    "410": {
+      "kw": "heading",
+      "translate": true
+    },
+    "414": {
+      "kw": "heading",
+      "translate": true
+    },
+    "418": {
+      "kw": "heading",
+      "translate": true
+    },
+    "436": {
+      "kw": "heading",
+      "translate": true
+    },
+    "440": {
+      "kw": "heading",
+      "translate": true
+    },
+    "444": {
+      "kw": "heading",
+      "translate": true
+    },
+    "448": {
+      "kw": "heading",
+      "translate": false
+    },
+    "459": {
+      "kw": "heading",
+      "translate": true
+    },
+    "481": {
+      "kw": "heading",
+      "translate": true
+    },
+    "485": {
+      "kw": "heading",
+      "translate": true
+    },
+    "490": {
+      "kw": "heading",
+      "translate": true
+    },
+    "495": {
+      "kw": "heading",
+      "translate": true
+    },
+    "499": {
+      "kw": "heading",
+      "translate": true
+    },
+    "503": {
+      "kw": "heading",
+      "translate": true
+    },
+    "507": {
+      "kw": "heading",
+      "translate": true
+    },
+    "511": {
+      "kw": "heading",
+      "translate": true
+    },
+    "515": {
+      "kw": "heading",
+      "translate": true
+    },
+    "519": {
+      "kw": "heading",
+      "translate": true
+    },
+    "523": {
+      "kw": "heading",
+      "translate": true
+    },
+    "533": {
+      "kw": "heading",
+      "translate": true
+    },
+    "537": {
+      "kw": "heading",
+      "translate": true
+    },
+    "541": {
+      "kw": "heading",
+      "translate": true
+    },
+    "545": {
+      "kw": "heading",
+      "translate": true
+    },
+    "549": {
+      "kw": "heading",
+      "translate": false
+    },
+    "553": {
+      "kw": "heading",
+      "translate": false
+    },
+    "557": {
+      "kw": "heading",
+      "translate": false
+    },
+    "561": {
+      "kw": "heading",
+      "translate": true
+    },
+    "565": {
+      "kw": "heading",
+      "translate": true
+    },
+    "569": {
+      "kw": "heading",
+      "translate": true
+    },
+    "574": {
+      "kw": "heading",
+      "translate": true
+    },
+    "584": {
+      "kw": "heading",
+      "translate": true
+    },
+    "588": {
+      "kw": "heading",
+      "translate": true
+    },
+    "593": {
+      "kw": "heading",
+      "translate": true
+    },
+    "598": {
+      "kw": "heading",
+      "translate": true
+    },
+    "602": {
+      "kw": "heading",
+      "translate": true
+    },
+    "606": {
+      "kw": "heading",
+      "translate": true
+    },
+    "610": {
+      "kw": "heading",
+      "translate": true
+    },
+    "614": {
+      "kw": "heading",
+      "translate": true
+    },
+    "618": {
+      "kw": "heading",
+      "translate": true
+    },
+    "622": {
+      "kw": "heading",
+      "translate": true
+    },
+    "631": {
+      "kw": "heading",
+      "translate": true
+    },
+    "635": {
+      "kw": "heading",
+      "translate": true
+    },
+    "639": {
+      "kw": "heading",
+      "translate": true
+    },
+    "645": {
+      "kw": "heading",
+      "translate": true
+    },
+    "650": {
+      "kw": "heading",
+      "translate": true
+    },
+    "654": {
+      "kw": "heading",
+      "translate": true
+    },
+    "658": {
+      "kw": "heading",
+      "translate": true
+    },
+    "662": {
+      "kw": "heading",
+      "translate": true
+    },
+    "666": {
+      "kw": "heading",
+      "translate": true
+    },
+    "670": {
+      "kw": "heading",
+      "translate": true
+    },
+    "676": {
+      "kw": "heading",
+      "translate": true
+    },
+    "680": {
+      "kw": "heading",
+      "translate": true
+    },
+    "684": {
+      "kw": "heading",
+      "translate": true
+    },
+    "689": {
+      "kw": "heading",
+      "translate": true
+    },
+    "693": {
+      "kw": "heading",
+      "translate": true
+    },
+    "697": {
+      "kw": "heading",
+      "translate": true
+    },
+    "701": {
+      "kw": "heading",
+      "translate": true
+    },
+    "705": {
+      "kw": "heading",
+      "translate": true
+    },
+    "709": {
+      "kw": "heading",
+      "translate": true
+    },
+    "713": {
+      "kw": "heading",
+      "translate": true
+    },
+    "717": {
+      "kw": "heading",
+      "translate": true
+    },
+    "721": {
+      "kw": "heading",
+      "translate": true
+    },
+    "725": {
+      "kw": "heading",
+      "translate": true
+    },
+    "729": {
+      "kw": "heading",
+      "translate": true
+    },
+    "733": {
+      "kw": "heading",
+      "translate": true
+    },
+    "737": {
+      "kw": "heading",
+      "translate": true
+    },
+    "741": {
+      "kw": "heading",
+      "translate": true
+    },
+    "745": {
+      "kw": "heading",
+      "translate": true
+    },
+    "749": {
+      "kw": "heading",
+      "translate": true
+    },
+    "753": {
+      "kw": "heading",
+      "translate": true
+    },
+    "757": {
+      "kw": "heading",
+      "translate": true
+    },
+    "761": {
+      "kw": "heading",
+      "translate": true
+    },
+    "765": {
+      "kw": "heading",
+      "translate": true
+    },
+    "769": {
+      "kw": "heading",
+      "translate": true
+    },
+    "773": {
+      "kw": "heading",
+      "translate": true
+    },
+    "777": {
+      "kw": "heading",
+      "translate": true
+    },
+    "781": {
+      "kw": "heading",
+      "translate": true
+    },
+    "785": {
+      "kw": "heading",
+      "translate": true
+    },
+    "789": {
+      "kw": "heading",
+      "translate": true
+    },
+    "795": {
+      "kw": "heading",
+      "translate": true
+    },
+    "803": {
+      "kw": "heading",
+      "translate": true
+    },
+    "807": {
+      "kw": "heading",
+      "translate": true
+    },
+    "811": {
+      "kw": "heading",
+      "translate": true
+    },
+    "815": {
+      "kw": "heading",
+      "translate": true
+    },
+    "819": {
+      "kw": "heading",
+      "translate": true
+    },
+    "824": {
+      "kw": "heading",
+      "translate": true
+    },
+    "828": {
+      "kw": "heading",
+      "translate": true
+    },
+    "832": {
+      "kw": "heading",
+      "translate": true
+    },
+    "836": {
+      "kw": "heading",
+      "translate": true
+    },
+    "840": {
+      "kw": "heading",
+      "translate": true
+    },
+    "844": {
+      "kw": "heading",
+      "translate": true
+    },
+    "850": {
+      "kw": "heading",
+      "translate": true
+    },
+    "872": {
+      "kw": "heading",
+      "translate": true
+    },
+    "876": {
+      "kw": "heading",
+      "translate": true
+    },
+    "892": {
+      "kw": "heading",
+      "translate": true
+    },
+    "974": {
+      "kw": "heading",
+      "translate": true
+    }
+  },
+  "AMERICAN_CREDITS.TXT": {
+    "13": {
+      "kw": "heading",
+      "translate": true
+    },
+    "16": {
+      "kw": "title",
+      "translate": true
+    },
+    "19": {
+      "kw": "title",
+      "translate": true
+    },
+    "22": {
+      "kw": "title",
+      "translate": true
+    },
+    "25": {
+      "kw": "title",
+      "translate": true
+    },
+    "28": {
+      "kw": "title",
+      "translate": true
+    },
+    "31": {
+      "kw": "title",
+      "translate": true
+    },
+    "34": {
+      "kw": "title",
+      "translate": true
+    },
+    "37": {
+      "kw": "title",
+      "translate": true
+    },
+    "40": {
+      "kw": "title",
+      "translate": true
+    },
+    "43": {
+      "kw": "title",
+      "translate": true
+    },
+    "46": {
+      "kw": "title",
+      "translate": true
+    },
+    "49": {
+      "kw": "title",
+      "translate": true
+    },
+    "52": {
+      "kw": "title",
+      "translate": true
+    },
+    "56": {
+      "kw": "heading",
+      "translate": true
+    },
+    "64": {
+      "kw": "heading",
+      "translate": true
+    },
+    "68": {
+      "kw": "heading",
+      "translate": true
+    },
+    "73": {
+      "kw": "heading",
+      "translate": true
+    },
+    "87": {
+      "kw": "heading",
+      "translate": true
+    },
+    "106": {
+      "kw": "heading",
+      "translate": true
+    },
+    "120": {
+      "kw": "heading",
+      "translate": true
+    },
+    "125": {
+      "kw": "heading",
+      "translate": true
+    },
+    "129": {
+      "kw": "heading",
+      "translate": true
+    },
+    "133": {
+      "kw": "heading",
+      "translate": true
+    },
+    "140": {
+      "kw": "heading",
+      "translate": true
+    },
+    "145": {
+      "kw": "heading",
+      "translate": true
+    },
+    "157": {
+      "kw": "heading",
+      "translate": true
+    },
+    "161": {
+      "kw": "heading",
+      "translate": true
+    },
+    "166": {
+      "kw": "heading",
+      "translate": true
+    },
+    "170": {
+      "kw": "heading",
+      "translate": true
+    },
+    "174": {
+      "kw": "heading",
+      "translate": true
+    },
+    "178": {
+      "kw": "heading",
+      "translate": true
+    },
+    "187": {
+      "kw": "heading",
+      "translate": true
+    },
+    "191": {
+      "kw": "heading",
+      "translate": true
+    },
+    "195": {
+      "kw": "heading",
+      "translate": true
+    },
+    "199": {
+      "kw": "heading",
+      "translate": true
+    },
+    "210": {
+      "kw": "heading",
+      "translate": true
+    },
+    "214": {
+      "kw": "heading",
+      "translate": true
+    },
+    "218": {
+      "kw": "heading",
+      "translate": true
+    },
+    "222": {
+      "kw": "heading",
+      "translate": true
+    },
+    "226": {
+      "kw": "heading",
+      "translate": true
+    },
+    "231": {
+      "kw": "heading",
+      "translate": true
+    },
+    "292": {
+      "kw": "title",
+      "translate": true
+    },
+    "295": {
+      "kw": "title",
+      "translate": true
+    },
+    "298": {
+      "kw": "title",
+      "translate": true
+    },
+    "301": {
+      "kw": "title",
+      "translate": true
+    },
+    "304": {
+      "kw": "title",
+      "translate": true
+    },
+    "308": {
+      "kw": "heading",
+      "translate": true
+    },
+    "312": {
+      "kw": "heading",
+      "translate": true
+    },
+    "316": {
+      "kw": "heading",
+      "translate": true
+    },
+    "320": {
+      "kw": "heading",
+      "translate": true
+    },
+    "324": {
+      "kw": "heading",
+      "translate": true
+    },
+    "328": {
+      "kw": "heading",
+      "translate": true
+    },
+    "337": {
+      "kw": "heading",
+      "translate": true
+    },
+    "346": {
+      "kw": "heading",
+      "translate": false
+    },
+    "353": {
+      "kw": "heading",
+      "translate": true
+    },
+    "357": {
+      "kw": "heading",
+      "translate": true
+    },
+    "394": {
+      "kw": "heading",
+      "translate": true
+    },
+    "401": {
+      "kw": "heading",
+      "translate": true
+    },
+    "406": {
+      "kw": "heading",
+      "translate": true
+    },
+    "410": {
+      "kw": "heading",
+      "translate": true
+    },
+    "414": {
+      "kw": "heading",
+      "translate": true
+    },
+    "418": {
+      "kw": "heading",
+      "translate": true
+    },
+    "436": {
+      "kw": "heading",
+      "translate": true
+    },
+    "440": {
+      "kw": "heading",
+      "translate": true
+    },
+    "444": {
+      "kw": "heading",
+      "translate": true
+    },
+    "448": {
+      "kw": "heading",
+      "translate": false
+    },
+    "459": {
+      "kw": "heading",
+      "translate": true
+    },
+    "481": {
+      "kw": "heading",
+      "translate": true
+    },
+    "485": {
+      "kw": "heading",
+      "translate": true
+    },
+    "490": {
+      "kw": "heading",
+      "translate": true
+    },
+    "495": {
+      "kw": "heading",
+      "translate": true
+    },
+    "499": {
+      "kw": "heading",
+      "translate": true
+    },
+    "503": {
+      "kw": "heading",
+      "translate": true
+    },
+    "507": {
+      "kw": "heading",
+      "translate": true
+    },
+    "511": {
+      "kw": "heading",
+      "translate": true
+    },
+    "515": {
+      "kw": "heading",
+      "translate": true
+    },
+    "519": {
+      "kw": "heading",
+      "translate": true
+    },
+    "523": {
+      "kw": "heading",
+      "translate": true
+    },
+    "533": {
+      "kw": "heading",
+      "translate": true
+    },
+    "537": {
+      "kw": "heading",
+      "translate": true
+    },
+    "541": {
+      "kw": "heading",
+      "translate": true
+    },
+    "545": {
+      "kw": "heading",
+      "translate": true
+    },
+    "549": {
+      "kw": "heading",
+      "translate": false
+    },
+    "553": {
+      "kw": "heading",
+      "translate": false
+    },
+    "557": {
+      "kw": "heading",
+      "translate": false
+    },
+    "561": {
+      "kw": "heading",
+      "translate": true
+    },
+    "565": {
+      "kw": "heading",
+      "translate": true
+    },
+    "569": {
+      "kw": "heading",
+      "translate": true
+    },
+    "574": {
+      "kw": "heading",
+      "translate": true
+    },
+    "584": {
+      "kw": "heading",
+      "translate": true
+    },
+    "588": {
+      "kw": "heading",
+      "translate": true
+    },
+    "593": {
+      "kw": "heading",
+      "translate": true
+    },
+    "598": {
+      "kw": "heading",
+      "translate": true
+    },
+    "602": {
+      "kw": "heading",
+      "translate": true
+    },
+    "606": {
+      "kw": "heading",
+      "translate": true
+    },
+    "610": {
+      "kw": "heading",
+      "translate": true
+    },
+    "614": {
+      "kw": "heading",
+      "translate": true
+    },
+    "618": {
+      "kw": "heading",
+      "translate": true
+    },
+    "622": {
+      "kw": "heading",
+      "translate": true
+    },
+    "631": {
+      "kw": "heading",
+      "translate": true
+    },
+    "635": {
+      "kw": "heading",
+      "translate": true
+    },
+    "639": {
+      "kw": "heading",
+      "translate": true
+    },
+    "645": {
+      "kw": "heading",
+      "translate": true
+    },
+    "650": {
+      "kw": "heading",
+      "translate": true
+    },
+    "654": {
+      "kw": "heading",
+      "translate": true
+    },
+    "658": {
+      "kw": "heading",
+      "translate": true
+    },
+    "662": {
+      "kw": "heading",
+      "translate": true
+    },
+    "666": {
+      "kw": "heading",
+      "translate": true
+    },
+    "670": {
+      "kw": "heading",
+      "translate": true
+    },
+    "676": {
+      "kw": "heading",
+      "translate": true
+    },
+    "680": {
+      "kw": "heading",
+      "translate": true
+    },
+    "684": {
+      "kw": "heading",
+      "translate": true
+    },
+    "689": {
+      "kw": "heading",
+      "translate": true
+    },
+    "693": {
+      "kw": "heading",
+      "translate": true
+    },
+    "697": {
+      "kw": "heading",
+      "translate": true
+    },
+    "701": {
+      "kw": "heading",
+      "translate": true
+    },
+    "705": {
+      "kw": "heading",
+      "translate": true
+    },
+    "709": {
+      "kw": "heading",
+      "translate": true
+    },
+    "713": {
+      "kw": "heading",
+      "translate": true
+    },
+    "717": {
+      "kw": "heading",
+      "translate": true
+    },
+    "721": {
+      "kw": "heading",
+      "translate": true
+    },
+    "725": {
+      "kw": "heading",
+      "translate": true
+    },
+    "729": {
+      "kw": "heading",
+      "translate": true
+    },
+    "733": {
+      "kw": "heading",
+      "translate": true
+    },
+    "737": {
+      "kw": "heading",
+      "translate": true
+    },
+    "741": {
+      "kw": "heading",
+      "translate": true
+    },
+    "745": {
+      "kw": "heading",
+      "translate": true
+    },
+    "749": {
+      "kw": "heading",
+      "translate": true
+    },
+    "753": {
+      "kw": "heading",
+      "translate": true
+    },
+    "757": {
+      "kw": "heading",
+      "translate": true
+    },
+    "761": {
+      "kw": "heading",
+      "translate": true
+    },
+    "765": {
+      "kw": "heading",
+      "translate": true
+    },
+    "769": {
+      "kw": "heading",
+      "translate": true
+    },
+    "773": {
+      "kw": "heading",
+      "translate": true
+    },
+    "777": {
+      "kw": "heading",
+      "translate": true
+    },
+    "781": {
+      "kw": "heading",
+      "translate": true
+    },
+    "785": {
+      "kw": "heading",
+      "translate": true
+    },
+    "789": {
+      "kw": "heading",
+      "translate": true
+    },
+    "795": {
+      "kw": "heading",
+      "translate": true
+    },
+    "803": {
+      "kw": "heading",
+      "translate": true
+    },
+    "807": {
+      "kw": "heading",
+      "translate": true
+    },
+    "811": {
+      "kw": "heading",
+      "translate": true
+    },
+    "815": {
+      "kw": "heading",
+      "translate": true
+    },
+    "819": {
+      "kw": "heading",
+      "translate": true
+    },
+    "824": {
+      "kw": "heading",
+      "translate": true
+    },
+    "828": {
+      "kw": "heading",
+      "translate": true
+    },
+    "832": {
+      "kw": "heading",
+      "translate": true
+    },
+    "836": {
+      "kw": "heading",
+      "translate": true
+    },
+    "840": {
+      "kw": "heading",
+      "translate": true
+    },
+    "844": {
+      "kw": "heading",
+      "translate": true
+    },
+    "850": {
+      "kw": "heading",
+      "translate": true
+    },
+    "872": {
+      "kw": "heading",
+      "translate": true
+    },
+    "876": {
+      "kw": "heading",
+      "translate": true
+    },
+    "892": {
+      "kw": "heading",
+      "translate": true
+    },
+    "974": {
+      "kw": "heading",
+      "translate": true
+    }
+  }
+}

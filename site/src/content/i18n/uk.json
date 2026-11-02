@@ -1,0 +1,4 @@
+{
+  "heading.anchorLabel": "Розділ «{{title}}»",
+  "search.devWarning": "Пошук працює лише у зібраному сайті. Зберіть і перегляньте сайт (npm run build && npm run preview), щоб перевірити його локально."
+}

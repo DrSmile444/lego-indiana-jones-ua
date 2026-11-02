@@ -1,0 +1,91 @@
+---
+title: LEGO Індіана Джонс — українізатор
+description: "Неофіційна українська локалізація LEGO Indiana Jones: The Original Adventures для ПК. Повний переклад тексту, шрифти з ІіЇїЄєҐґ, перемальовані текстури й логотип. Завантажити безкоштовно."
+template: splash
+editUrl: false
+hero:
+  title: "LEGO Індіана Джонс: <em>Оригінальні пригоди</em> — українською"
+  tagline: Неофіційна локалізація гри для ПК — текст, шрифти з ІіЇїЄєҐґ, меню, титри й перемальований логотип. Розпакуйте архів поруч із грою — і вперед, до Ковчега.
+---
+
+import InstallSteps from '../../components/InstallSteps.astro';
+import TranslatedStats from '../../components/TranslatedStats.astro';
+import BeforeAfter from '../../components/BeforeAfter.astro';
+import Gallery from '../../components/Gallery.astro';
+import AdaptationCards from '../../components/AdaptationCards.astro';
+
+<section class="home-section">
+  <p class="section-kicker">Три кроки</p>
+
+## Встановлення за хвилину
+
+<InstallSteps />
+</section>
+
+<section class="home-section">
+  <p class="section-kicker">Що всередині</p>
+
+## Що перекладено
+
+Повний переклад: усі рядки гри, діалоги збереження, титри й меню налаштувань ПК. Плюс редактор персонажів із кириличними іменами та культурні адаптації там, де дослівний переклад звучав би мертво.
+
+<TranslatedStats />
+</section>
+
+<section class="home-section">
+  <p class="section-kicker">Як це працює</p>
+
+## Три мегабайти замість перепакованих архівів
+
+Переклад не перепаковує сотні мегабайтів архівів гри: він **підставляється в пам'ять під час гри**. У пакеті лише те, що ми змінили (текст, два шрифти й дев'ять текстур), тому весь архів важить ≈3 МБ.
+
+- **Нічого не перезаписується.** Оригінальні `.DAT` і `LEGOIndy.exe` лишаються незмінними, оновлення Steam не конфліктують із перекладом.
+- **Дружить з іншими модами.** Переклад не займає чужих файлів і працює через стандартний ASI Loader поряд з іншими плагінами.
+- **Безпечно в найгіршому випадку.** Інша версія гри чи пошкоджений пакет? Плагін нічого не чіпає, і гра просто запускається англійською.
+
+[Як це влаштовано всередині →](/lego-indiana-jones-ua/dev/architecture/)
+</section>
+
+<section class="home-section">
+  <p class="section-kicker">Головне меню</p>
+
+## До й після
+
+<BeforeAfter after="main-menu.jpg" alt="головне меню гри з логотипом і пунктами меню" caption="Головне меню: логотип, пункти меню й підказки кнопок — українською." />
+</section>
+
+<section class="home-section">
+  <p class="section-kicker">Галерея</p>
+
+## Як це виглядає в грі
+
+Знімки зроблено в Steam-версії гри з установленим українізатором. Натисніть, щоб збільшити; гортати можна стрілками.
+
+<Gallery />
+</section>
+
+<section class="home-section">
+  <p class="section-kicker">Культурні адаптації</p>
+
+## Не дослівно, а по-нашому
+
+<AdaptationCards />
+</section>
+
+<section class="home-section">
+  <p class="section-kicker">Історія</p>
+
+## Як ми це робили
+
+Шлях від першого розпакованого архіву до релізу: шрифти з новими гліфами, власний ASI-плагін, що підставляє ресурси під час гри, текстури, глосарій і довге QA наживо. Ідеї, рішення й вичитка — автора; ШІ-асистенти допомагали з дослідженням форматів, інструментами й чернетками.
+
+[Пройти маршрут →](/lego-indiana-jones-ua/approach/) · [Інструменти](/lego-indiana-jones-ua/tooling/) · [Дослідження](/lego-indiana-jones-ua/research/fonts/)
+</section>
+
+<section class="home-section">
+  <p class="section-kicker">Зворотний зв’язок</p>
+
+## Знайшли помилку чи обрізаний текст?
+
+Напишіть у [GitHub Issues](https://github.com/DrSmile444/lego-indiana-jones-ua/issues) або в Telegram [@dimkasmile](https://t.me/dimkasmile): що сталося, на якому рівні, і по можливості додайте скриншот. [Як повідомити про проблему](/lego-indiana-jones-ua/feedback/).
+</section>

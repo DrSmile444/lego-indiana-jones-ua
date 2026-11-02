@@ -1,0 +1,66 @@
+[
+ {
+  "codepoint": 1111,
+  "char": "ї",
+  "glyph_index": 169,
+  "x": 161,
+  "y": 528,
+  "width": 20
+ },
+ {
+  "codepoint": 1169,
+  "char": "ґ",
+  "glyph_index": 170,
+  "x": 201,
+  "y": 528,
+  "width": 21
+ },
+ {
+  "codepoint": 1168,
+  "char": "Ґ",
+  "glyph_index": 166,
+  "x": 73,
+  "y": 528,
+  "width": 23
+ },
+ {
+  "codepoint": 1108,
+  "char": "є",
+  "glyph_index": 165,
+  "x": 37,
+  "y": 527,
+  "width": 28
+ },
+ {
+  "codepoint": 1031,
+  "char": "Ї",
+  "glyph_index": 162,
+  "x": 248,
+  "y": 480,
+  "width": 18
+ },
+ {
+  "codepoint": 1103,
+  "char": "я",
+  "glyph_index": 236,
+  "x": 351,
+  "y": 913,
+  "width": 28
+ },
+ {
+  "codepoint": 1102,
+  "char": "ю",
+  "glyph_index": 235,
+  "x": 307,
+  "y": 913,
+  "width": 39
+ },
+ {
+  "codepoint": 1100,
+  "char": "ь",
+  "glyph_index": 233,
+  "x": 240,
+  "y": 913,
+  "width": 26
+ }
+]

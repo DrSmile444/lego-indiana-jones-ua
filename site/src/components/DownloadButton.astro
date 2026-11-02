@@ -1,0 +1,243 @@
+---
+/**
+ * Кнопка «Завантажити» у формі цеглинки 2×4 (design D4).
+ *
+ * Під час збірки: версія й посилання з manifests/releases/ (src/generated/release.json).
+ *   Якщо маніфесту немає — кнопка веде на сторінку Releases.
+ * На клієнті: уточнює через GitHub API (releases/latest). Якщо запит не вдався —
+ *   кнопка веде на сторінку Releases, сторінка працює далі.
+ * ZIP завжди завантажується з GitHub, а не з сайту.
+ */
+import release from '../generated/release.json';
+import { strings } from '../i18n/strings';
+
+interface Props {
+  size?: 'large' | 'compact';
+  class?: string;
+}
+const { size = 'large', class: className } = Astro.props;
+const t = strings(Astro.locals).download;
+const href = release.fromManifest ? release.downloadUrl : release.releasesUrl;
+---
+
+<div class:list={['download', `download--${size}`, className]} data-download-root>
+  <a
+    class="brick-btn"
+    href={href}
+    data-download
+    data-api={release.latestApi}
+    data-releases={release.releasesUrl}
+    rel="noopener"
+  >
+    <span class="brick-btn__studs" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+    <span class="brick-btn__face">
+      <svg class="brick-btn__icon" viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">
+        <path
+          d="M12 3v11m0 0l-4.5-4.5M12 14l4.5-4.5M4 17v2.5A1.5 1.5 0 0 0 5.5 21h13a1.5 1.5 0 0 0 1.5-1.5V17"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.4"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path>
+      </svg>
+      <span class="brick-btn__text">
+        <span class="brick-btn__label">{t.label}</span>
+        <span class="brick-btn__meta">
+          {t.version} <b data-download-version>{release.version}</b> · {t.source}
+        </span>
+      </span>
+    </span>
+  </a>
+  <p class="download__note">
+    <span data-download-status>{t.note}</span>
+    <a href={release.releasesUrl}>{t.all}</a>
+  </p>
+</div>
+
+<script>
+  type Asset = { name: string; browser_download_url: string };
+  type Release = { tag_name: string; html_url: string; assets: Asset[] };
+
+  async function refine(link: HTMLAnchorElement) {
+    const api = link.dataset.api!;
+    const releasesUrl = link.dataset.releases!;
+    const root = link.closest('[data-download-root]');
+    const versionEl = root?.querySelector<HTMLElement>('[data-download-version]');
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 5000);
+    try {
+      const res = await fetch(api, {
+        signal: ctrl.signal,
+        headers: { Accept: 'application/vnd.github+json' },
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = (await res.json()) as Release;
+      const zips = (data.assets ?? []).filter((a) => /\.zip$/i.test(a.name));
+      const zip = zips.find((a) => a.name.startsWith('lego-indiana-jones-ua')) ?? zips[0];
+      const version = (data.tag_name ?? '').replace(/^v/, '');
+      if (!zip || !version) throw new Error('no zip asset');
+      link.href = zip.browser_download_url;
+      if (versionEl) versionEl.textContent = version;
+      link.dataset.state = 'latest';
+    } catch {
+      // API недоступний або ліміт запитів: надійний шлях — сторінка Releases.
+      link.href = releasesUrl;
+      link.dataset.state = 'fallback';
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+
+  document.querySelectorAll<HTMLAnchorElement>('a[data-download]').forEach((link) => {
+    void refine(link);
+  });
+</script>
+
+<style>
+  .download {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.9rem;
+    margin: 0;
+  }
+
+  .brick-btn {
+    --depth: 7px;
+    position: relative;
+    display: inline-block;
+    margin-top: 12px; /* місце для штифтів */
+    color: var(--on-brick);
+    text-decoration: none;
+    border-radius: 0.45rem;
+    transform: translateY(0);
+    transition:
+      transform 0.12s ease,
+      filter 0.12s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .brick-btn__face {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.85rem 1.5rem 0.85rem 1.2rem;
+    border-radius: 0.45rem;
+    background:
+      linear-gradient(180deg, rgb(255 255 255 / 0.16), transparent 45%),
+      var(--brick-red-face);
+    box-shadow:
+      inset 0 0 0 1.5px rgb(255 255 255 / 0.16),
+      0 var(--depth) 0 var(--brick-red-side),
+      0 calc(var(--depth) + 10px) 18px -6px rgb(0 0 0 / 0.45);
+    transition: box-shadow 0.12s ease;
+  }
+
+  .brick-btn__studs {
+    position: absolute;
+    inset-inline: 9%;
+    top: -11px;
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none;
+  }
+
+  .brick-btn__studs i {
+    position: relative;
+    width: 15%;
+    max-width: 38px;
+    height: 13px;
+    border-radius: 50% / 34%;
+    background:
+      radial-gradient(ellipse 60% 40% at 50% 30%, rgb(255 255 255 / 0.32), transparent 70%),
+      var(--brick-red-face);
+    box-shadow:
+      inset 0 -5px 0 var(--brick-red-side),
+      inset 0 0 0 1.5px rgb(255 255 255 / 0.12);
+  }
+
+  .brick-btn__icon {
+    flex: none;
+    filter: drop-shadow(0 1px 0 rgb(0 0 0 / 0.25));
+  }
+
+  .brick-btn__text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+  }
+
+  .brick-btn__label {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.45rem;
+    letter-spacing: 0.01em;
+    text-shadow: 0 1px 0 rgb(0 0 0 / 0.25);
+  }
+
+  .brick-btn__meta {
+    font-size: 0.85rem;
+    opacity: 0.95;
+  }
+
+  .brick-btn:hover {
+    transform: translateY(-2px);
+    filter: saturate(1.08);
+  }
+
+  .brick-btn:hover .brick-btn__face {
+    box-shadow:
+      inset 0 0 0 1.5px rgb(255 255 255 / 0.2),
+      0 calc(var(--depth) + 2px) 0 var(--brick-red-side),
+      0 calc(var(--depth) + 16px) 22px -6px rgb(0 0 0 / 0.45);
+  }
+
+  /* Натискання: цеглинка «защіпається» вниз */
+  .brick-btn:active {
+    transform: translateY(calc(var(--depth) - 1px));
+  }
+
+  .brick-btn:active .brick-btn__face {
+    box-shadow:
+      inset 0 0 0 1.5px rgb(255 255 255 / 0.12),
+      0 1px 0 var(--brick-red-side),
+      0 3px 6px -2px rgb(0 0 0 / 0.4);
+  }
+
+  .brick-btn:focus-visible {
+    outline: 3px solid var(--brick-yellow);
+    outline-offset: 6px;
+  }
+
+  .download__note {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--ink-muted);
+    max-width: 34rem;
+  }
+
+  .download__note a {
+    color: var(--link);
+    white-space: nowrap;
+    margin-inline-start: 0.35rem;
+  }
+
+  .download--compact .brick-btn__label {
+    font-size: 1.15rem;
+  }
+
+  .download--compact .brick-btn__face {
+    padding: 0.6rem 1.1rem 0.6rem 0.9rem;
+  }
+
+  @media (max-width: 24rem) {
+    .brick-btn__face {
+      padding-inline: 0.9rem 1.1rem;
+      gap: 0.6rem;
+    }
+    .brick-btn__label {
+      font-size: 1.25rem;
+    }
+  }
+</style>

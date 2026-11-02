@@ -1,0 +1,19 @@
+{
+  "source": "D:\\Projects\\lego-indi-1-ukrainizator\\fonts\\font1\\PC_FONT_PC.FNT",
+  "atlas": "tools\\glyph_viewer\\atlasx2.png",
+  "scale": 2.0,
+  "height": 48.0,
+  "baseline": 37.0,
+  "layout": {
+    "relocation_offset": 5596656,
+    "relocation_count": 16,
+    "dds_offset": 4096,
+    "glyph_count": 239,
+    "mapping_offset": 2976,
+    "mapping_slots": 241,
+    "real_mapping_entries": 240,
+    "width": 2048,
+    "height": 2048
+  },
+  "status": "User reports working without issues; deferred on 2026-10-17. Standard v0.1.5 fonts and DLL selected for now."
+}

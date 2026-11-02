@@ -1,0 +1,13 @@
+---
+/** Додає пунктирний маршрут «Як ми це робили» перед текстом сторінки, якщо frontmatter має routeTimeline. */
+import Default from '@astrojs/starlight/components/MarkdownContent.astro';
+import RouteTimeline from '../RouteTimeline.astro';
+
+const { entry } = Astro.locals.starlightRoute;
+const showRoute = Boolean((entry.data as { routeTimeline?: boolean }).routeTimeline);
+---
+
+<Default {...Astro.props}>
+  {showRoute && <RouteTimeline />}
+  <slot />
+</Default>

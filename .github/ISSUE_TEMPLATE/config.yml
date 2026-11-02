@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Написати в Telegram (@dimkasmile)
+    url: https://t.me/dimkasmile
+    about: Немає акаунта GitHub? Надішліть опис, скриншот і сейв в особисті повідомлення.
+  - name: Як встановити й видалити українізатор
+    url: https://github.com/DrSmile444/lego-indiana-jones-ua#встановлення
+    about: Інструкція, сумісність і відповіді на часті питання.

@@ -1,0 +1,192 @@
+---
+/**
+ * Пунктирний маршрут «Як ми це робили» (design D3 route.svg).
+ * Зверху — мапа з маршрутом (декоративна, для широких екранів),
+ * нижче — доступний упорядкований список етапів з тим самим пунктиром.
+ */
+import Stud from './svg/Stud.astro';
+import { strings } from '../i18n/strings';
+
+const stops = strings(Astro.locals).route;
+
+// Точки маршруту на мапі (viewBox 960×250)
+const pts = [
+  [85, 170],
+  [195, 80],
+  [310, 150],
+  [425, 70],
+  [540, 165],
+  [655, 85],
+  [770, 170],
+  [880, 90],
+];
+const d = pts
+  .map(([x, y], i) => {
+    if (i === 0) return `M${x} ${y}`;
+    const [px, py] = pts[i - 1];
+    const mx = (px + x) / 2;
+    return `C${mx} ${py}, ${mx} ${y}, ${x} ${y}`;
+  })
+  .join(' ');
+---
+
+<div class="route not-content">
+  <svg class="route-map" viewBox="0 0 960 250" aria-hidden="true">
+    <defs>
+      <pattern id="route-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+        <path d="M40 0H0V40" fill="none" stroke="var(--map-line)" stroke-width="1" opacity=".7"></path>
+      </pattern>
+    </defs>
+    <rect x="1" y="1" width="958" height="248" rx="14" fill="url(#route-grid)" stroke="var(--leather)" stroke-width="2"
+    ></rect>
+    <path d={d} fill="none" stroke="var(--leather)" stroke-width="4" stroke-dasharray="1 13" stroke-linecap="round"
+    ></path>
+    {
+      pts.map(([x, y], i) =>
+        i === pts.length - 1 ? (
+          <g>
+            <path
+              d={`M${x - 14} ${y - 14}L${x + 14} ${y + 14}M${x + 14} ${y - 14}L${x - 14} ${y + 14}`}
+              stroke="var(--brick-red)"
+              stroke-width="7"
+              stroke-linecap="round"
+            />
+            <text x={x} y={y + 44} class="route-map__label" text-anchor="middle">
+              {stops[i].title}
+            </text>
+          </g>
+        ) : (
+          <g>
+            <circle cx={x} cy={y + 3} r="17" fill="var(--brick-yellow-side)" />
+            <circle cx={x} cy={y} r="17" fill="var(--brick-yellow)" />
+            <text x={x} y={y + 6} class="route-map__num" text-anchor="middle">
+              {i + 1}
+            </text>
+            <text x={x} y={y > 120 ? y + 44 : y - 28} class="route-map__label" text-anchor="middle">
+              {stops[i].title}
+            </text>
+          </g>
+        ),
+      )
+    }
+  </svg>
+
+  <ol class="route-list">
+    {
+      stops.map((s, i) => (
+        <li class:list={['route-stop', { 'route-stop--end': i === stops.length - 1 }]}>
+          <span class="route-stop__marker" aria-hidden="true">
+            {i === stops.length - 1 ? <span class="route-x">✕</span> : <Stud size={30} tone="yellow" />}
+            <span class="route-stop__num">{i + 1}</span>
+          </span>
+          <div>
+            <h3 class="route-stop__title">{s.title}</h3>
+            <p>{s.text}</p>
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+</div>
+
+<style>
+  .route {
+    margin: 0.5rem 0 2.5rem;
+  }
+
+  .route-map {
+    display: none;
+    width: 100%;
+    height: auto;
+    margin-bottom: 1.5rem;
+    background: var(--paper-raised);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+  }
+
+  .route-map__num {
+    font: 800 17px var(--font-display);
+    fill: #2b1d12;
+  }
+
+  .route-map__label {
+    font: 700 17px var(--font-display);
+    fill: var(--ink);
+  }
+
+  .route-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    counter-reset: none;
+  }
+
+  .route-stop {
+    position: relative;
+    display: grid;
+    grid-template-columns: 2.6rem minmax(0, 1fr);
+    gap: 0.9rem;
+    padding-bottom: 1.3rem;
+  }
+
+  /* Пунктир між етапами */
+  .route-stop:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    left: calc(1.3rem - 2px);
+    top: 2.4rem;
+    bottom: 0.2rem;
+    border-left: 4px dotted var(--leather);
+  }
+
+  .route-stop__marker {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 2.6rem;
+    height: 2.6rem;
+  }
+
+  .route-stop__marker :global(svg) {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+
+  .route-stop__num {
+    position: absolute;
+    top: 0.42rem;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font: 800 0.85rem var(--font-display);
+    color: #2b1d12;
+  }
+
+  .route-stop--end .route-stop__num {
+    display: none;
+  }
+
+  .route-x {
+    font: 800 1.9rem/1 var(--font-display);
+    color: var(--brick-red);
+  }
+
+  .route-stop__title {
+    margin: 0.35rem 0 0.2rem;
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--sl-color-white);
+  }
+
+  .route-stop p {
+    margin: 0;
+    color: var(--ink-muted);
+  }
+
+  @media (min-width: 40rem) {
+    .route-map {
+      display: block;
+    }
+  }
+</style>

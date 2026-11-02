@@ -1,0 +1,397 @@
+---
+/**
+ * Глосарій, згенерований під час збірки з translations/glossary.json
+ * (через src/generated/glossary.json, який пише sync-docs).
+ * Один рядок таблиці = один термін. Пошук і фільтр за категорією — на клієнті.
+ *
+ * Українська сторінка: категорія, оригінал, українською, статус.
+ * Англійська (/en/): англійський термін, український переклад, статус, примітка (поле note з JSON).
+ */
+import data from '../generated/glossary.json';
+import { fmt, langOf, STRINGS } from '../i18n/strings';
+
+type Term = { category: string; en: string; uk: string; confidence: string; note: string };
+const lang = langOf(Astro.locals);
+const t = STRINGS[lang].glossary;
+const isEn = lang === 'en';
+const terms = data.terms as Term[];
+const categories = (data.categories as { key: string; label: string }[]).map((c) => ({
+  key: c.key,
+  label: isEn ? (t.categories[c.key] ?? c.key.replace(/_/g, ' ')) : c.label,
+  other: isEn ? c.label : (STRINGS.en.glossary.categories[c.key] ?? ''),
+}));
+const catLabel = Object.fromEntries(categories.map((c) => [c.key, c.label]));
+const catOther = Object.fromEntries(categories.map((c) => [c.key, c.other]));
+
+const status = (c: string) => t.status[c] ?? { label: c, tone: 'low', hint: c };
+const counts = Object.fromEntries(categories.map((c) => [c.key, terms.filter((x) => x.category === c.key).length]));
+---
+
+<div class:list={['glossary not-content', { 'glossary--en': isEn }]} data-glossary data-count-template={t.count}>
+  <div class="glossary__tools">
+    <label class="glossary__search">
+      <span class="visually-hidden">{t.search}</span>
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"
+        ><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"></circle><path
+          d="M15.5 15.5L21 21"
+          stroke="currentColor"
+          stroke-width="2.4"
+          stroke-linecap="round"></path></svg
+      >
+      <input type="search" placeholder={t.placeholder} autocomplete="off" data-glossary-query />
+    </label>
+    <div class="glossary__chips" role="group" aria-label={t.categoryGroup}>
+      <button type="button" class="chip" aria-pressed="true" data-cat="">{t.all} <span>{terms.length}</span></button>
+      {
+        categories.map((c) => (
+          <button type="button" class="chip" aria-pressed="false" data-cat={c.key}>
+            {c.label} <span>{counts[c.key]}</span>
+          </button>
+        ))
+      }
+    </div>
+  </div>
+
+  <p class="glossary__count" aria-live="polite" data-glossary-count>
+    {fmt(t.count, { shown: terms.length, total: terms.length })}
+  </p>
+
+  <table class="glossary__table">
+    <thead>
+      <tr>
+        {isEn ? (
+          <>
+            <th scope="col">{t.columns.en}</th>
+            <th scope="col">{t.columns.uk}</th>
+            <th scope="col">{t.columns.status}</th>
+            <th scope="col">{t.columns.note}</th>
+          </>
+        ) : (
+          <>
+            <th scope="col">{t.columns.category}</th>
+            <th scope="col">{t.columns.en}</th>
+            <th scope="col">{t.columns.uk}</th>
+            <th scope="col">{t.columns.status}</th>
+          </>
+        )}
+      </tr>
+    </thead>
+    <tbody>
+      {
+        terms.map((term) => {
+          const s = status(term.confidence);
+          const statusCell = (
+            <td data-label={t.columns.status} class="g-status">
+              <span class={`status status--${s.tone}`} title={s.hint}>
+                {s.label}
+              </span>
+            </td>
+          );
+          return (
+            <tr
+              data-term
+              data-cat={term.category}
+              data-search={`${term.en} ${term.uk} ${catLabel[term.category] ?? ''} ${catOther[term.category] ?? ''}`.toLowerCase()}
+            >
+              {isEn ? (
+                <>
+                  <td data-label={t.columns.en} class="g-en" lang="en">
+                    {term.en}
+                    <span class="g-cat-inline">{catLabel[term.category] ?? term.category}</span>
+                  </td>
+                  <td data-label={t.columns.uk} class="g-uk glossary__uk" lang="uk">
+                    {term.uk}
+                  </td>
+                  {statusCell}
+                  <td data-label={t.columns.note} class="g-note" lang="en">{term.note}</td>
+                </>
+              ) : (
+                <>
+                  <td data-label={t.columns.category} class="g-cat">
+                    {catLabel[term.category] ?? term.category}
+                  </td>
+                  <td data-label={t.columns.en} class="g-en" lang="en">
+                    {term.en}
+                  </td>
+                  <td data-label={t.columns.uk} class="g-uk glossary__uk">
+                    {term.uk}
+                  </td>
+                  {statusCell}
+                </>
+              )}
+            </tr>
+          );
+        })
+      }
+    </tbody>
+  </table>
+  <p class="glossary__empty" hidden data-glossary-empty>{t.empty}</p>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-glossary]').forEach((root) => {
+    const input = root.querySelector<HTMLInputElement>('[data-glossary-query]')!;
+    const rows = [...root.querySelectorAll<HTMLTableRowElement>('tr[data-term]')];
+    const chips = [...root.querySelectorAll<HTMLButtonElement>('.chip')];
+    const countEl = root.querySelector<HTMLElement>('[data-glossary-count]')!;
+    const empty = root.querySelector<HTMLElement>('[data-glossary-empty]')!;
+    const template = root.dataset.countTemplate ?? '{shown} / {total}';
+    let cat = '';
+
+    const norm = (s: string) => s.toLowerCase().replace(/ґ/g, 'г').replace(/[’'ʼ]/g, '').trim();
+
+    const apply = () => {
+      const q = norm(input.value);
+      let shown = 0;
+      for (const r of rows) {
+        const ok = (!cat || r.dataset.cat === cat) && (!q || norm(r.dataset.search!).includes(q));
+        r.hidden = !ok;
+        if (ok) shown++;
+      }
+      countEl.textContent = template.replace('{shown}', String(shown)).replace('{total}', String(rows.length));
+      empty.hidden = shown > 0;
+    };
+
+    input.addEventListener('input', apply);
+    chips.forEach((chip) =>
+      chip.addEventListener('click', () => {
+        cat = chip.dataset.cat ?? '';
+        chips.forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
+        apply();
+      }),
+    );
+
+    const q = new URLSearchParams(location.search).get('q');
+    if (q) {
+      input.value = q;
+      apply();
+    }
+  });
+</script>
+
+<style>
+  .glossary__tools {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .glossary__search {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.55rem 0.8rem;
+    border-radius: var(--radius);
+    background: var(--paper-raised);
+    border: 2px solid var(--sl-color-hairline-light);
+    color: var(--ink-muted);
+  }
+
+  .glossary__search:focus-within {
+    border-color: var(--brick-yellow);
+  }
+
+  .glossary__search input {
+    flex: 1;
+    min-width: 0;
+    border: 0;
+    background: none;
+    font: inherit;
+    font-size: 1rem;
+    color: var(--ink);
+    outline: none;
+  }
+
+  .glossary__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .chip {
+    padding: 0.3rem 0.7rem;
+    border-radius: 999px;
+    border: 1px solid var(--sl-color-hairline-light);
+    background: var(--paper-raised);
+    color: var(--ink);
+    font: 600 0.85rem var(--sl-font);
+    cursor: pointer;
+  }
+
+  .chip span {
+    color: var(--ink-muted);
+    font-weight: 400;
+    margin-inline-start: 0.2rem;
+  }
+
+  .chip[aria-pressed='true'] {
+    background: var(--brick-red-face);
+    border-color: var(--brick-red-face);
+    color: var(--on-brick);
+  }
+
+  .chip[aria-pressed='true'] span {
+    color: inherit;
+    opacity: 0.85;
+  }
+
+  .glossary__count {
+    margin: 0.4rem 0 0.6rem;
+    font-size: 0.85rem;
+    color: var(--ink-muted);
+  }
+
+  .glossary__table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--paper-raised);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    font-size: 0.95rem;
+  }
+
+  .glossary__table th {
+    text-align: start;
+    font-family: var(--font-display);
+    font-weight: 700;
+    background: color-mix(in srgb, var(--leather) 18%, transparent);
+    padding: 0.6rem 0.8rem;
+  }
+
+  .glossary__table td {
+    padding: 0.5rem 0.8rem;
+    border-top: 1px solid var(--sl-color-hairline-light);
+    vertical-align: top;
+  }
+
+  .glossary__table .g-cat,
+  .glossary__table .g-note {
+    color: var(--ink-muted);
+    font-size: 0.85rem;
+  }
+
+  .glossary__table .g-note {
+    overflow-wrap: anywhere;
+  }
+
+  .g-cat-inline {
+    display: block;
+    margin-top: 0.1rem;
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--ink-muted);
+  }
+
+  .glossary--en .g-en {
+    font-weight: 600;
+  }
+
+  .glossary__uk {
+    font-weight: 600;
+    color: var(--sl-color-white);
+  }
+
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.82rem;
+    white-space: nowrap;
+  }
+
+  .status::before {
+    content: '';
+    width: 0.62rem;
+    height: 0.62rem;
+    border-radius: 50%;
+    box-shadow: inset 0 -2px 0 rgb(0 0 0 / 0.25);
+  }
+
+  .status--ok::before {
+    background: #3f9b4f;
+  }
+  .status--mid::before {
+    background: var(--brick-yellow);
+  }
+  .status--low::before {
+    background: var(--sl-color-gray-4);
+  }
+
+  .glossary__empty {
+    margin-top: 1rem;
+    color: var(--ink-muted);
+  }
+
+  /* Телефон: кожен термін — окрема картка, без горизонтальної прокрутки */
+  @media (max-width: 40rem) {
+    .glossary__table,
+    .glossary__table tbody,
+    .glossary__table tr,
+    .glossary__table td {
+      display: block;
+    }
+    .glossary__table thead {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+    }
+    .glossary__table {
+      background: none;
+      box-shadow: none;
+    }
+    .glossary__table tr {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 0.1rem 0.8rem;
+      padding: 0.6rem 0.8rem;
+      margin-bottom: 0.5rem;
+      background: var(--paper-raised);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .glossary__table tr[hidden] {
+      display: none;
+    }
+    .glossary__table td {
+      border: 0;
+      padding: 0;
+    }
+    .glossary__table .g-cat {
+      grid-column: 1;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .glossary__table .g-status {
+      grid-column: 2;
+      grid-row: 1;
+    }
+    .glossary__table .g-en,
+    .glossary__table .g-uk,
+    .glossary__table .g-note {
+      grid-column: 1 / -1;
+    }
+    .glossary__table .g-en {
+      color: var(--ink-muted);
+    }
+    .glossary--en .glossary__table .g-en {
+      grid-column: 1;
+      grid-row: 1;
+      color: var(--ink);
+    }
+    .glossary__table .g-note:empty {
+      display: none;
+    }
+    .glossary__uk {
+      font-size: 1.05rem;
+    }
+  }
+
+  tr[hidden] {
+    display: none;
+  }
+</style>

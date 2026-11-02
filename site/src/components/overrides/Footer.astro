@@ -1,0 +1,110 @@
+---
+/**
+ * Підвал кожної сторінки: стандартні «Редагувати / Назад / Далі» від Starlight
+ * плюс дисклеймер неофіційного фанатського проєкту й посилання на ліцензії.
+ */
+import Default from '@astrojs/starlight/components/Footer.astro';
+import ProjectMark from '../svg/ProjectMark.astro';
+import { langOf, localePath, REPO_URL as REPO, STRINGS } from '../../i18n/strings';
+
+const lang = langOf(Astro.locals);
+const t = STRINGS[lang].footer;
+---
+
+<Default {...Astro.props}><slot /></Default>
+
+<div class="site-footer not-content" data-site-footer>
+  <div class="route-divider" aria-hidden="true">
+    <span></span>
+    <svg viewBox="0 0 24 24" width="22" height="22"
+      ><path d="M5 5l14 14M19 5L5 19" stroke="var(--brick-red)" stroke-width="3.2" stroke-linecap="round"
+      ></path></svg
+    >
+    <span></span>
+  </div>
+  <div class="site-footer__grid">
+    <div class="site-footer__brand">
+      <ProjectMark size={28} />
+      <p>
+        <strong>{t.brand}</strong>
+        {t.tagline}
+      </p>
+    </div>
+    <ul class="site-footer__links">
+      <li><a href={`${REPO}/releases`}>{t.releases}</a></li>
+      <li><a href={localePath(lang, 'feedback/')}>{t.feedback}</a></li>
+      <li><a href={REPO}>{t.code}</a></li>
+      <li>
+        <a href={localePath(t.otherLang.lang)} lang={t.otherLang.lang} hreflang={t.otherLang.lang}>{t.otherLang.label}</a>
+      </li>
+    </ul>
+  </div>
+  <p class="disclaimer" data-disclaimer>
+    {t.disclaimer} <a href={`${REPO}/blob/master/LICENSE`}>{t.licenses}</a>.
+  </p>
+</div>
+
+<style>
+  .site-footer {
+    margin-top: 2.5rem;
+    font-size: 0.88rem;
+    color: var(--ink-muted);
+  }
+
+  .route-divider {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .route-divider span {
+    flex: 1;
+    border-top: 3px dotted color-mix(in srgb, var(--leather) 70%, transparent);
+  }
+
+  .site-footer__grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem 2rem;
+    align-items: flex-start;
+  }
+
+  .site-footer__brand {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    max-width: 28rem;
+  }
+
+  .site-footer__brand p {
+    margin: 0;
+  }
+
+  .site-footer__brand strong {
+    color: var(--ink);
+  }
+
+  .site-footer__links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem 1.1rem;
+  }
+
+  .site-footer a {
+    color: var(--link);
+  }
+
+  .disclaimer {
+    margin: 1.1rem 0 0;
+    padding: 0.75rem 0.9rem;
+    border-radius: var(--radius);
+    background: color-mix(in srgb, var(--leather) 10%, transparent);
+    border: 1px dashed color-mix(in srgb, var(--leather) 55%, transparent);
+    line-height: 1.5;
+  }
+</style>

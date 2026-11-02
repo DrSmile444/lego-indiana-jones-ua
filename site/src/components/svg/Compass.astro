@@ -1,0 +1,51 @@
+---
+/** Компасна троянда, намальована вручну; лінії — currentColor, стрілка — цегляно-червона. */
+interface Props {
+  size?: number;
+  class?: string;
+}
+import { strings } from '../../i18n/strings';
+
+const { size = 120, class: className } = Astro.props;
+const c = strings(Astro.locals).compass;
+---
+
+<svg class:list={['compass', className]} width={size} height={size} viewBox="0 0 120 120" aria-hidden="true">
+  <g fill="none" stroke="currentColor" stroke-linecap="round">
+    <circle cx="60" cy="60" r="54" stroke-width="1.5" />
+    <circle cx="60" cy="60" r="47" stroke-width="1" stroke-dasharray="2 4" />
+    <circle cx="60" cy="60" r="20" stroke-width="1" />
+    {
+      Array.from({ length: 32 }, (_, i) => {
+        const a = (i * Math.PI) / 16;
+        const r1 = i % 4 === 0 ? 40 : 44;
+        return (
+          <line
+            x1={60 + Math.sin(a) * r1}
+            y1={60 - Math.cos(a) * r1}
+            x2={60 + Math.sin(a) * 47}
+            y2={60 - Math.cos(a) * 47}
+            stroke-width={i % 4 === 0 ? 1.6 : 0.8}
+          />
+        );
+      })
+    }
+  </g>
+  <g stroke="currentColor" stroke-width="1" stroke-linejoin="round">
+    <path d="M60 60 L52 52 L60 14 Z" fill="var(--brick-red-face)" />
+    <path d="M60 60 L68 52 L60 14 Z" fill="var(--brick-red-side)" />
+    <path d="M60 60 L52 68 L60 106 Z" fill="currentColor" fill-opacity=".25" />
+    <path d="M60 60 L68 68 L60 106 Z" fill="currentColor" fill-opacity=".55" />
+    <path d="M60 60 L68 52 L106 60 Z" fill="currentColor" fill-opacity=".25" />
+    <path d="M60 60 L68 68 L106 60 Z" fill="currentColor" fill-opacity=".55" />
+    <path d="M60 60 L52 52 L14 60 Z" fill="currentColor" fill-opacity=".55" />
+    <path d="M60 60 L52 68 L14 60 Z" fill="currentColor" fill-opacity=".25" />
+  </g>
+  <circle cx="60" cy="60" r="4.5" fill="var(--brick-yellow)" stroke="currentColor" />
+  <g fill="currentColor" font-family="Rubik, sans-serif" font-weight="700" font-size="11" text-anchor="middle">
+    <text x="60" y="10">{c.n}</text>
+    <text x="60" y="118">{c.s}</text>
+    <text x="113" y="64">{c.e}</text>
+    <text x="7" y="64">{c.w}</text>
+  </g>
+</svg>

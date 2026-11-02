@@ -1,0 +1,10 @@
+---
+/** Стандартний <head> Starlight плюс og:image:alt мовою сторінки (решта og-тегів — у astro.config.mjs). */
+import Default from '@astrojs/starlight/components/Head.astro';
+import { strings } from '../../i18n/strings';
+
+const t = strings(Astro.locals).head;
+---
+
+<Default {...Astro.props}><slot /></Default>
+<meta property="og:image:alt" content={t.ogImageAlt} />

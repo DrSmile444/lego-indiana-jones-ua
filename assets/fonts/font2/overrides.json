@@ -1,0 +1,266 @@
+[
+ {
+  "codepoint": 1065,
+  "char": "Щ",
+  "glyph_index": 193,
+  "x": 449,
+  "y": 569,
+  "width": 54
+ },
+ {
+  "codepoint": 1040,
+  "char": "А",
+  "glyph_index": 164,
+  "x": 0,
+  "y": 516,
+  "width": 33
+ },
+ {
+  "codepoint": 1057,
+  "char": "С",
+  "glyph_index": 185,
+  "x": 47,
+  "y": 576,
+  "width": 37
+ },
+ {
+  "codepoint": 1058,
+  "char": "Т",
+  "glyph_index": 186,
+  "x": 96,
+  "y": 576,
+  "width": 33
+ },
+ {
+  "codepoint": 1041,
+  "char": "Б",
+  "glyph_index": 165,
+  "x": 41,
+  "y": 516,
+  "width": 37
+ },
+ {
+  "codepoint": 1042,
+  "char": "В",
+  "glyph_index": 166,
+  "x": 86,
+  "y": 516,
+  "width": 37
+ },
+ {
+  "codepoint": 1043,
+  "char": "Г",
+  "glyph_index": 167,
+  "x": 131,
+  "y": 516,
+  "width": 37
+ },
+ {
+  "codepoint": 1168,
+  "char": "Ґ",
+  "glyph_index": 168,
+  "x": 176,
+  "y": 512,
+  "width": 38
+ },
+ {
+  "codepoint": 1044,
+  "char": "Д",
+  "glyph_index": 169,
+  "x": 222,
+  "y": 512,
+  "width": 49
+ },
+ {
+  "codepoint": 1045,
+  "char": "Е",
+  "glyph_index": 170,
+  "x": 279,
+  "y": 516,
+  "width": 37
+ },
+ {
+  "codepoint": 1028,
+  "char": "Є",
+  "glyph_index": 171,
+  "x": 326,
+  "y": 516,
+  "width": 37
+ },
+ {
+  "codepoint": 1046,
+  "char": "Ж",
+  "glyph_index": 172,
+  "x": 371,
+  "y": 515,
+  "width": 63
+ },
+ {
+  "codepoint": 1047,
+  "char": "З",
+  "glyph_index": 173,
+  "x": 442,
+  "y": 516,
+  "width": 34
+ },
+ {
+  "codepoint": 1048,
+  "char": "И",
+  "glyph_index": 174,
+  "x": 484,
+  "y": 516,
+  "width": 44
+ },
+ {
+  "codepoint": 1030,
+  "char": "І",
+  "glyph_index": 175,
+  "x": 536,
+  "y": 516,
+  "width": 34
+ },
+ {
+  "codepoint": 1031,
+  "char": "Ї",
+  "glyph_index": 176,
+  "x": 578,
+  "y": 506,
+  "width": 39
+ },
+ {
+  "codepoint": 1049,
+  "char": "Й",
+  "glyph_index": 177,
+  "x": 625,
+  "y": 509,
+  "width": 44
+ },
+ {
+  "codepoint": 1050,
+  "char": "К",
+  "glyph_index": 178,
+  "x": 677,
+  "y": 516,
+  "width": 43
+ },
+ {
+  "codepoint": 1051,
+  "char": "Л",
+  "glyph_index": 179,
+  "x": 728,
+  "y": 516,
+  "width": 44
+ },
+ {
+  "codepoint": 1052,
+  "char": "М",
+  "glyph_index": 180,
+  "x": 780,
+  "y": 514,
+  "width": 54
+ },
+ {
+  "codepoint": 1053,
+  "char": "Н",
+  "glyph_index": 181,
+  "x": 842,
+  "y": 516,
+  "width": 43
+ },
+ {
+  "codepoint": 1054,
+  "char": "О",
+  "glyph_index": 182,
+  "x": 895,
+  "y": 516,
+  "width": 39
+ },
+ {
+  "codepoint": 1055,
+  "char": "П",
+  "glyph_index": 183,
+  "x": 942,
+  "y": 516,
+  "width": 43
+ },
+ {
+  "codepoint": 1056,
+  "char": "Р",
+  "glyph_index": 184,
+  "x": 0,
+  "y": 576,
+  "width": 37
+ },
+ {
+  "codepoint": 1059,
+  "char": "У",
+  "glyph_index": 187,
+  "x": 139,
+  "y": 576,
+  "width": 34
+ },
+ {
+  "codepoint": 1060,
+  "char": "Ф",
+  "glyph_index": 188,
+  "x": 182,
+  "y": 576,
+  "width": 46
+ },
+ {
+  "codepoint": 1061,
+  "char": "Х",
+  "glyph_index": 189,
+  "x": 236,
+  "y": 575,
+  "width": 43
+ },
+ {
+  "codepoint": 1062,
+  "char": "Ц",
+  "glyph_index": 190,
+  "x": 287,
+  "y": 569,
+  "width": 45
+ },
+ {
+  "codepoint": 1063,
+  "char": "Ч",
+  "glyph_index": 191,
+  "x": 344,
+  "y": 576,
+  "width": 35
+ },
+ {
+  "codepoint": 1064,
+  "char": "Ш",
+  "glyph_index": 192,
+  "x": 387,
+  "y": 576,
+  "width": 54
+ },
+ {
+  "codepoint": 1068,
+  "char": "Ь",
+  "glyph_index": 194,
+  "x": 511,
+  "y": 576,
+  "width": 32
+ },
+ {
+  "codepoint": 1070,
+  "char": "Ю",
+  "glyph_index": 195,
+  "x": 552,
+  "y": 576,
+  "width": 57
+ },
+ {
+  "codepoint": 1071,
+  "char": "Я",
+  "glyph_index": 196,
+  "x": 617,
+  "y": 576,
+  "width": 46
+ }
+]

@@ -1,0 +1,8 @@
+{
+  "version": "0.1.10",
+  "file": "lego-indiana-jones-ua-v0.1.10.zip",
+  "sha256": "b0abff131056d0c525a1cf0a4ea752851c699c7586fdf4e50c8f505f858ec995",
+  "uap_sha256": "6f1b4e65e3f3922b52779c15d73afaf176fa8610efb131a4977bb35e3356964a",
+  "url": null,
+  "note": "Bootstrap baseline: the last research build, kept in local/baseline/ until 1.1.10 is published. After publishing, switch to the 1.1.10 GitHub Release asset."
+}

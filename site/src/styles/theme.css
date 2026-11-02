@@ -1,0 +1,314 @@
+/*
+ * Тема «LEGO × пригоди»: пергамент, сепія, мапа й кольори цеглинки.
+ * Токени — design D2. Контраст основного тексту й посилань ≥ 4.5:1 в обох темах
+ * (див. коментарі біля значень).
+ */
+
+/* ------------------------------------------------------------------ */
+/* Темна тема (Starlight за замовчуванням описує темну в :root)         */
+:root {
+  --paper: #1e1812;
+  --paper-raised: #2a221a;
+  --paper-sunk: #17120d;
+  --ink: #efe3c8; /* 13.8:1 на --paper */
+  --ink-muted: #b8a68a; /* 7.4:1 */
+  --brick-red: #e2453b;
+  --brick-red-face: #b8322a; /* кнопка: #FFF8E8 на ній 5.6:1 */
+  --brick-red-side: #7a1d17;
+  --brick-yellow: #f5cd4a;
+  --brick-yellow-side: #a9851c;
+  --brick-blue: #3a7bd5;
+  --leather: #b07a45; /* 4.8:1 */
+  --map-line: #4a3c2c;
+  --link: #f08a7e; /* 7.2:1 */
+  --on-brick: #fff8e8;
+  --shadow: 0 1px 0 rgb(0 0 0 / 0.4), 0 10px 30px -12px rgb(0 0 0 / 0.7);
+  --grid-alpha: 0.55;
+
+  --sl-color-accent-low: #3d1c16;
+  --sl-color-accent: #e2453b;
+  --sl-color-accent-high: #f7b8ac;
+  --sl-color-white: #fff8e8;
+  --sl-color-gray-1: #efe3c8;
+  --sl-color-gray-2: #dccdb0;
+  --sl-color-gray-3: #b8a68a;
+  --sl-color-gray-4: #7d6a52;
+  --sl-color-gray-5: #4a3c2c;
+  --sl-color-gray-6: #2a221a;
+  --sl-color-black: #1e1812;
+  --sl-color-text-accent: var(--link);
+  --sl-color-bg-nav: rgb(30 24 18 / 0.92);
+  --sl-color-bg-sidebar: #1b150f;
+  --sl-color-hairline-light: #3a2f23;
+  --sl-color-hairline-shade: #120e0a;
+
+  --sl-font: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Rubik', 'IBM Plex Sans', system-ui, sans-serif;
+  --sl-content-width: 46rem;
+  --sl-nav-height: 4rem;
+  --radius: 0.6rem;
+}
+
+/* ------------------------------------------------------------------ */
+/* Світла тема — пергамент                                               */
+:root[data-theme='light'] {
+  --paper: #f3e6c8;
+  --paper-raised: #f8efda;
+  --paper-sunk: #eadbb8;
+  --ink: #2b1d12; /* 13.2:1 */
+  --ink-muted: #5e4a36; /* 6.8:1 */
+  --brick-red: #c8102e; /* 4.75:1 — як акцент і великий текст */
+  --brick-red-face: #c8102e; /* білий на ній 5.9:1 */
+  --brick-red-side: #8b0a1f;
+  --brick-yellow: #f2c230;
+  --brick-yellow-side: #b88d12;
+  --brick-blue: #1f5fbf;
+  --leather: #8a5a2b; /* 4.7:1 */
+  --map-line: #b79a6a;
+  --link: #a50d26; /* 6.3:1 */
+  --on-brick: #ffffff;
+  --shadow: 0 1px 0 rgb(91 62 30 / 0.2), 0 12px 30px -14px rgb(91 62 30 / 0.55);
+  --grid-alpha: 0.32;
+
+  --sl-color-accent-low: #f2cfc3;
+  --sl-color-accent: #b30e29;
+  --sl-color-accent-high: #5e0a16;
+  --sl-color-white: #1d130b;
+  --sl-color-gray-1: #2b1d12;
+  --sl-color-gray-2: #4a3726;
+  --sl-color-gray-3: #5e4a36;
+  --sl-color-gray-4: #8c7556;
+  --sl-color-gray-5: #c9b48c;
+  --sl-color-gray-6: #eadbb8;
+  --sl-color-gray-7: #f0e2c2;
+  --sl-color-black: #f3e6c8;
+  --sl-color-text-accent: var(--link);
+  --sl-color-bg-nav: rgb(243 230 200 / 0.92);
+  --sl-color-bg-sidebar: #efe0bf;
+  --sl-color-hairline-light: #dcc79d;
+  --sl-color-hairline-shade: #c9b48c;
+}
+
+/* ------------------------------------------------------------------ */
+/* Тло — аркуш мапи з сіткою                                              */
+body {
+  background-color: var(--paper);
+  background-image:
+    radial-gradient(ellipse at 50% -10%, transparent 40%, rgb(0 0 0 / 0.08) 100%),
+    linear-gradient(color-mix(in srgb, var(--map-line) calc(var(--grid-alpha) * 100%), transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--map-line) calc(var(--grid-alpha) * 100%), transparent) 1px, transparent 1px);
+  background-size: 100% 100%, 48px 48px, 48px 48px;
+  background-attachment: fixed, scroll, scroll;
+  color: var(--ink);
+  overflow-x: clip;
+}
+
+.page,
+.main-frame {
+  max-width: 100vw;
+}
+
+header.header {
+  backdrop-filter: blur(8px);
+  border-bottom: 2px dashed color-mix(in srgb, var(--leather) 55%, transparent);
+}
+
+/* ------------------------------------------------------------------ */
+/* Типографіка                                                          */
+h1,
+h2,
+h3,
+h4,
+.sl-markdown-content :is(h1, h2, h3, h4) {
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
+}
+
+.sl-markdown-content h2 {
+  font-weight: 700;
+  padding-bottom: 0.3rem;
+  border-bottom: 2px dotted color-mix(in srgb, var(--leather) 70%, transparent);
+}
+
+.sl-markdown-content h3 {
+  font-weight: 700;
+  color: var(--sl-color-white);
+}
+
+h1#_top {
+  font-weight: 800;
+}
+
+.sl-markdown-content a:not(:where(.not-content *)) {
+  color: var(--link);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+.sl-markdown-content a:not(:where(.not-content *)):hover {
+  text-decoration-thickness: 2px;
+}
+
+/* Штифти замість маркерів списку (маска — штифт згори: диск з кільцем). */
+.sl-markdown-content ul:not(:where(.not-content *, [class])) {
+  list-style: none;
+  padding-inline-start: 1.6rem;
+}
+
+.sl-markdown-content ul:not(:where(.not-content *, [class])) > li {
+  position: relative;
+}
+
+.sl-markdown-content ul:not(:where(.not-content *, [class])) > li::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: -1.35rem;
+  top: 0.38em;
+  width: 0.85rem;
+  height: 0.85rem;
+  background: var(--brick-yellow);
+  -webkit-mask: var(--stud-mask) center / contain no-repeat;
+  mask: var(--stud-mask) center / contain no-repeat;
+  filter: drop-shadow(0 1px 0 var(--brick-yellow-side));
+}
+
+.sl-markdown-content ul ul:not(:where(.not-content *, [class])) > li::before {
+  background: var(--leather);
+  filter: none;
+}
+
+:root {
+  --stud-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill-rule='evenodd' d='M10 1a9 9 0 1 1 0 18a9 9 0 1 1 0-18zm0 4.2a4.8 4.8 0 1 0 0 9.6a4.8 4.8 0 1 0 0-9.6zm0 1.6a3.2 3.2 0 1 1 0 6.4a3.2 3.2 0 1 1 0-6.4z'/%3E%3C/svg%3E");
+}
+
+/* Таблиці — як картки на пергаменті */
+.sl-markdown-content table:not(:where(.not-content *)) {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  border-radius: var(--radius);
+  background: var(--paper-raised);
+  box-shadow: var(--shadow);
+}
+
+.sl-markdown-content :is(th, td):not(:where(.not-content *)) {
+  border-color: var(--sl-color-hairline-light);
+}
+
+.sl-markdown-content th:not(:where(.not-content *)) {
+  font-family: var(--font-display);
+  font-weight: 600;
+  background: color-mix(in srgb, var(--leather) 16%, transparent);
+}
+
+/* Зображення в тексті — фото на мапі */
+.sl-markdown-content img:not(:where(.not-content *)) {
+  border-radius: 0.35rem;
+  border: 6px solid var(--paper-raised);
+  box-shadow: var(--shadow);
+  height: auto;
+}
+
+.sl-markdown-content blockquote:not(:where(.not-content *)) {
+  border-inline-start: 4px solid var(--brick-yellow);
+  background: color-mix(in srgb, var(--brick-yellow) 9%, transparent);
+  padding: 0.6rem 1rem;
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+.sl-markdown-content code:not(:where(.not-content *, pre code)) {
+  background: color-mix(in srgb, var(--leather) 16%, transparent);
+  border-radius: 0.25rem;
+  overflow-wrap: anywhere;
+}
+
+/* Довгі шляхи й хеші не мають розпирати сторінку на телефоні */
+.sl-markdown-content :is(p, li, td) {
+  overflow-wrap: break-word;
+}
+
+/* Бічна панель */
+.sidebar-content {
+  font-size: 0.95rem;
+}
+
+.sidebar-content .group-label .large,
+nav.sidebar summary .large {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--leather);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.82rem;
+}
+
+.sidebar-content a[aria-current='page'],
+.sidebar-content a[aria-current='page']:hover,
+.sidebar-content a[aria-current='page']:focus {
+  background: var(--brick-red-face);
+  color: var(--on-brick);
+  border-radius: 0.35rem;
+}
+
+/* Видимий фокус */
+:focus-visible {
+  outline: 3px solid var(--brick-yellow);
+  outline-offset: 2px;
+}
+
+/* Загальні допоміжні */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.section-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--leather);
+}
+
+/* Домашня: широкі секції */
+[data-has-hero] .sl-markdown-content > section.home-section {
+  margin-top: 4rem;
+}
+
+[data-has-hero] .home-section > .section-kicker {
+  margin: 0;
+}
+
+[data-has-hero] .sl-markdown-content .home-section > .section-kicker + :is(h2, .sl-heading-wrapper) {
+  margin-top: 0.2rem;
+}
+
+[data-has-hero] .sl-markdown-content .home-section > :is(h2, .sl-heading-wrapper) + * {
+  margin-top: 1.25rem;
+}
+
+[data-has-hero] .home-section .section-kicker::before {
+  content: '';
+  width: 1.4rem;
+  border-top: 3px dotted currentColor;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}

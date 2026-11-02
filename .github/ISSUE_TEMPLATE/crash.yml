@@ -1,0 +1,78 @@
+name: Збій гри або проблема
+description: Гра вилітає, зависає, переклад не вмикається, щось зламалося після встановлення.
+title: "[Збій] "
+labels: ["збій"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Опишіть проблему якомога докладніше: так її вдасться відтворити.
+        Немає акаунта GitHub? Напишіть у Telegram: https://t.me/dimkasmile
+  - type: textarea
+    id: what
+    attributes:
+      label: Що сталося
+      description: Що ви бачите і що мало б статися.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Кроки, щоб повторити
+      placeholder: |
+        1. Завантажити сейв…
+        2. Відкрити…
+        3. Гра вилітає
+    validations:
+      required: true
+  - type: input
+    id: location
+    attributes:
+      label: Рівень або екран
+      placeholder: "Напр.: «У пошуках втраченого ковчега», розділ 3 / редактор персонажа"
+    validations:
+      required: true
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Платформа
+      options:
+        - Steam (Windows)
+        - Steam Deck / Proton
+        - GOG
+        - Інше
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Версія українізатора
+      description: Указана в назві архіву або в `scripts/UKRAINIAN/README.txt`.
+      placeholder: "1.1.10"
+    validations:
+      required: true
+  - type: textarea
+    id: save
+    attributes:
+      label: Файл збереження
+      description: |
+        Сейви лежать у `%LOCALAPPDATA%\LucasArts\LEGOIndianaJones\SavedGames\`
+        (файли `SaveGame0.LEGOIndianaJones_SavedGame` тощо). Запакуйте потрібний файл у ZIP
+        і перетягніть сюди. Без сейву проблему на пізніх рівнях часто неможливо відтворити.
+  - type: textarea
+    id: screenshot
+    attributes:
+      label: Скриншот або відео
+      description: Перетягніть файли сюди (необов'язково).
+  - type: textarea
+    id: log
+    attributes:
+      label: Журнал плагіна
+      description: |
+        Вміст файла `scripts/legoindy-ua-pc.log` у теці гри (якщо він є).
+      render: text
+  - type: textarea
+    id: mods
+    attributes:
+      label: Інші моди
+      description: Чи встановлені інші моди, ASI-плагіни або змінений `LEGOIndy.exe` (наприклад, LAA-патч)?

@@ -1,0 +1,788 @@
+{
+  "igen": {
+    "translate": false,
+    "tokens": []
+  },
+  "GAMENAME": {
+    "translate": true,
+    "tokens": []
+  },
+  "GAMETITLE": {
+    "translate": true,
+    "tokens": []
+  },
+  "GAMESUBTITLE": {
+    "translate": true,
+    "tokens": []
+  },
+  "GEN_YES": {
+    "translate": true,
+    "tokens": []
+  },
+  "GEN_NO": {
+    "translate": true,
+    "tokens": []
+  },
+  "GEN_OK": {
+    "translate": true,
+    "tokens": []
+  },
+  "GEN_CANCEL": {
+    "translate": true,
+    "tokens": []
+  },
+  "GEN_RETRY": {
+    "translate": true,
+    "tokens": []
+  },
+  "GEN_SLOT": {
+    "translate": true,
+    "tokens": []
+  },
+  "GEN_PRESENT": {
+    "translate": true,
+    "tokens": []
+  },
+  "GEN_EMPTY": {
+    "translate": true,
+    "tokens": []
+  },
+  "GEN_NOSPACE": {
+    "translate": true,
+    "tokens": []
+  },
+  "GEN_CONTINUE": {
+    "translate": true,
+    "tokens": []
+  },
+  "GEN_SAVEGAME": {
+    "translate": true,
+    "tokens": []
+  },
+  "GEN_LOADGAME": {
+    "translate": true,
+    "tokens": []
+  },
+  "GEN_DELETEGAME": {
+    "translate": true,
+    "tokens": []
+  },
+  "GEN_GAMESAVED": {
+    "translate": true,
+    "tokens": []
+  },
+  "GEN_GAMEOVERWRITTEN": {
+    "translate": true,
+    "tokens": []
+  },
+  "GEN_GAMELOADED": {
+    "translate": true,
+    "tokens": []
+  },
+  "GEN_DELETING": {
+    "translate": true,
+    "tokens": []
+  },
+  "GEN_FORMATTING": {
+    "translate": true,
+    "tokens": []
+  },
+  "GEN_GAMEOVERWRITING": {
+    "translate": true,
+    "tokens": []
+  },
+  "GEN_CORRUPTLOAD": {
+    "translate": true,
+    "tokens": []
+  },
+  "GEN_CONFIRMLOAD": {
+    "translate": true,
+    "tokens": []
+  },
+  "GEN_CONFIRMSAVE": {
+    "translate": true,
+    "tokens": []
+  },
+  "GEN_CONFIRMOVERWRITE": {
+    "translate": true,
+    "tokens": []
+  },
+  "GEN_DOYOUWANTTOSTART": {
+    "translate": true,
+    "tokens": []
+  },
+  "GEN_DOYOUWANTTOABORT": {
+    "translate": true,
+    "tokens": []
+  },
+  "GEN_DOYOUWANTTOABORTLOAD": {
+    "translate": true,
+    "tokens": []
+  },
+  "GEN_DOYOUWANTTOABORTFORMAT": {
+    "translate": true,
+    "tokens": []
+  },
+  "GEN_CONTINUEWITHOUTSAVING": {
+    "translate": true,
+    "tokens": []
+  },
+  "GEN_CONTINUEWITHOUTLOADING": {
+    "translate": true,
+    "tokens": []
+  },
+  "GEN_NEWSAVE": {
+    "translate": true,
+    "tokens": []
+  },
+  "GEN_COMPLETED": {
+    "translate": true,
+    "tokens": []
+  },
+  "GEN_SELECT": {
+    "translate": true,
+    "tokens": []
+  },
+  "GEN_BACK": {
+    "translate": true,
+    "tokens": []
+  },
+  "GEN_VIBRATION": {
+    "translate": true,
+    "tokens": []
+  },
+  "GEN_CONFIRMDELETE": {
+    "translate": true,
+    "tokens": []
+  },
+  "GEN_PROGRESS": {
+    "translate": true,
+    "tokens": []
+  },
+  "GEN_TIMEPLAYED": {
+    "translate": true,
+    "tokens": [
+      "%s"
+    ]
+  },
+  "GEN_PRESSSTART": {
+    "translate": true,
+    "tokens": []
+  },
+  "GEN_PCPRESSSTART": {
+    "translate": true,
+    "tokens": []
+  },
+  "GEN_PCPRESSSTARTFE": {
+    "translate": true,
+    "tokens": []
+  },
+  "GEN_PCPRESSSTARTP1": {
+    "translate": true,
+    "tokens": []
+  },
+  "GEN_PCPRESSSTARTP2": {
+    "translate": true,
+    "tokens": []
+  },
+  "GEN_OVERWRITEWARNING": {
+    "translate": true,
+    "tokens": []
+  },
+  "GEN_CONFIRMDISABLESAVE": {
+    "translate": true,
+    "tokens": []
+  },
+  "PS2_NODATAAVAILABLE": {
+    "translate": false,
+    "tokens": []
+  },
+  "PS2_GAMESAVING": {
+    "translate": false,
+    "tokens": []
+  },
+  "PS2_GAMELOADING": {
+    "translate": false,
+    "tokens": []
+  },
+  "PS2_FAILEDTOLOAD": {
+    "translate": false,
+    "tokens": []
+  },
+  "PS2_FAILEDTOSAVE": {
+    "translate": false,
+    "tokens": []
+  },
+  "PS2_FAILEDTOOVERWRITE": {
+    "translate": false,
+    "tokens": []
+  },
+  "PS2_FAILEDTOFORMAT": {
+    "translate": false,
+    "tokens": []
+  },
+  "PS2_FAILEDTODELETE": {
+    "translate": false,
+    "tokens": []
+  },
+  "PS2_DONOTREMOVEMEMORYCARD": {
+    "translate": false,
+    "tokens": []
+  },
+  "PS2_NOCARDINSERTED": {
+    "translate": false,
+    "tokens": []
+  },
+  "PS2_MEMORYCARDISNOTFORMATTED": {
+    "translate": false,
+    "tokens": []
+  },
+  "PS2_CONFIRMFORMAT": {
+    "translate": false,
+    "tokens": []
+  },
+  "PS2_CONFIRMFORMAT2": {
+    "translate": false,
+    "tokens": []
+  },
+  "PS2_SPACENEEDED": {
+    "translate": false,
+    "tokens": []
+  },
+  "PS2_SPACENEEDEDPLUS": {
+    "translate": false,
+    "tokens": []
+  },
+  "PS2_BOOTNOCARDINSERTED": {
+    "translate": false,
+    "tokens": []
+  },
+  "PS2_CHECKINGMEMORYCARD": {
+    "translate": false,
+    "tokens": []
+  },
+  "PS2_NOTENOUGHSPACE": {
+    "translate": false,
+    "tokens": []
+  },
+  "PS2_AUTOSAVE_ENABLED": {
+    "translate": false,
+    "tokens": []
+  },
+  "PS2_AUTOSAVE_WARNING": {
+    "translate": false,
+    "tokens": []
+  },
+  "PS2_AUTOSAVE_CANCEL1": {
+    "translate": false,
+    "tokens": []
+  },
+  "PS2_AUTOSAVE_CANCEL2": {
+    "translate": false,
+    "tokens": []
+  },
+  "PS2_AUTOSAVE_CANCEL3": {
+    "translate": false,
+    "tokens": []
+  },
+  "PS2_SPACEFORADDSLOT": {
+    "translate": false,
+    "tokens": []
+  },
+  "PS2_FILECORRUPTED": {
+    "translate": false,
+    "tokens": []
+  },
+  "PS2_CORRUPTCONTINUE": {
+    "translate": false,
+    "tokens": []
+  },
+  "PS2_FORMATTINGCOMPLETE": {
+    "translate": false,
+    "tokens": []
+  },
+  "PS2_DELETECOMPLETE": {
+    "translate": false,
+    "tokens": []
+  },
+  "PS2_DELETEFILE": {
+    "translate": false,
+    "tokens": []
+  },
+  "PS2_AUTOSAVE_BOOTWARN1": {
+    "translate": false,
+    "tokens": []
+  },
+  "PS2_AUTOSAVE_BOOTWARN2": {
+    "translate": false,
+    "tokens": []
+  },
+  "PS2_FORMATTING": {
+    "translate": false,
+    "tokens": []
+  },
+  "PS2_CONTROLLERREMOVED": {
+    "translate": false,
+    "tokens": []
+  },
+  "PS2_FAILEDCHECK": {
+    "translate": false,
+    "tokens": []
+  },
+  "PC_GAMESAVING": {
+    "translate": true,
+    "tokens": []
+  },
+  "PC_GAMELOADING": {
+    "translate": true,
+    "tokens": []
+  },
+  "PC_FAILEDTOLOAD": {
+    "translate": true,
+    "tokens": []
+  },
+  "PC_FAILEDTOSAVE": {
+    "translate": true,
+    "tokens": []
+  },
+  "PC_FAILEDTOOVERWRITE": {
+    "translate": true,
+    "tokens": []
+  },
+  "PC_NODATAAVAILABLE": {
+    "translate": true,
+    "tokens": [
+      "%s"
+    ]
+  },
+  "PC_AUTOSAVE_ENABLED": {
+    "translate": true,
+    "tokens": [
+      "%i"
+    ]
+  },
+  "PC_FORMATTINGCOMPLETE": {
+    "translate": true,
+    "tokens": []
+  },
+  "PC_DELETECOMPLETE": {
+    "translate": true,
+    "tokens": []
+  },
+  "PC_NOTENOUGHSPACE": {
+    "translate": true,
+    "tokens": []
+  },
+  "PC_CONTROLLERREMOVED": {
+    "translate": true,
+    "tokens": []
+  },
+  "360_NODATAAVAILABLE": {
+    "translate": false,
+    "tokens": []
+  },
+  "360_GAMESAVING": {
+    "translate": false,
+    "tokens": []
+  },
+  "360_GAMELOADING": {
+    "translate": false,
+    "tokens": []
+  },
+  "360_FAILEDTOLOAD": {
+    "translate": false,
+    "tokens": []
+  },
+  "360_FAILEDTOSAVE": {
+    "translate": false,
+    "tokens": []
+  },
+  "360_FAILEDTOOVERWRITE": {
+    "translate": false,
+    "tokens": []
+  },
+  "360_AUTOSAVE_ENABLED": {
+    "translate": false,
+    "tokens": []
+  },
+  "360_AUTOSAVE_WARNING": {
+    "translate": false,
+    "tokens": []
+  },
+  "360_DAMAGEDGAME": {
+    "translate": false,
+    "tokens": []
+  },
+  "360_DELETECOMPLETE": {
+    "translate": false,
+    "tokens": []
+  },
+  "360_DAMAGEDDATA": {
+    "translate": false,
+    "tokens": []
+  },
+  "360_SPACEFORADDSLOT": {
+    "translate": false,
+    "tokens": []
+  },
+  "360_CHOOSEDEVICE": {
+    "translate": false,
+    "tokens": []
+  },
+  "360_SPACENEEDED": {
+    "translate": false,
+    "tokens": []
+  },
+  "360_NOCARDINSERTED": {
+    "translate": false,
+    "tokens": []
+  },
+  "360_AUTOSAVE_CANCEL1": {
+    "translate": false,
+    "tokens": []
+  },
+  "360_AUTOSAVE_CANCEL2": {
+    "translate": false,
+    "tokens": []
+  },
+  "360_AUTOSAVE_CANCEL3": {
+    "translate": false,
+    "tokens": []
+  },
+  "360_NOTENOUGHSPACE": {
+    "translate": false,
+    "tokens": []
+  },
+  "360_NOMORESAVESLOTS": {
+    "translate": false,
+    "tokens": []
+  },
+  "360_TOOMANYSAVESLOTS": {
+    "translate": false,
+    "tokens": []
+  },
+  "360_USERNOTSIGNEDINWARNING": {
+    "translate": false,
+    "tokens": []
+  },
+  "360_USERNOTSIGNEDINLOADING": {
+    "translate": false,
+    "tokens": []
+  },
+  "360_SLOT": {
+    "translate": false,
+    "tokens": []
+  },
+  "360_ACHIEVEMENTS_DISABLED": {
+    "translate": false,
+    "tokens": []
+  },
+  "360_PROFILECHANGE1": {
+    "translate": false,
+    "tokens": []
+  },
+  "360_PROFILECHANGE2": {
+    "translate": false,
+    "tokens": []
+  },
+  "360_PROFILECHANGE3": {
+    "translate": false,
+    "tokens": []
+  },
+  "360_CONTROLLERREMOVED": {
+    "translate": false,
+    "tokens": []
+  },
+  "WII_NODATAAVAILABLE": {
+    "translate": false,
+    "tokens": []
+  },
+  "WII_GAMESAVING": {
+    "translate": false,
+    "tokens": []
+  },
+  "WII_GAMELOADING": {
+    "translate": false,
+    "tokens": []
+  },
+  "WII_GAMEOVERWRITING": {
+    "translate": false,
+    "tokens": []
+  },
+  "WII_FAILEDTOLOAD": {
+    "translate": false,
+    "tokens": []
+  },
+  "WII_FAILEDTOSAVE": {
+    "translate": false,
+    "tokens": []
+  },
+  "WII_FAILEDTODELETE": {
+    "translate": false,
+    "tokens": []
+  },
+  "WII_FAILEDTOOVERWRITE": {
+    "translate": false,
+    "tokens": []
+  },
+  "WII_FAILEDTOCREATE": {
+    "translate": false,
+    "tokens": []
+  },
+  "WII_DONOTREMOVEMEMORYCARD": {
+    "translate": false,
+    "tokens": []
+  },
+  "WII_SPACENEEDED": {
+    "translate": false,
+    "tokens": []
+  },
+  "WII_CHECKINGMEMORYCARD": {
+    "translate": false,
+    "tokens": []
+  },
+  "WII_NOTENOUGHSPACE": {
+    "translate": false,
+    "tokens": []
+  },
+  "WII_AUTOSAVE_ENABLED": {
+    "translate": false,
+    "tokens": []
+  },
+  "WII_AUTOSAVE_WARNING": {
+    "translate": false,
+    "tokens": []
+  },
+  "WII_CREATING": {
+    "translate": false,
+    "tokens": []
+  },
+  "WII_CREATECOMPLETE": {
+    "translate": false,
+    "tokens": []
+  },
+  "WII_MEMORYCARDHASNOFILE": {
+    "translate": false,
+    "tokens": []
+  },
+  "WII_CONFIRMCREATE": {
+    "translate": false,
+    "tokens": []
+  },
+  "WII_FILECORRUPTED": {
+    "translate": false,
+    "tokens": []
+  },
+  "WII_DELETEFILE": {
+    "translate": false,
+    "tokens": []
+  },
+  "WII_MANAGEMEMORYCARD": {
+    "translate": false,
+    "tokens": []
+  },
+  "WII_BROKENCARD": {
+    "translate": false,
+    "tokens": []
+  },
+  "WII_DELETECOMPLETE": {
+    "translate": false,
+    "tokens": []
+  },
+  "WII_CONNECTNUNCHUK": {
+    "translate": false,
+    "tokens": []
+  },
+  "WII_LOWBATTERY": {
+    "translate": false,
+    "tokens": []
+  },
+  "WII_REMOTEERROR": {
+    "translate": false,
+    "tokens": []
+  },
+  "WII_REMOTECOMMSINTERRUPT": {
+    "translate": false,
+    "tokens": []
+  },
+  "WII_REMOTEPRESSANY": {
+    "translate": false,
+    "tokens": []
+  },
+  "WII_CHANGESOUND": {
+    "translate": false,
+    "tokens": []
+  },
+  "WII_SPACENEEDEDINODES": {
+    "translate": false,
+    "tokens": []
+  },
+  "WII_CONTINUEWITHOUTSAVING": {
+    "translate": false,
+    "tokens": []
+  },
+  "WII_VIBRATION": {
+    "translate": false,
+    "tokens": []
+  },
+  "WII_MANAGECONFIRM": {
+    "translate": false,
+    "tokens": []
+  },
+  "WII_PRESSSTART": {
+    "translate": false,
+    "tokens": []
+  },
+  "PS3_AUTOSAVE_ENABLED": {
+    "translate": false,
+    "tokens": []
+  },
+  "PS3_NOTENOUGHSPACE": {
+    "translate": false,
+    "tokens": []
+  },
+  "PS3_AUTOSAVE_BOOTWARN1": {
+    "translate": false,
+    "tokens": []
+  },
+  "PS3_AUTOSAVE_BOOTWARN2": {
+    "translate": false,
+    "tokens": []
+  },
+  "PS3_AUTOSAVE_WARNING": {
+    "translate": false,
+    "tokens": []
+  },
+  "PS3_SPACENEEDED": {
+    "translate": false,
+    "tokens": []
+  },
+  "PS3_DELETEFROMALL": {
+    "translate": false,
+    "tokens": []
+  },
+  "PS3_REDOLOAD": {
+    "translate": false,
+    "tokens": []
+  },
+  "PS3_REDOSAVE": {
+    "translate": false,
+    "tokens": []
+  },
+  "PS3_CONTROLLERREMOVED": {
+    "translate": false,
+    "tokens": []
+  },
+  "PSP_NODATAAVAILABLE": {
+    "translate": false,
+    "tokens": []
+  },
+  "PSP_GAMESAVING": {
+    "translate": false,
+    "tokens": []
+  },
+  "PSP_GAMELOADING": {
+    "translate": false,
+    "tokens": []
+  },
+  "PSP_FAILEDTOLOAD": {
+    "translate": false,
+    "tokens": []
+  },
+  "PSP_FAILEDTOSAVE": {
+    "translate": false,
+    "tokens": []
+  },
+  "PSP_FAILEDTOOVERWRITE": {
+    "translate": false,
+    "tokens": []
+  },
+  "PSP_FAILEDTOFORMAT": {
+    "translate": false,
+    "tokens": []
+  },
+  "PSP_DONOTREMOVEMEMORYCARD": {
+    "translate": false,
+    "tokens": []
+  },
+  "PSP_NOCARDINSERTED": {
+    "translate": false,
+    "tokens": []
+  },
+  "PSP_MEMORYCARDISNOTFORMATTED": {
+    "translate": false,
+    "tokens": []
+  },
+  "PSP_CONFIRMFORMAT": {
+    "translate": false,
+    "tokens": []
+  },
+  "PSP_SPACENEEDED": {
+    "translate": false,
+    "tokens": []
+  },
+  "PSP_CHECKINGMEMORYCARD": {
+    "translate": false,
+    "tokens": []
+  },
+  "PSP_NOTENOUGHSPACE": {
+    "translate": false,
+    "tokens": []
+  },
+  "PSP_AUTOSAVE_ENABLED": {
+    "translate": false,
+    "tokens": []
+  },
+  "PSP_AUTOSAVE_WARNING": {
+    "translate": false,
+    "tokens": []
+  },
+  "PSP_AUTOSAVE_CANCEL1": {
+    "translate": false,
+    "tokens": []
+  },
+  "PSP_AUTOSAVE_CANCEL2": {
+    "translate": false,
+    "tokens": []
+  },
+  "PSP_AUTOSAVE_CANCEL3": {
+    "translate": false,
+    "tokens": []
+  },
+  "PSP_FILECORRUPTED": {
+    "translate": false,
+    "tokens": []
+  },
+  "PSP_CORRUPTCONTINUE": {
+    "translate": false,
+    "tokens": []
+  },
+  "PSP_FORMATTINGCOMPLETE": {
+    "translate": false,
+    "tokens": []
+  },
+  "PSP_DELETECOMPLETE": {
+    "translate": false,
+    "tokens": []
+  },
+  "PSP_DELETEFROMALL": {
+    "translate": false,
+    "tokens": []
+  },
+  "PSP_REDOLOAD": {
+    "translate": false,
+    "tokens": []
+  },
+  "PSP_REDOSAVE": {
+    "translate": false,
+    "tokens": []
+  },
+  "PSP_SLEEPLOAD": {
+    "translate": false,
+    "tokens": []
+  },
+  "PSP_SLEEPSAVE": {
+    "translate": false,
+    "tokens": []
+  }
+}

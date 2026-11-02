@@ -1,0 +1,276 @@
+---
+/**
+ * Hero головної: аркуш мапи з сіткою, компас, пунктирний маршрут,
+ * «фото» головного меню, версія й кнопка-цеглинка.
+ * Пасхалка: розкидані по мапі круглики можна зібрати (StudCounter, design D4).
+ */
+import { Image } from 'astro:assets';
+import DownloadButton from '../DownloadButton.astro';
+import Compass from '../svg/Compass.astro';
+import Stud from '../svg/Stud.astro';
+import StudHunt from '../StudHunt.astro';
+import { screenshot } from '../../lib/screenshots';
+import { langOf, localePath, STRINGS } from '../../i18n/strings';
+
+const { data } = Astro.locals.starlightRoute.entry;
+const { title = data.title, tagline } = data.hero || {};
+const shot = screenshot('main-menu.jpg');
+const lang = langOf(Astro.locals);
+const t = STRINGS[lang].hero;
+---
+
+<div class="hero-map not-content">
+  <svg class="hero-route" viewBox="0 0 1000 520" preserveAspectRatio="none" aria-hidden="true">
+    <path
+      d="M-20 470 C 120 420, 160 300, 300 330 S 470 470, 560 360 S 650 120, 800 150 S 960 80, 1030 40"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="3"
+      stroke-dasharray="2 12"
+      stroke-linecap="round"
+      vector-effect="non-scaling-stroke"></path>
+  </svg>
+  <Compass class="hero-compass" size={150} />
+
+  <div class="hero-copy">
+    <p class="section-kicker hero-kicker">
+      <Stud size={18} tone="red" /> {t.kicker}
+    </p>
+    <h1 id="_top" data-page-title set:html={title} />
+    {tagline && <p class="hero-tagline" set:html={tagline} />}
+    <ul class="hero-badges" aria-label={t.badgesLabel}>
+      {t.badges.map((b) => <li class:list={['badge', b.tone && `badge--${b.tone}`]}>{b.label}</li>)}
+    </ul>
+    <DownloadButton />
+    <nav class="hero-links" aria-label={t.linksLabel}>
+      {t.links.map((l) => <a href={localePath(lang, l.page)}>{l.label}</a>)}
+    </nav>
+  </div>
+
+  <div class="hero-visual">
+  <figure class="hero-photo">
+    <span class="tape tape--l" aria-hidden="true"></span>
+    <span class="tape tape--r" aria-hidden="true"></span>
+    {
+      shot ? (
+        <Image
+          src={shot}
+          widths={[480, 800, 1200]}
+          sizes="(min-width: 64rem) 34rem, 92vw"
+          alt={t.imageAlt}
+          loading="eager"
+          fetchpriority="high"
+        />
+      ) : (
+        <div class="hero-photo__empty">{t.imageEmpty}</div>
+      )
+    }
+    <figcaption>{t.caption}</figcaption>
+  </figure>
+  <StudHunt />
+  </div>
+</div>
+
+<style>
+  :global(:root[data-has-hero]) {
+    --sl-content-width: 72rem;
+  }
+
+  .hero-map {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem;
+    align-items: center;
+    padding: 0.5rem 0 2.5rem;
+    isolation: isolate;
+  }
+
+  .hero-route {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    color: var(--leather);
+    opacity: 0.7;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  .hero-map :global(.hero-compass) {
+    position: absolute;
+    right: 0;
+    bottom: -1.5rem;
+    color: var(--leather);
+    opacity: 0.45;
+    z-index: -1;
+    transform: rotate(-12deg);
+    width: 110px;
+    height: 110px;
+  }
+
+  .hero-copy {
+    min-width: 0;
+  }
+
+  .hero-kicker {
+    margin: 0 0 0.6rem;
+  }
+
+  h1 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(1.9rem, 1.1rem + 3vw, 3.05rem);
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    color: var(--sl-color-white);
+    text-wrap: balance;
+  }
+
+  h1 :global(em) {
+    font-style: normal;
+    color: var(--brick-red);
+    background: linear-gradient(transparent 78%, color-mix(in srgb, var(--brick-yellow) 38%, transparent) 78%, color-mix(in srgb, var(--brick-yellow) 38%, transparent) 92%, transparent 92%);
+    padding-inline: 0.05em;
+  }
+
+  .hero-tagline {
+    margin: 0.7rem 0 0;
+    font-size: clamp(1rem, 0.95rem + 0.4vw, 1.2rem);
+    color: var(--ink-muted);
+    max-width: 38rem;
+  }
+
+  .hero-badges {
+    list-style: none;
+    padding: 0;
+    margin: 0.8rem 0 0.4rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.15rem 0.6rem 0.15rem 0.45rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    background: var(--paper-raised);
+    border: 1px solid var(--sl-color-hairline-light);
+    color: var(--ink);
+  }
+
+  .badge::before {
+    content: '';
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: 50%;
+    box-shadow: inset 0 -2px 0 rgb(0 0 0 / 0.25);
+  }
+
+  .badge--ok::before {
+    background: #3f9b4f;
+  }
+  .badge--wait::before {
+    background: var(--brick-yellow);
+  }
+  .badge--no::before {
+    background: var(--sl-color-gray-4);
+  }
+
+  .hero-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1.2rem;
+    margin-top: 1.1rem;
+    font-weight: 600;
+  }
+
+  .hero-links a {
+    color: var(--link);
+    text-decoration: none;
+    border-bottom: 2px dotted currentColor;
+  }
+
+  .hero-links a:hover {
+    border-bottom-style: solid;
+  }
+
+  .hero-visual {
+    position: relative;
+    padding: 1.2rem 0.6rem;
+    min-width: 0;
+  }
+
+  .hero-photo {
+    position: relative;
+    margin: 0 auto;
+    max-width: 34rem;
+    width: 100%;
+    padding: 0.6rem 0.6rem 0.4rem;
+    background: var(--paper-raised);
+    border-radius: 0.3rem;
+    box-shadow: var(--shadow);
+    transform: rotate(1.6deg);
+  }
+
+  .hero-photo :global(img) {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 0.15rem;
+  }
+
+  .hero-photo__empty {
+    aspect-ratio: 16 / 9;
+    display: grid;
+    place-items: center;
+    background: var(--paper-sunk);
+    color: var(--ink-muted);
+  }
+
+  .hero-photo figcaption {
+    margin-top: 0.35rem;
+    font-size: 0.8rem;
+    text-align: center;
+    color: var(--ink-muted);
+    font-style: italic;
+  }
+
+  .tape {
+    position: absolute;
+    top: -0.7rem;
+    width: 5.5rem;
+    height: 1.4rem;
+    background: color-mix(in srgb, var(--brick-yellow) 55%, transparent);
+    box-shadow: 0 1px 2px rgb(0 0 0 / 0.15);
+    z-index: 1;
+  }
+  .tape--l {
+    left: 1.2rem;
+    transform: rotate(-8deg);
+  }
+  .tape--r {
+    right: 1.2rem;
+    transform: rotate(7deg);
+  }
+
+  @media (min-width: 64rem) {
+    .hero-map {
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+      gap: 3rem;
+      padding: 0.75rem 0 2.5rem;
+    }
+    .hero-map :global(.hero-compass) {
+      width: 150px;
+      height: 150px;
+      right: auto;
+      left: 46%;
+      bottom: -2rem;
+    }
+  }
+</style>

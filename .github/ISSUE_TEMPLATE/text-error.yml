@@ -1,0 +1,58 @@
+name: Помилка в тексті
+description: Друкарська помилка, невдалий переклад, обрізаний чи англійський текст, неправильна літера.
+title: "[Текст] "
+labels: ["текст"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Дякуємо, що допомагаєте зробити переклад кращим!
+        Немає акаунта GitHub? Напишіть у Telegram: https://t.me/dimkasmile
+  - type: textarea
+    id: screenshot
+    attributes:
+      label: Скриншот
+      description: Перетягніть зображення сюди. У Steam скриншот робиться клавішею F12.
+    validations:
+      required: true
+  - type: input
+    id: location
+    attributes:
+      label: Рівень або екран
+      description: Де саме видно текст.
+      placeholder: "Напр.: «Храм Долі», розділ 2 / меню паузи / магазин персонажів"
+    validations:
+      required: true
+  - type: textarea
+    id: current
+    attributes:
+      label: Поточний текст
+      description: Як зараз написано в грі.
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Як має бути
+      description: Ваш варіант і, якщо хочете, пояснення.
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Що відбувалося
+      description: Що ви робили, коли побачили текст (необов'язково).
+  - type: textarea
+    id: save
+    attributes:
+      label: Файл збереження (за можливості)
+      description: |
+        Допомагає швидко дістатися до потрібного місця. Сейви лежать у
+        `%LOCALAPPDATA%\LucasArts\LEGOIndianaJones\SavedGames\`
+        (файли `SaveGame0.LEGOIndianaJones_SavedGame` тощо). Запакуйте файл у ZIP і перетягніть сюди.
+  - type: input
+    id: version
+    attributes:
+      label: Версія українізатора
+      description: Указана в назві архіву або в `scripts/UKRAINIAN/README.txt`.
+      placeholder: "1.1.10"

@@ -1,0 +1,54 @@
+LEGO Indiana Jones Ukrainian localization — licensing scope
+Copyright (c) 2026 Dmytro Vakulenko and contributors
+
+This project uses different licenses for software and creative contributions.
+This notice does not place the entire repository or any resource archive under
+a single license.
+
+1. Original software: MIT
+
+Original source code, tools, build scripts and runtime plugin code developed
+for this project are licensed under the MIT License. The full license and
+copyright notice are in LICENSES/MIT.txt.
+Embedded translation text is covered by section 2 instead of this section.
+Third-party code retains its own license as described in section 3.
+
+2. Original creative contributions: CC BY 4.0
+
+To the extent the contributors hold the applicable rights, their original
+Ukrainian translation contributions, original visual contributions and original
+documentation are licensed under Creative Commons Attribution 4.0 International
+(CC BY 4.0). The full license is in LICENSES/CC-BY-4.0.txt:
+https://creativecommons.org/licenses/by/4.0/
+
+For attribution, retain the project title, the supplied author/contributor
+credits and this license notice; provide a link to the license and indicate
+changes. Existing credits are listed in README.md and the relevant asset
+documentation. This license does not imply endorsement of modified versions.
+
+3. Excluded third-party materials and rights
+
+The licenses above grant only rights held by the project contributors. They
+do not relicense LEGO Indiana Jones: The Original Adventures, its original
+texts, artwork, textures, fonts, music, video, code or other game resources.
+Game-derived or donor-derived resources may contain third-party material;
+only the contributors' own licensable contributions are covered by section 2.
+No blanket CC BY or MIT license is granted for a complete UAP, DAT, FNT, DDS,
+GSC or other mixed resource file. Original font designs, donor localization
+materials, trademarks and other third-party rights remain with their
+respective rights holders. These licenses do not supply missing permissions
+to use or redistribute such material.
+
+Ultimate ASI Loader and its included third-party components retain their own
+licenses. Their full notices are preserved in:
+native/vendor/ultimate-asi-loader-v9.7.4/LICENSE.txt
+In the game bundle: scripts/UKRAINIAN/LICENSE-ASI-Loader.txt
+
+Bundled third-party code, tools and other materials with their own notices
+are excluded from the project's MIT and CC BY grants.
+
+4. Distribution layout
+
+The repository and source archive include this notice and LICENSES/.
+The game bundle includes the same notice and both full project license texts
+in scripts/UKRAINIAN/LICENSE.txt, alongside LICENSE-ASI-Loader.txt.

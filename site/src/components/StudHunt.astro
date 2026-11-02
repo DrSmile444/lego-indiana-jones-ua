@@ -1,0 +1,200 @@
+---
+/**
+ * Пасхалка «StudCounter» (design D4): по мапі hero розкидані круглики.
+ * Клік або Enter збирає круглик: срібний — 10, золотий — 100, синій — 1000.
+ * Загальна сума запам'ятовується в браузері (лише для зручності; без неї все працює).
+ */
+import Stud from './svg/Stud.astro';
+import { BCP47, fmt, langOf, STRINGS } from '../i18n/strings';
+
+const lang = langOf(Astro.locals);
+const t = STRINGS[lang].studHunt;
+
+const studs = [
+  { tone: 'silver', value: 10, x: '4%', y: '30%' },
+  { tone: 'gold', value: 100, x: '50%', y: '0%' },
+  { tone: 'silver', value: 10, x: '97%', y: '58%' },
+  { tone: 'gold', value: 100, x: '86%', y: '100%' },
+  { tone: 'silver', value: 10, x: '26%', y: '100%' },
+  { tone: 'blue', value: 1000, x: '2%', y: '92%' },
+] as const;
+---
+
+<div class="stud-hunt" data-stud-hunt data-locale={BCP47[lang]} data-done={t.allCollected}>
+  {
+    studs.map((s) => (
+      <button
+        type="button"
+        class="hunt-stud"
+        style={`--x:${s.x};--y:${s.y}`}
+        data-value={s.value}
+        aria-label={fmt(t.collect, { value: s.value })}
+      >
+        <Stud size={26} tone={s.tone} />
+      </button>
+    ))
+  }
+  <p class="hunt-counter" aria-live="polite">
+    <span class="hunt-counter__icon" aria-hidden="true"><Stud size={16} tone="gold" /></span>
+    <span>{t.counter} <b data-hunt-total>0</b></span>
+  </p>
+</div>
+
+<script>
+  const KEY = 'lego-indy-ua:krugliky';
+  const root = document.querySelector<HTMLElement>('[data-stud-hunt]');
+  if (root) {
+    const totalEl = root.querySelector<HTMLElement>('[data-hunt-total]')!;
+    const fmt = new Intl.NumberFormat(root.dataset.locale || 'uk-UA');
+    let total = 0;
+    try {
+      total = Number(localStorage.getItem(KEY)) || 0;
+    } catch {
+      /* сховище недоступне — рахуємо лише в межах сторінки */
+    }
+    const render = () => {
+      totalEl.textContent = fmt.format(total);
+      root.classList.toggle('has-loot', total > 0);
+    };
+    render();
+
+    root.querySelectorAll<HTMLButtonElement>('.hunt-stud').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        if (btn.dataset.collected) return;
+        btn.dataset.collected = '1';
+        total += Number(btn.dataset.value);
+        try {
+          localStorage.setItem(KEY, String(total));
+        } catch {
+          /* ігноруємо */
+        }
+        const pop = document.createElement('span');
+        pop.className = 'hunt-pop';
+        pop.textContent = `+${btn.dataset.value}`;
+        pop.setAttribute('aria-hidden', 'true');
+        btn.after(pop);
+        pop.style.cssText = btn.getAttribute('style') ?? '';
+        setTimeout(() => pop.remove(), 900);
+        btn.disabled = true;
+        render();
+        const left = root.querySelectorAll('.hunt-stud:not([data-collected])').length;
+        if (left === 0) {
+          root.classList.add('all-collected');
+          totalEl.parentElement!.setAttribute('title', root.dataset.done ?? '');
+        }
+      });
+    });
+  }
+</script>
+
+<style>
+  .stud-hunt {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .hunt-stud,
+  :global(.hunt-pop) {
+    position: absolute;
+    /* не виходимо за межі hero навіть на 360 px */
+    left: clamp(1.15rem, var(--x), calc(100% - 1.15rem));
+    top: clamp(1.15rem, var(--y), calc(100% - 1.15rem));
+    translate: -50% -50%;
+  }
+
+  .hunt-stud {
+    pointer-events: auto;
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    border-radius: 50%;
+    animation: bob 3.2s ease-in-out infinite;
+    filter: drop-shadow(0 2px 1px rgb(0 0 0 / 0.3));
+  }
+
+  .hunt-stud:nth-child(2n) {
+    animation-delay: -1.4s;
+  }
+
+  .hunt-stud:hover {
+    scale: 1.15;
+  }
+
+  .hunt-stud[data-collected] {
+    animation: collect 0.45s ease-in forwards;
+    pointer-events: none;
+  }
+
+  :global(.hunt-pop) {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 0.95rem;
+    color: var(--brick-yellow);
+    -webkit-text-stroke: 0.5px var(--brick-yellow-side);
+    animation: pop 0.9s ease-out forwards;
+    pointer-events: none;
+  }
+
+  .hunt-counter {
+    position: absolute;
+    left: 50%;
+    translate: -50% 0;
+    bottom: -1.6rem;
+    white-space: nowrap;
+    margin: 0;
+    display: none;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.15rem 0.6rem 0.15rem 0.4rem;
+    border-radius: 999px;
+    background: var(--paper-raised);
+    border: 1px solid var(--sl-color-hairline-light);
+    color: var(--ink);
+  }
+
+  .stud-hunt:global(.has-loot) .hunt-counter {
+    display: inline-flex;
+  }
+
+  .stud-hunt:global(.all-collected) .hunt-counter {
+    border-color: var(--brick-yellow);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--brick-yellow) 35%, transparent);
+  }
+
+  .hunt-counter__icon {
+    display: inline-flex;
+  }
+
+  @keyframes bob {
+    50% {
+      transform: translateY(-4px);
+    }
+  }
+
+  @keyframes collect {
+    to {
+      transform: translateY(-28px) scale(0.4);
+      opacity: 0;
+    }
+  }
+
+  @keyframes pop {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(-36px);
+    }
+  }
+</style>

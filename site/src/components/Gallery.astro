@@ -1,0 +1,253 @@
+---
+/**
+ * Галерея скриншотів із лайтбоксом без залежностей.
+ * Лайтбокс — нативний <dialog>: фокус лишається всередині, Esc закриває,
+ * ←/→ гортають, після закриття фокус повертається на мініатюру.
+ */
+import { Image, getImage } from 'astro:assets';
+import { gallery, screenshot } from '../lib/screenshots';
+import { langOf, STRINGS } from '../i18n/strings';
+
+interface Props {
+  only?: string[];
+}
+const { only } = Astro.props;
+const lang = langOf(Astro.locals);
+const t = STRINGS[lang].gallery;
+const list = (only ? gallery.filter((g) => only.includes(g.file)) : gallery)
+  .map((g) => ({ file: g.file, caption: g.caption[lang], alt: g.alt[lang], img: screenshot(g.file) }))
+  .filter((g) => g.img);
+
+const items = await Promise.all(
+  list.map(async (g) => ({
+    ...g,
+    full: (await getImage({ src: g.img!, width: 1600, format: 'webp' })).src,
+  })),
+);
+---
+
+<div class="gallery not-content" data-gallery>
+  <ul class="gallery__grid">
+    {
+      items.map((g, i) => (
+        <li>
+          <figure>
+            <button
+              type="button"
+              class="gallery__thumb"
+              data-index={i}
+              data-full={g.full}
+              data-caption={g.caption}
+              data-alt={g.alt}
+              aria-label={`${t.zoom}${g.caption}`}
+            >
+              <Image src={g.img!} alt={g.alt} widths={[400, 640]} sizes="(min-width: 50rem) 22rem, 92vw" />
+            </button>
+            <figcaption>{g.caption}</figcaption>
+          </figure>
+        </li>
+      ))
+    }
+  </ul>
+
+  <dialog class="lightbox" aria-label={t.dialog}>
+    <figure class="lightbox__figure">
+      <img class="lightbox__img" alt="" />
+      <figcaption class="lightbox__caption"></figcaption>
+    </figure>
+    <div class="lightbox__bar">
+      <button type="button" class="lb-btn" data-lb="prev" aria-label={t.prev}>←</button>
+      <span class="lightbox__count" aria-live="polite"></span>
+      <button type="button" class="lb-btn" data-lb="next" aria-label={t.next}>→</button>
+      <button type="button" class="lb-btn lb-btn--close" data-lb="close" aria-label={t.close}>✕</button>
+    </div>
+  </dialog>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-gallery]').forEach((root) => {
+    const thumbs = [...root.querySelectorAll<HTMLButtonElement>('.gallery__thumb')];
+    const dlg = root.querySelector<HTMLDialogElement>('dialog')!;
+    const img = dlg.querySelector<HTMLImageElement>('.lightbox__img')!;
+    const cap = dlg.querySelector<HTMLElement>('.lightbox__caption')!;
+    const count = dlg.querySelector<HTMLElement>('.lightbox__count')!;
+    let current = 0;
+
+    const show = (i: number) => {
+      current = (i + thumbs.length) % thumbs.length;
+      const t = thumbs[current];
+      img.src = t.dataset.full!;
+      img.alt = t.dataset.alt!;
+      cap.textContent = t.dataset.caption!;
+      count.textContent = `${current + 1} / ${thumbs.length}`;
+    };
+
+    thumbs.forEach((t, i) =>
+      t.addEventListener('click', () => {
+        show(i);
+        dlg.showModal();
+      }),
+    );
+
+    dlg.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement;
+      const action = target.closest<HTMLElement>('[data-lb]')?.dataset.lb;
+      if (action === 'prev') show(current - 1);
+      else if (action === 'next') show(current + 1);
+      else if (action === 'close' || target === dlg) dlg.close();
+    });
+
+    dlg.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        show(current - 1);
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        show(current + 1);
+      }
+    });
+
+    dlg.addEventListener('close', () => thumbs[current]?.focus());
+  });
+</script>
+
+<style>
+  .gallery__grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
+    gap: 1.4rem 1.2rem;
+  }
+
+  .gallery__grid li:nth-child(3n + 1) figure {
+    transform: rotate(-0.8deg);
+  }
+  .gallery__grid li:nth-child(3n + 2) figure {
+    transform: rotate(0.6deg);
+  }
+  .gallery__grid li:nth-child(3n) figure {
+    transform: rotate(-0.3deg);
+  }
+
+  figure {
+    margin: 0;
+    padding: 0.45rem 0.45rem 0.3rem;
+    background: var(--paper-raised);
+    border-radius: 0.3rem;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s ease;
+  }
+
+  figure:hover {
+    transform: rotate(0) translateY(-3px) !important;
+  }
+
+  .gallery__thumb {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: zoom-in;
+    border-radius: 0.15rem;
+  }
+
+  .gallery__thumb :global(img) {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 0.15rem;
+  }
+
+  figcaption {
+    padding: 0.4rem 0.2rem 0.1rem;
+    font-size: 0.85rem;
+    color: var(--ink-muted);
+  }
+
+  .lightbox {
+    /* Starlight's reset zeroes every margin, which drops the UA centering of <dialog>. */
+    position: fixed;
+    inset: 0;
+    margin: auto;
+    width: min(96vw, 1400px);
+    max-width: none;
+    height: fit-content;
+    max-height: 96vh;
+    padding: 0;
+    border: 0;
+    border-radius: 0.5rem;
+    background: var(--paper-raised);
+    color: var(--ink);
+    box-shadow: 0 30px 80px rgb(0 0 0 / 0.6);
+    overflow: hidden;
+  }
+
+  .lightbox::backdrop {
+    background: rgb(20 14 8 / 0.82);
+    backdrop-filter: blur(3px);
+  }
+
+  .lightbox__figure {
+    padding: 0.5rem 0.5rem 0;
+    background: none;
+    box-shadow: none;
+    transform: none !important;
+  }
+
+  .lightbox__img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: calc(96vh - 7rem);
+    object-fit: contain;
+    background: #000;
+    border-radius: 0.2rem;
+  }
+
+  .lightbox__caption {
+    font-size: 0.95rem;
+    color: var(--ink);
+  }
+
+  .lightbox__bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.6rem 0.6rem;
+  }
+
+  .lightbox__count {
+    flex: 1;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+    color: var(--ink-muted);
+  }
+
+  .lb-btn {
+    min-width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 0.4rem;
+    border: 0;
+    background: var(--brick-red-face);
+    color: var(--on-brick);
+    font: 700 1.2rem var(--font-display);
+    cursor: pointer;
+    box-shadow: 0 3px 0 var(--brick-red-side);
+  }
+
+  .lb-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 var(--brick-red-side);
+  }
+
+  .lb-btn--close {
+    background: var(--paper-sunk);
+    color: var(--ink);
+    box-shadow: 0 3px 0 var(--sl-color-gray-5);
+  }
+</style>

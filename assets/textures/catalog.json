@@ -1,0 +1,405 @@
+{
+  "_note": "Candidate textures with visible text found by the OCR catalog (tools/textures). status=pending were reviewed but not translated.",
+  "textures": [
+    {
+      "id": "T2743",
+      "sha256": "67e1fc991d0600c83098018384200ebce8013d31a2b6b8837c6bc9d87ab89820",
+      "width": 1024,
+      "height": 1024,
+      "mip_count": 11,
+      "compression": "DXT1",
+      "occurrences": [
+        {
+          "archive": "GAME",
+          "resource": "STUFF/LEGAL/PC/LEGAL_ENGLISH_PC.GSC",
+          "offset": 8276,
+          "length": 699192
+        }
+      ],
+      "label": "Стартовий екран без ESRB",
+      "status": "pending",
+      "note": "Логотипи, правовий текст, видавець, розробник, попередження про фоточутливість. Основний варіант для перекладу."
+    },
+    {
+      "id": "T2748",
+      "sha256": "b8afa8fe3de6e60ed7331b42f1f70e8a92f444eed4d24db5d0db6fddf07530ce",
+      "width": 1024,
+      "height": 1024,
+      "mip_count": 11,
+      "compression": "DXT1",
+      "occurrences": [
+        {
+          "archive": "GAME",
+          "resource": "STUFF/LEGAL/PC/LEGAL_US_PC.GSC",
+          "offset": 8292,
+          "length": 699192
+        }
+      ],
+      "label": "Стартовий екран США",
+      "status": "pending",
+      "note": "Варіант із тим самим текстом та значком ESRB. Для обох варіантів можна використати один український макет, зберігши відмінності."
+    },
+    {
+      "id": "T1407",
+      "sha256": "f160674f2f159f3cab87343dfbf3249e4c0281d0bfecc770f42a78062b6555e2",
+      "width": 1024,
+      "height": 1024,
+      "mip_count": 11,
+      "compression": "DXT1",
+      "occurrences": [
+        {
+          "archive": "CRUSADE",
+          "resource": "LEVELS/CRUSADE/VENICE/VENICE_A/VENICE_A_PC.GSC",
+          "offset": 34124028,
+          "length": 699192
+        },
+        {
+          "archive": "CRUSADE",
+          "resource": "LEVELS/CRUSADE/VENICE/VENICE_D/VENICE_D_PC.GSC",
+          "offset": 30603956,
+          "length": 699192
+        },
+        {
+          "archive": "CRUSADE",
+          "resource": "LEVELS/CRUSADE/VENICE/VENICE_INTRO2/VENICE_INTRO2_PC.GSC",
+          "offset": 25425108,
+          "length": 699192
+        },
+        {
+          "archive": "CRUSADE",
+          "resource": "LEVELS/CRUSADE/VENICE/VENICE_MIDTRO3/VENICE_MIDTRO3_PC.GSC",
+          "offset": 30242628,
+          "length": 699192
+        },
+        {
+          "archive": "CRUSADE",
+          "resource": "LEVELS/CRUSADE/VENICE/VENICE_OUTRO/VENICE_OUTRO_PC.GSC",
+          "offset": 21801788,
+          "length": 699192
+        }
+      ],
+      "label": "Вивіски банку у Венеції",
+      "status": "pending",
+      "note": "BANCA / CAMBIO / EXCHANGE / WECHSEL. Написи розміщені на фасадах усередині великого атласу; решту будівель не змінювати."
+    },
+    {
+      "id": "T1030",
+      "sha256": "755d81fd59b17f106f6fcb77dbe743d3ddd62e786a574c9ad9005f26b2756a19",
+      "width": 1024,
+      "height": 1024,
+      "mip_count": 11,
+      "compression": "DXT1",
+      "occurrences": [
+        {
+          "archive": "CRUSADE",
+          "resource": "LEVELS/CRUSADE/ESCAPE/ESCAPE_OUTRO2/ESCAPE_OUTRO2_PC.GSC",
+          "offset": 17499436,
+          "length": 699192
+        },
+        {
+          "archive": "CRUSADE",
+          "resource": "LEVELS/CRUSADE/VENICE/VENICE_INTRO1/VENICE_INTRO1_PC.GSC",
+          "offset": 11165796,
+          "length": 699192
+        }
+      ],
+      "label": "Вивіски банку — інший варіант атласу",
+      "status": "pending",
+      "note": "Та сама пара вивісок, окремий ресурс у сцені втечі. Перекладати разом із T1407."
+    },
+    {
+      "id": "T0573",
+      "sha256": "53b3464ab9f3b5df31d41633dffed5ba36163c6e57810f37f53cd2a2b1817eec",
+      "width": 512,
+      "height": 512,
+      "mip_count": 10,
+      "compression": "DXT1",
+      "occurrences": [
+        {
+          "archive": "CRUSADE",
+          "resource": "LEVELS/CRUSADE/CASTLE/CASTLE_A/CASTLE_A_PC.GSC",
+          "offset": 43910612,
+          "length": 174904
+        },
+        {
+          "archive": "CRUSADE",
+          "resource": "LEVELS/CRUSADE/CASTLE/CASTLE_C/CASTLE_C_PC.GSC",
+          "offset": 35000548,
+          "length": 174904
+        }
+      ],
+      "label": "Панель електричного приладу",
+      "status": "pending",
+      "note": "FUNCTION, POWER, ON, TEST, HORIZ, VERT та інші дрібні позначення. Позначення фізичних одиниць і скорочення потребують окремого рішення."
+    },
+    {
+      "id": "T1941",
+      "sha256": "04741ecd9157aa3349e3c1bb02d29a4d91741ccefc4626cce23068f13739a611",
+      "width": 256,
+      "height": 256,
+      "mip_count": 9,
+      "compression": "DXT5",
+      "occurrences": [
+        {
+          "archive": "GAME",
+          "resource": "CHARS/WEIRDO/ICONS/MENUICON_ALL_PC.GSC",
+          "offset": 139188,
+          "length": 87536
+        },
+        {
+          "archive": "GAME",
+          "resource": "CHARS/WEIRDO/ICONS/MENUICON_CHANGENAME_PC.GSC",
+          "offset": 9940,
+          "length": 87536
+        }
+      ],
+      "label": "Дошка ABC в іконках редактора персонажа",
+      "status": "pending",
+      "note": "Літери ABC на дошці. Можлива адаптація на АБВ; це графіка предмета, а не рядок основного інтерфейсу."
+    },
+    {
+      "id": "T2563",
+      "sha256": "1037db0381553acc54999d2367af06a3191ffd62f7f307b953c37d339a9c96ad",
+      "width": 1024,
+      "height": 1024,
+      "mip_count": 11,
+      "compression": "DXT1",
+      "occurrences": [
+        {
+          "archive": "GAME",
+          "resource": "STUFF/DEMOSCREEN/DEMO_ENGLISH_PC.GSC",
+          "offset": 8276,
+          "length": 699192
+        }
+      ],
+      "label": "Екран завершення демоверсії",
+      "status": "optional",
+      "note": "THANK YOU! FOR PLAYING THE DEMO, рекламний абзац, Coming June 2008 і логотип гри. Наявність ресурсу підтверджена; використання у повній Steam-версії не підтверджене."
+    },
+    {
+      "id": "T2568",
+      "sha256": "23b46a8aa60bccf63b4366c5e026ef0e93a4998a7883aeef2a5f19f43c81fa35",
+      "width": 1024,
+      "height": 1024,
+      "mip_count": 11,
+      "compression": "DXT1",
+      "occurrences": [
+        {
+          "archive": "GAME",
+          "resource": "STUFF/DEMOSCREEN/DEMO_US_PC.GSC",
+          "offset": 8292,
+          "length": 699192
+        }
+      ],
+      "label": "Демоекран — американський варіант",
+      "status": "optional",
+      "note": "Той самий тип рекламного екрана, із регіональними відмінностями. Для звичайного проходження повної версії не є першочерговим."
+    },
+    {
+      "id": "T2735",
+      "sha256": "6d4c3aab827e0c292beb0690500e7846235b988cc374481d7c8acb4b1f990018",
+      "width": 1024,
+      "height": 1024,
+      "mip_count": 11,
+      "compression": "DXT1",
+      "occurrences": [
+        {
+          "archive": "GAME",
+          "resource": "STUFF/LEGAL/GAMECUBE/GC_WARNING_ENGLISH_PC.GSC",
+          "offset": 8724,
+          "length": 699192
+        }
+      ],
+      "label": "Попередження GameCube — англомовне",
+      "status": "console",
+      "note": "Консольне попередження про здоров’я та безпеку. Ресурс є в GAME.DAT, але для нашої Steam PC-версії не є ціллю локалізації."
+    },
+    {
+      "id": "T2739",
+      "sha256": "0e2dc7d9f338fbf84556d517763033d3052895df6abe8426135fe35e1ea664bf",
+      "width": 1024,
+      "height": 1024,
+      "mip_count": 1,
+      "compression": "DXT3",
+      "occurrences": [
+        {
+          "archive": "GAME",
+          "resource": "STUFF/LEGAL/GAMECUBE/GC_WARNING_PC.GSC",
+          "offset": 30,
+          "length": 1048704
+        }
+      ],
+      "label": "Попередження GameCube — інший варіант",
+      "status": "console",
+      "note": "Додаткове англомовне консольне попередження. Для поточної PC-локалізації не потрібне."
+    },
+    {
+      "id": "T0195",
+      "sha256": "b782f3f12237602b70715849ca88f0391b27540351cd614ab99ba9c242f08001",
+      "width": 256,
+      "height": 256,
+      "mip_count": 9,
+      "compression": "DXT1",
+      "occurrences": [
+        {
+          "archive": "CRUSADE",
+          "resource": "LEVELS/CRUSADE/AIRSHIP/AIRSHIP_INTRO/AIRSHIP_INTRO_PC.GSC",
+          "offset": 40639876,
+          "length": 43832
+        }
+      ],
+      "label": "Плакат у сцені дирижабля",
+      "status": "review",
+      "note": "Є декоративні знаки й дрібні псевдонаписи; однозначного читабельного англійського тексту не встановлено. За бажанням можна адаптувати як декорацію."
+    },
+    {
+      "id": "T5784",
+      "sha256": "2bef2c8014a265f7a92ee870cea68ef723547825fbe3feb176107a81e36bf108",
+      "width": 256,
+      "height": 512,
+      "mip_count": 10,
+      "compression": "DXT1",
+      "occurrences": [
+        {
+          "archive": "TEMPLE",
+          "resource": "LEVELS/TEMPLE/SHANGHAISHOWDOWN/SHANGHAISHOWDOWN_D/SHANGHAISHOWDOWN_D_PC.GSC",
+          "offset": 7822732,
+          "length": 87528
+        },
+        {
+          "archive": "TEMPLE",
+          "resource": "LEVELS/TEMPLE/SHANGHAISHOWDOWN/SHANGHAISHOWDOWN_OUTRO1/SHANGHAISHOWDOWN_OUTRO1_PC.GSC",
+          "offset": 8317348,
+          "length": 87528
+        }
+      ],
+      "label": "Рукописна нотатка у Шанхаї",
+      "status": "review",
+      "note": "Рукописні символи та числа. Частина написів нечитабельна; буквальний переклад без додаткового розбору не пропонується."
+    },
+    {
+      "id": "T2522",
+      "sha256": "b15d8d51e793a57893038b37866f52f99536ae1c5d13fe92992f594fdbb8dd6b",
+      "width": 512,
+      "height": 256,
+      "mip_count": 10,
+      "compression": "DXT1",
+      "occurrences": [
+        {
+          "archive": "GAME",
+          "resource": "LEVELS/TITLES/PICTURES_3_PC.GSC",
+          "offset": 454044,
+          "length": 87528
+        }
+      ],
+      "label": "Ілюстрація коледжу",
+      "status": "review",
+      "note": "Дуже дрібна вивіска в намальованій ілюстрації. Залишено для ручного огляду; це не окрема текстура таблички."
+    },
+    {
+      "id": "T2741",
+      "sha256": "fd1afc6a1ae1a8390683e367b7ad310df10fa87ca60efd650346429112d1f9f3",
+      "width": 1024,
+      "height": 1024,
+      "mip_count": 11,
+      "compression": "DXT1",
+      "occurrences": [
+        {
+          "archive": "GAME",
+          "resource": "STUFF/LEGAL/PC/ESRB_TEN_PC.GSC",
+          "offset": 8292,
+          "length": 699192
+        }
+      ],
+      "label": "Значок ESRB",
+      "status": "brand",
+      "note": "EVERYONE 10+ / CONTENT RATED BY ESRB — частина знака рейтингу. Не включено до обов’язкового перекладу."
+    },
+    {
+      "id": "T2525",
+      "sha256": "6801a1bc5486a81b05d8ff7e3a303f488e2f637c25757e3201ba6110defc19fe",
+      "width": 1024,
+      "height": 256,
+      "mip_count": 11,
+      "compression": "DXT5",
+      "occurrences": [
+        {
+          "archive": "GAME",
+          "resource": "LEVELS/TITLES/TITLES_DANISH_PC.GSC",
+          "offset": 2110252,
+          "length": 349712
+        },
+        {
+          "archive": "GAME",
+          "resource": "LEVELS/TITLES/TITLES_FRENCH_PC.GSC",
+          "offset": 2110252,
+          "length": 349712
+        },
+        {
+          "archive": "GAME",
+          "resource": "LEVELS/TITLES/TITLES_GERMAN_PC.GSC",
+          "offset": 2110252,
+          "length": 349712
+        },
+        {
+          "archive": "GAME",
+          "resource": "LEVELS/TITLES/TITLES_ITALIAN_PC.GSC",
+          "offset": 2110252,
+          "length": 349712
+        },
+        {
+          "archive": "GAME",
+          "resource": "LEVELS/TITLES/TITLES_SPANISH_PC.GSC",
+          "offset": 2110252,
+          "length": 349712
+        },
+        {
+          "archive": "GAME",
+          "resource": "LEVELS/TITLES/TITLES_UK_PC.GSC",
+          "offset": 2110252,
+          "length": 349712
+        },
+        {
+          "archive": "GAME",
+          "resource": "LEVELS/TITLES/TITLES_US_PC.GSC",
+          "offset": 2110252,
+          "length": 349712
+        }
+      ],
+      "label": "Логотип головного меню",
+      "status": "done",
+      "note": "Уже перекладено та встановлено у v0.1.1. Тут збережений оригінал для довідки."
+    },
+    {
+      "id": "T2526",
+      "sha256": "3722105365303e57648e8a38164236acc618184f2cd82f749b18af4207ec9e8d",
+      "width": 512,
+      "height": 64,
+      "mip_count": 10,
+      "compression": "DXT5",
+      "occurrences": [
+        {
+          "archive": "GAME",
+          "resource": "LEVELS/TITLES/TITLES_DANISH_PC.GSC",
+          "offset": 2459964,
+          "length": 43920
+        },
+        {
+          "archive": "GAME",
+          "resource": "LEVELS/TITLES/TITLES_UK_PC.GSC",
+          "offset": 2459964,
+          "length": 43920
+        },
+        {
+          "archive": "GAME",
+          "resource": "LEVELS/TITLES/TITLES_US_PC.GSC",
+          "offset": 2459964,
+          "length": 43920
+        }
+      ],
+      "label": "Підзаголовок головного меню",
+      "status": "done",
+      "note": "The Original Adventures уже замінено на Оригінальні пригоди у v0.1.1. Тут оригінал для довідки."
+    }
+  ]
+}

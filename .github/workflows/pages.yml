@@ -1,0 +1,68 @@
+# Збирає сайт site/ (Astro Starlight) і публікує на GitHub Pages:
+# https://drsmile444.github.io/lego-indiana-jones-ua/
+name: Сайт на GitHub Pages
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'site/**'
+      - 'docs/**'
+      - 'translations/glossary.json'
+      - 'manifests/releases/**'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Одна публікація за раз; новіший запуск чекає, а не скасовує поточний деплой.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: site
+    steps:
+      - name: Отримати репозиторій
+        uses: actions/checkout@v4
+
+      - name: Node.js LTS
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+
+      - name: Встановити залежності
+        run: npm ci
+
+      - name: Зібрати сайт (суворий sync-docs)
+        env:
+          SYNC_STRICT: '1'
+        run: npm run build
+
+      - name: Налаштувати Pages
+        uses: actions/configure-pages@v5
+
+      - name: Завантажити артефакт
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Опублікувати
+        id: deployment
+        uses: actions/deploy-pages@v4

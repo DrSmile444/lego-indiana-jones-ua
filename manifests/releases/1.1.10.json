@@ -1,0 +1,47 @@
+{
+  "version": "1.1.10",
+  "date": "2026-11-02",
+  "archive": "lego-indiana-jones-ua-1.1.10.zip",
+  "archive_size": 3056040,
+  "archive_sha256": "c946c7263313f2627a9b51ae8af16828e5002642ca92db9f8b169f5aaa559188",
+  "files": {
+    "dinput8.dll": {
+      "size": 2407648,
+      "sha256": "ec2f4824eca58dd40f425756a4a7cec77b8e381f21d11d7c846ec4b339b617ab"
+    },
+    "scripts/UKRAINIAN.asi": {
+      "size": 119296,
+      "sha256": "f2494bfd66ce377a57940fd7fe34ed82e4b06ba06b517d78b2a4ea8264f12634"
+    },
+    "scripts/UKRAINIAN.uap": {
+      "size": 6628493,
+      "sha256": "bee51f274cf7780e02c1bcce9118e0b9f7a5152cf4b22cf908e12045fbd0a528"
+    },
+    "scripts/UKRAINIAN/README.txt": {
+      "size": 2582,
+      "sha256": "96db00246d24b33bf90619c59d70822624fe6765ba8247666fb135434e4a8cef"
+    },
+    "scripts/UKRAINIAN/LICENSE.txt": {
+      "size": 22464,
+      "sha256": "222ced6a71d7a02212e08cfd739a06d3b29ca4321a69f44f789af041c1c01ed0"
+    },
+    "scripts/UKRAINIAN/LICENSE-ASI-Loader.txt": {
+      "size": 32586,
+      "sha256": "c77fcd0552a402b735624b53f144a1d6ee90e4b7302a6b5fba67c2ffcf23a45d"
+    }
+  },
+  "baseline": "0.1.10",
+  "changed_uap_resources": [
+    "STUFF/TEXT/ENGLISH.TXT",
+    "STUFF/TEXT/TRC.CSV",
+    "STUFF/TEXT/AMERICAN.TXT",
+    "STUFF/TEXT/AMERICAN_CREDITS.TXT"
+  ],
+  "supported_exe_sha256": "c12f7348ec63aed61f56eb15d825f15b8340500668fa8c8dcf06c2f332e5e5fd",
+  "loader": {
+    "version": "9.7.4",
+    "asset": "https://github.com/ThirteenAG/Ultimate-ASI-Loader/releases/download/v9.7.4/Ultimate-ASI-Loader-NoPDB.zip",
+    "asset_sha256": "14b3a1ad018899571ac9aa01482977f3c6d49e6cba99f552d01c5acacd1315e1",
+    "dll_sha256": "ec2f4824eca58dd40f425756a4a7cec77b8e381f21d11d7c846ec4b339b617ab"
+  }
+}

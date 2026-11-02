@@ -1,0 +1,113 @@
+---
+title: LEGO Indiana Jones — Ukrainian localization
+description: "An unofficial fan-made Ukrainian localization of LEGO Indiana Jones: The Original Adventures for PC. Full text translation, fonts with ІіЇїЄєҐґ, repainted textures and the title logo. Free download."
+template: splash
+editUrl: false
+hero:
+  title: "LEGO Indiana Jones: <em>The Original Adventures</em> — in Ukrainian"
+  tagline: An unofficial fan localization of the PC game into Ukrainian — text, fonts with ІіЇїЄєҐґ, menus, credits and a repainted logo. Unpack the archive next to the game and off you go, to the Ark.
+---
+
+import InstallSteps from '../../../components/InstallSteps.astro';
+import TranslatedStats from '../../../components/TranslatedStats.astro';
+import BeforeAfter from '../../../components/BeforeAfter.astro';
+import Gallery from '../../../components/Gallery.astro';
+import AdaptationCards from '../../../components/AdaptationCards.astro';
+
+<section class="home-section">
+  <p class="section-kicker">What this is</p>
+
+## A Ukrainian translation, explained in English
+
+This site is mostly read by Ukrainian players, so the translation itself is **Ukrainian only**: installing it turns the game’s English text into Ukrainian. This English version is for international modders, fellow translators and curious players who want to know what was changed in the game and how. The research pages document TT Games’ file formats, fonts and runtime loading in detail.
+
+The first public release is **1.1.10**, and the translation is complete: every in-game string, the save dialogs, the credits and the PC settings menus.
+</section>
+
+<section class="home-section">
+  <p class="section-kicker">Three steps</p>
+
+## Installs in a minute
+
+<InstallSteps />
+</section>
+
+<section class="home-section">
+  <p class="section-kicker">What’s inside</p>
+
+## What is translated
+
+A complete translation: all game strings, save dialogs, credits and the PC settings menus. Plus a character editor that accepts Cyrillic names, and cultural adaptations wherever a literal translation would sound lifeless.
+
+<TranslatedStats />
+</section>
+
+<section class="home-section">
+  <p class="section-kicker">How it works</p>
+
+## Three megabytes instead of repacked archives
+
+The translation does not repack hundreds of megabytes of game archives: it is **injected into memory while the game runs**. The package holds only what we changed (the text, two fonts and nine textures), so the whole download is ≈3 MB instead of a ~600 MB set of repacked archives.
+
+- **Nothing is overwritten.** The original `.DAT` archives and `LEGOIndy.exe` stay untouched, so Steam updates never conflict with the translation.
+- **Plays well with other mods.** The translation doesn’t claim anyone else’s files and runs through the standard ASI Loader alongside other plugins.
+- **Safe in the worst case.** A different game version or a damaged package? The plugin leaves everything alone and the game simply starts in English.
+
+[How it works inside →](/lego-indiana-jones-ua/en/dev/architecture/)
+</section>
+
+<section class="home-section">
+  <p class="section-kicker">Main menu</p>
+
+## Before and after
+
+<BeforeAfter after="main-menu.jpg" alt="the game’s main menu with the logo and menu items" caption="The main menu: logo, menu items and button prompts — in Ukrainian." />
+</section>
+
+<section class="home-section">
+  <p class="section-kicker">Gallery</p>
+
+## How it looks in the game
+
+Screenshots from the Steam version of the game with the localization installed. Click to enlarge; use the arrow keys to browse.
+
+<Gallery />
+</section>
+
+<section class="home-section">
+  <p class="section-kicker">Cultural adaptations</p>
+
+## Not word for word, but the Ukrainian way
+
+A few names were deliberately adapted rather than translated literally. They stay Ukrainian in the game; the Latin spelling and a short gloss are given here for English readers.
+
+<AdaptationCards />
+</section>
+
+<section class="home-section">
+  <p class="section-kicker">The story</p>
+
+## How we built it
+
+The road from the first unpacked archive to the release: fonts with new glyphs, a custom ASI plugin that serves resources at runtime, textures, a glossary and long live QA sessions. Ideas, decisions and proofreading are the author’s; AI assistants helped with file-format research, tooling and drafts, and every line was reviewed and tested in-game by a human.
+
+[Follow the route →](/lego-indiana-jones-ua/en/approach/) · [Tooling](/lego-indiana-jones-ua/en/tooling/) · [Research](/lego-indiana-jones-ua/en/research/)
+</section>
+
+<section class="home-section">
+  <p class="section-kicker">Feedback</p>
+
+## Found a bug or clipped text?
+
+Open an issue on [GitHub Issues](https://github.com/DrSmile444/lego-indiana-jones-ua/issues) or write on Telegram to [@dimkasmile](https://t.me/dimkasmile): what happened, on which level or screen, and a screenshot if you can. English is fine. [How to report a problem](/lego-indiana-jones-ua/en/feedback/).
+</section>
+
+<section class="home-section">
+  <p class="section-kicker">Credits</p>
+
+## Credits and licenses
+
+Made by Dmytro Vakulenko. Code is MIT; the translation and documentation are CC BY 4.0 — see the [project licenses](https://github.com/DrSmile444/lego-indiana-jones-ua/blob/master/LICENSE). The ASI loader is [Ultimate ASI Loader](https://github.com/ThirteenAG/Ultimate-ASI-Loader) by ThirteenAG.
+
+This is an unofficial fan project, not affiliated with or endorsed by the LEGO Group, Lucasfilm, TT Games or Warner Bros. You need your own legal copy of the game.
+</section>

@@ -1,0 +1,60 @@
+{
+  "_note": "Third-party inputs that stay in local/ (never in git). Needed only for the levels listed. Checksums identify the exact files used for 0.1.10/1.1.10.",
+  "inputs": [
+    {
+      "id": "quickbms",
+      "path": "local/tools/quickbms/quickbms.exe",
+      "sha256": "ff812d38e22aea0cc2cdc13c5c91ca34fae4443ab12987002105be6bab3f4948",
+      "source": "https://aluigi.altervista.org/quickbms.htm",
+      "license": "GPL-2.0 (Luigi Auriemma)",
+      "levels": [
+        "extract"
+      ]
+    },
+    {
+      "id": "ttgames-bms",
+      "path": "local/tools/quickbms/ttgames.bms",
+      "sha256": "996eac13a8c46b8f3724c53c7928036ad2af801911705dc7a983359662b82d04",
+      "version": "0.9.11a",
+      "source": "https://aluigi.altervista.org/bms/ttgames.bms",
+      "levels": [
+        "extract"
+      ]
+    },
+    {
+      "id": "cyrillic-font-patch",
+      "path": "local/donors/cyrillic-font-patch/PC_FONT_PC.FNT",
+      "sha256": "6f3d395fbc5be1a7c2086b23b51e2035e854a21222878d831de5b842598093e2",
+      "source": "Third-party Cyrillic font patch for this game (community Cyrillic localization); the PC_FONT_PC.FNT from its STUFF/TEXT folder.",
+      "levels": [
+        "full: Font 1"
+      ]
+    },
+    {
+      "id": "adventure-ttf",
+      "path": "local/donors/Adventure_Indiana_Jones.ttf",
+      "sha256": "c43a7d1f803e8bd0ba0ca988d2138cde7e01b8e8c7b97ca592f633f7d7cfbb78",
+      "source": "Fan font \"Adventure\" (Indiana Jones title style), free for personal use.",
+      "levels": [
+        "full: Font 2"
+      ]
+    },
+    {
+      "id": "franklin-gothic-medium",
+      "path": "local/fonts/Franklin Gothic Medium Regular.ttf",
+      "sha256": "f103d31608ff1fa1b861ff297b16a49a74441dae98ce12c506a7085c01de9a11",
+      "source": "Commercial typeface (ITC / Monotype). License it from the rights holder; it is not bundled with Windows.",
+      "levels": [
+        "full: Font 1"
+      ]
+    },
+    {
+      "id": "msvc",
+      "path": null,
+      "source": "Visual Studio 2022 Build Tools: MSVC x86 + Windows 10/11 SDK",
+      "levels": [
+        "native"
+      ]
+    }
+  ]
+}

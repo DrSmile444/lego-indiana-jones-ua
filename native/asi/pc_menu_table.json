@@ -1,0 +1,197 @@
+{
+  "_note": "Audited Steam LEGOIndy.exe PC menu table: the ASI verifies each original label at its address before replacing it.",
+  "exe_sha256": "c12f7348ec63aed61f56eb15d825f15b8340500668fa8c8dcf06c2f332e5e5fd",
+  "image_base": "0x400000",
+  "rows": [
+    {
+      "id": 0,
+      "va": "0x832f0c",
+      "text": "Quit"
+    },
+    {
+      "id": 1,
+      "va": "0x832efc",
+      "text": "Quit to Windows"
+    },
+    {
+      "id": 2,
+      "va": "0x832ee8",
+      "text": "Quit to Demos Menu"
+    },
+    {
+      "id": 3,
+      "va": "0x832ed8",
+      "text": "Return to game"
+    },
+    {
+      "id": 4,
+      "va": "0x831188",
+      "text": "Low"
+    },
+    {
+      "id": 5,
+      "va": "0x832ed0",
+      "text": "Medium"
+    },
+    {
+      "id": 6,
+      "va": "0x831180",
+      "text": "High"
+    },
+    {
+      "id": 7,
+      "va": "0x832ec8",
+      "text": "Resume"
+    },
+    {
+      "id": 8,
+      "va": "0x832ec0",
+      "text": "Accept"
+    },
+    {
+      "id": 9,
+      "va": "0x832eb8",
+      "text": "Decline"
+    },
+    {
+      "id": 10,
+      "va": "0x830ffc",
+      "text": "Back"
+    },
+    {
+      "id": 11,
+      "va": "0x832eb4",
+      "text": "Yes"
+    },
+    {
+      "id": 12,
+      "va": "0x832eb0",
+      "text": "No"
+    },
+    {
+      "id": 13,
+      "va": "0x832eac",
+      "text": "OK"
+    },
+    {
+      "id": 14,
+      "va": "0x832ea4",
+      "text": "Cancel"
+    },
+    {
+      "id": 15,
+      "va": "0x832ea0",
+      "text": "On"
+    },
+    {
+      "id": 16,
+      "va": "0x832e9c",
+      "text": "Off"
+    },
+    {
+      "id": 17,
+      "va": "0x832e88",
+      "text": "Reset To Defaults"
+    },
+    {
+      "id": 18,
+      "va": "0x832e78",
+      "text": "Video Settings"
+    },
+    {
+      "id": 19,
+      "va": "0x832e64",
+      "text": "Screen Resolution"
+    },
+    {
+      "id": 20,
+      "va": "0x832e54",
+      "text": "Refresh Rate"
+    },
+    {
+      "id": 21,
+      "va": "0x832e44",
+      "text": "Vertical Sync"
+    },
+    {
+      "id": 22,
+      "va": "0x832e34",
+      "text": "Aspect Ratio"
+    },
+    {
+      "id": 23,
+      "va": "0x832e20",
+      "text": "Enhanced Graphics"
+    },
+    {
+      "id": 24,
+      "va": "0x832e10",
+      "text": "From Screen-Res"
+    },
+    {
+      "id": 25,
+      "va": "0x832df8",
+      "text": "Use current settings"
+    },
+    {
+      "id": 26,
+      "va": "0x832de8",
+      "text": "Texture Quality"
+    },
+    {
+      "id": 27,
+      "va": "0x832de0",
+      "text": "Revert"
+    },
+    {
+      "id": 28,
+      "va": "0x832da4",
+      "text": "You must restart the game for these changes to take effect!"
+    },
+    {
+      "id": 29,
+      "va": "0x832d90",
+      "text": "Effects Settings"
+    },
+    {
+      "id": 30,
+      "va": "0x8316f4",
+      "text": "FSAA"
+    },
+    {
+      "id": 31,
+      "va": "0x832d80",
+      "text": "Externally Set"
+    },
+    {
+      "id": 32,
+      "va": "0x832d78",
+      "text": "Shadows"
+    },
+    {
+      "id": 33,
+      "va": "0x832d70",
+      "text": "Bloom"
+    },
+    {
+      "id": 34,
+      "va": "0x832d60",
+      "text": "Depth of Field"
+    },
+    {
+      "id": 35,
+      "va": "0x832d54",
+      "text": "Speed Blur"
+    },
+    {
+      "id": 36,
+      "va": "0x832d3c",
+      "text": "Dynamic Light Quality"
+    },
+    {
+      "id": 37,
+      "va": "0x832d34",
+      "text": "Edge AA"
+    }
+  ]
+}

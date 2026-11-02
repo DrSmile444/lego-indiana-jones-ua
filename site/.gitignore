@@ -1,0 +1,14 @@
+# Згенеровано scripts/sync-docs.mjs із docs/, translations/ і manifests/ — не редагувати вручну.
+/src/content/docs/research/
+/src/content/docs/dev/
+/src/content/docs/tooling.md
+/src/content/docs/approach.md
+/src/content/docs/adaptations.md
+/src/generated/
+/public/og-image.jpg
+/public/docs-media/
+/src/content/docs/en/research/
+/src/content/docs/en/dev/
+/src/content/docs/en/tooling.md
+/src/content/docs/en/approach.md
+/src/content/docs/en/adaptations.md

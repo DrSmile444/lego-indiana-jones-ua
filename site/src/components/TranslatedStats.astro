@@ -1,0 +1,75 @@
+---
+/** «Що перекладено» — плитки-цеглинки з числами. */
+import { strings } from '../i18n/strings';
+
+const tiles = strings(Astro.locals).stats;
+---
+
+<ul class="stats not-content">
+  {
+    tiles.map((t) => (
+      <li class={`stat stat--${t.tone}`}>
+        <span class="stat__big">{t.big}</span>
+        <span class="stat__label">{t.label}</span>
+        <span class="stat__text">{t.text}</span>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .stats {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+    gap: 1rem;
+  }
+
+  .stat {
+    --c: var(--brick-red-face);
+    --s: var(--brick-red-side);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding: 1rem 1rem 1.1rem;
+    border-radius: var(--radius);
+    background: var(--paper-raised);
+    border-top: 6px solid var(--c);
+    box-shadow:
+      0 4px 0 color-mix(in srgb, var(--s) 45%, transparent),
+      var(--shadow);
+  }
+
+  .stat--yellow {
+    --c: var(--brick-yellow);
+    --s: var(--brick-yellow-side);
+  }
+  .stat--blue {
+    --c: var(--brick-blue);
+    --s: #163f7a;
+  }
+  .stat--leather {
+    --c: var(--leather);
+    --s: color-mix(in srgb, var(--leather) 60%, black);
+  }
+
+  .stat__big {
+    font: 800 clamp(1.7rem, 1.3rem + 1.5vw, 2.3rem) / 1.05 var(--font-display);
+    color: var(--sl-color-white);
+    letter-spacing: -0.01em;
+    overflow-wrap: anywhere;
+  }
+
+  .stat__label {
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .stat__text {
+    font-size: 0.88rem;
+    color: var(--ink-muted);
+  }
+</style>

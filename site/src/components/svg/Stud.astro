@@ -1,0 +1,25 @@
+---
+/** Штифт LEGO збоку — для роздільників, номерів кроків і декору. */
+interface Props {
+  size?: number;
+  tone?: 'yellow' | 'red' | 'leather' | 'silver' | 'gold' | 'blue';
+  class?: string;
+}
+const { size = 24, tone = 'yellow', class: className } = Astro.props;
+const tones = {
+  yellow: ['var(--brick-yellow)', 'var(--brick-yellow-side)'],
+  red: ['var(--brick-red-face)', 'var(--brick-red-side)'],
+  leather: ['var(--leather)', 'color-mix(in srgb, var(--leather) 60%, black)'],
+  silver: ['#d9dde3', '#8d949e'],
+  gold: ['#f2c230', '#a8800f'],
+  blue: ['#3a7bd5', '#1d4a8f'],
+} as const;
+const [face, side] = tones[tone];
+---
+
+<svg class:list={['stud', className]} width={size} height={size} viewBox="0 0 24 24" aria-hidden="true">
+  <ellipse cx="12" cy="16" rx="10" ry="5" fill={side} />
+  <rect x="2" y="9" width="20" height="7" fill={side} />
+  <ellipse cx="12" cy="9" rx="10" ry="5" fill={face} />
+  <ellipse cx="12" cy="9" rx="5.6" ry="2.6" fill="none" stroke="#fff" stroke-opacity=".45" stroke-width="1.2" />
+</svg>

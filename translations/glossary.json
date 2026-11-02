@@ -1,0 +1,312 @@
+{
+  "_meta": {
+    "description": "Terminology glossary of the Ukrainian localization: approved names, places, artifacts and game terms. Keys are the English source terms; `ids` lists ENGLISH.TXT strings checked by `python -m ua validate`.",
+    "confidence": "team-approved = decided by the author; other values are proposals kept for context."
+  },
+  "characters": {
+    "Bandit": {
+      "uk": "Бандюган",
+      "confidence": "team-approved",
+      "note": "User-approved humorous rendering for ENGLISH.TXT ID 168. Other bandit variants retain their own translations.",
+      "ids": [
+        168
+      ]
+    },
+    "Grave Robber 1": {
+      "uk": "Чорний археолог 1",
+      "confidence": "team-approved",
+      "note": "User-approved ironic character name; ENGLISH.TXT ID 184. Preserve the number.",
+      "ids": [
+        184
+      ]
+    },
+    "Grave Robber 2": {
+      "uk": "Чорний археолог 2",
+      "confidence": "team-approved",
+      "note": "User-approved ironic character name; ENGLISH.TXT ID 185. Preserve the number.",
+      "ids": [
+        185
+      ]
+    },
+    "Shanghai Hoodlum 1": {
+      "uk": "Шанхайський батяр 1",
+      "confidence": "team-approved",
+      "note": "Intentional Ukrainian cultural adaptation approved by the user; ENGLISH.TXT ID 186. Preserve Shanghai and the number.",
+      "ids": [
+        186
+      ]
+    },
+    "Shanghai Hoodlum 2": {
+      "uk": "Шанхайський батяр 2",
+      "confidence": "team-approved",
+      "note": "Intentional Ukrainian cultural adaptation approved by the user; ENGLISH.TXT ID 187. Preserve Shanghai and the number.",
+      "ids": [
+        187
+      ]
+    },
+    "Jungle Guide": {
+      "uk": "Валєра",
+      "confidence": "team-approved",
+      "note": "Intentional Easter egg requested by the user, inspired by the Ukrainian Cars dub. Keep the spelling Валєра. Applies only to ENGLISH.TXT ID 151; other guides and named characters retain their own names.",
+      "ids": [
+        151
+      ]
+    },
+    "Boy Scout": {
+      "uk": "Пластун",
+      "confidence": "team-approved",
+      "note": "Intentional Ukrainian cultural adaptation of the scout role, requested by the user; not a claim that the character belongs to Plast. ENGLISH.TXT ID 107. References: https://plast.org.ua/about/ and https://plast.org.ua/about-history/",
+      "ids": [
+        107
+      ]
+    },
+    "Indiana Jones": {
+      "uk": "Індіана Джонс",
+      "note": "nickname: Інді",
+      "confidence": "high"
+    },
+    "Indy": {
+      "uk": "Інді",
+      "confidence": "high"
+    },
+    "Marion Ravenwood": {
+      "uk": "Меріон Ревенвуд",
+      "confidence": "high"
+    },
+    "Marion": {
+      "uk": "Меріон",
+      "confidence": "high"
+    },
+    "Short Round": {
+      "uk": "Малюк",
+      "confidence": "medium-high"
+    },
+    "Sallah": {
+      "uk": "Салла",
+      "confidence": "high"
+    },
+    "Marcus Brody": {
+      "uk": "Маркус Броді",
+      "confidence": "high"
+    },
+    "Brody": {
+      "uk": "Броді",
+      "confidence": "high"
+    },
+    "René Belloq": {
+      "uk": "Рене Беллок",
+      "confidence": "high"
+    },
+    "Belloq": {
+      "uk": "Беллок",
+      "confidence": "high"
+    },
+    "Henry Jones Sr.": {
+      "uk": "Генрі Джонс-старший",
+      "confidence": "high"
+    },
+    "Henry Jones": {
+      "uk": "Генрі Джонс",
+      "confidence": "high"
+    },
+    "Willie Scott": {
+      "uk": "Вільгельміна «Віллі» Скотт",
+      "confidence": "high"
+    },
+    "Willie": {
+      "uk": "Віллі",
+      "confidence": "high"
+    },
+    "Elsa Schneider": {
+      "uk": "Ельза Шнайдер",
+      "confidence": "high"
+    },
+    "Elsa": {
+      "uk": "Ельза",
+      "confidence": "high"
+    },
+    "Mola Ram": {
+      "uk": "Мола Рам",
+      "confidence": "high"
+    },
+    "Lao Che": {
+      "uk": "Лао Че",
+      "confidence": "high"
+    }
+  },
+  "artifacts": {
+    "Ark of the Covenant": {
+      "uk": "Ковчег Заповіту",
+      "confidence": "high"
+    },
+    "The Holy Grail": {
+      "uk": "Святий Ґрааль",
+      "confidence": "medium",
+      "note": "team decision: use Ґ spelling consistently, not Грааль"
+    },
+    "Holy Grail": {
+      "uk": "Ґрааль",
+      "confidence": "medium"
+    },
+    "Crystal Skull": {
+      "uk": "Кришталевий череп",
+      "confidence": "high"
+    },
+    "Headpiece of the Staff of Ra": {
+      "uk": "Наконечник посоха Ра",
+      "confidence": "medium"
+    }
+  },
+  "items": {
+    "Bullwhip": {
+      "uk": "Батіг для биків",
+      "confidence": "high"
+    },
+    "Fedora": {
+      "uk": "Капелюх-федора",
+      "confidence": "high"
+    },
+    "Revolver": {
+      "uk": "Револьвер",
+      "confidence": "high"
+    }
+  },
+  "game_mechanics": {
+    "Studs": {
+      "uk": "круглики",
+      "confidence": "team-approved",
+      "note": "Also called Treasure in this game; apply by context, not a global replacement of treasure."
+    },
+    "Story Mode": {
+      "uk": "Сюжетний режим",
+      "confidence": "low-proposal"
+    },
+    "Free Play": {
+      "uk": "Вільна гра",
+      "confidence": "low-proposal"
+    },
+    "True Adventurer": {
+      "uk": "Справжній шукач пригод",
+      "confidence": "low-proposal"
+    },
+    "Character Token": {
+      "uk": "Жетон персонажа",
+      "confidence": "low-proposal"
+    },
+    "Extras": {
+      "uk": "Бонуси",
+      "confidence": "team-approved"
+    },
+    "Minikit": {
+      "uk": "Мінікіт",
+      "confidence": "low-proposal"
+    },
+    "Red Brick": {
+      "uk": "Червона цеглинка",
+      "confidence": "low-proposal"
+    },
+    "Stud": {
+      "uk": "круглик",
+      "confidence": "team-approved",
+      "note": "In-game currency; plural круглики, genitive plural кругликів. Building bricks remain цеглинки."
+    },
+    "Treasure (currency)": {
+      "uk": "Круглики",
+      "confidence": "team-approved"
+    },
+    "Extra": {
+      "uk": "Бонуси",
+      "confidence": "team-approved",
+      "note": "Menu category; translate singular effect names by context."
+    },
+    "Parcel": {
+      "uk": "Посилка",
+      "confidence": "team-approved"
+    },
+    "Parcel Detector": {
+      "uk": "Детектор посилок",
+      "confidence": "team-approved"
+    },
+    "Mail Room": {
+      "uk": "Поштова кімната",
+      "confidence": "team-approved"
+    },
+    "Posted": {
+      "uk": "Відправлено",
+      "confidence": "team-approved"
+    },
+    "Artefact Piece": {
+      "uk": "Частина артефакту",
+      "confidence": "team-approved"
+    },
+    "Artefact": {
+      "uk": "Артефакт",
+      "confidence": "team-approved"
+    },
+    "Character Treasure": {
+      "uk": "Круглики за ворогів",
+      "confidence": "team-approved",
+      "note": "Defeated enemies yield studs. https://brickraiders.net/LegoIndy1/extras.html"
+    },
+    "Treasure Magnet": {
+      "uk": "Магніт кругликів",
+      "confidence": "team-approved"
+    },
+    "Poo Treasure": {
+      "uk": "Какашковий скарб",
+      "confidence": "team-approved",
+      "note": "Deliberate humorous exception to currency naming, approved by the user."
+    },
+    "Fast Build": {
+      "uk": "Швидке будівництво",
+      "confidence": "team-approved"
+    }
+  },
+  "places": {
+    "Egypt": {
+      "uk": "Єгипет",
+      "confidence": "high"
+    },
+    "Cairo": {
+      "uk": "Каїр",
+      "confidence": "high"
+    },
+    "Nepal": {
+      "uk": "Непал",
+      "confidence": "high"
+    },
+    "India": {
+      "uk": "Індія",
+      "confidence": "high"
+    },
+    "Venice": {
+      "uk": "Венеція",
+      "confidence": "high"
+    },
+    "Shanghai": {
+      "uk": "Шанхай",
+      "confidence": "high"
+    },
+    "Pankot Palace": {
+      "uk": "Палац Панкот",
+      "confidence": "high"
+    }
+  },
+  "chapter_titles": {
+    "RAIDERS OF THE LOST ARK": {
+      "uk": "У ПОШУКАХ ВТРАЧЕНОГО КОВЧЕГА",
+      "confidence": "high",
+      "note": "official Ukrainian theatrical dub title"
+    },
+    "TEMPLE OF DOOM": {
+      "uk": "ХРАМ ДОЛІ",
+      "confidence": "high",
+      "note": "official Ukrainian theatrical dub title"
+    },
+    "THE LAST CRUSADE": {
+      "uk": "ОСТАННІЙ ХРЕСТОВИЙ ПОХІД",
+      "confidence": "high",
+      "note": "official Ukrainian theatrical dub title"
+    }
+  }
+}

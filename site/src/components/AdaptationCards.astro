@@ -1,0 +1,84 @@
+---
+/** Тизер культурних адаптацій на головній. Англійська версія додає латинську транслітерацію й пояснення. */
+import { langOf, localePath, STRINGS } from '../i18n/strings';
+
+const lang = langOf(Astro.locals);
+const t = STRINGS[lang].adaptations;
+---
+
+<ul class="adapt not-content">
+  {
+    t.cards.map((c) => (
+      <li class="adapt__card">
+        <span class:list={['adapt__en', { 'adapt__en--plain': c.plain }]} lang={c.plain ? lang : 'en'}>
+          {c.en}
+        </span>
+        <span class="adapt__uk" lang="uk">{c.uk}</span>
+        {c.gloss && <span class="adapt__gloss">{c.gloss}</span>}
+        <span class="adapt__why">{c.why}</span>
+      </li>
+    ))
+  }
+</ul>
+<p class="adapt-more not-content">
+  {t.moreBefore}<a href={localePath(lang, 'adaptations/')}>{t.moreAdaptations}</a>{t.moreMiddle}<a
+    href={localePath(lang, 'glossary/')}>{t.moreGlossary}</a
+  >{t.moreAfter}
+</p>
+
+<style>
+  .adapt {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 12.5rem), 1fr));
+    gap: 0.8rem;
+  }
+
+  .adapt__card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    padding: 0.8rem 0.9rem;
+    border-radius: var(--radius);
+    background: var(--paper-raised);
+    border: 1px dashed color-mix(in srgb, var(--leather) 60%, transparent);
+  }
+
+  .adapt__en {
+    font-size: 0.78rem;
+    color: var(--ink-muted);
+    text-decoration: line-through;
+    text-decoration-color: color-mix(in srgb, var(--brick-red) 70%, transparent);
+  }
+
+  .adapt__en--plain {
+    text-decoration: none;
+  }
+
+  .adapt__uk {
+    font: 800 1.2rem var(--font-display);
+    color: var(--sl-color-white);
+  }
+
+  .adapt__gloss {
+    font-size: 0.8rem;
+    font-style: italic;
+    color: var(--leather);
+  }
+
+  .adapt__why {
+    font-size: 0.85rem;
+    color: var(--ink-muted);
+  }
+
+  .adapt-more {
+    margin-top: 1rem;
+    font-size: 0.92rem;
+  }
+
+  .adapt-more a {
+    color: var(--link);
+  }
+</style>

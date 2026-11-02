@@ -1,0 +1,159 @@
+---
+/**
+ * Слайдер «англійською / українською» (design D4).
+ * Керується звичайним <input type="range">, тож працює з клавіатури (←/→, Home/End)
+ * і на сенсорних екранах. Якщо англійського знімка немає (docs/screenshots/<name>-en.jpg),
+ * компонент показує один український скриншот.
+ */
+import { Image } from 'astro:assets';
+import { screenshot } from '../lib/screenshots';
+import { strings } from '../i18n/strings';
+
+interface Props {
+  after: string;
+  before?: string;
+  alt: string;
+  caption?: string;
+}
+const { after, before = after.replace(/\.(\w+)$/, '-en.$1'), alt, caption } = Astro.props;
+const afterImg = screenshot(after);
+const beforeImg = screenshot(before);
+const id = `ba-${after.replace(/\W/g, '')}`;
+const t = strings(Astro.locals).beforeAfter;
+---
+
+{
+  afterImg && (
+    <figure class="ba not-content" data-before-after>
+      {beforeImg ? (
+        <div class="ba__stage" style="--pos: 50%">
+          <Image class="ba__img" src={beforeImg} alt={`${t.before}${alt}`} widths={[640, 1200]} sizes="(min-width: 72rem) 68rem, 94vw" />
+          <div class="ba__after">
+            <Image class="ba__img" src={afterImg} alt={`${t.after}${alt}`} widths={[640, 1200]} sizes="(min-width: 72rem) 68rem, 94vw" />
+          </div>
+          <span class="ba__tag ba__tag--before" aria-hidden="true">EN</span>
+          <span class="ba__tag ba__tag--after" aria-hidden="true">UA</span>
+          <span class="ba__handle" aria-hidden="true" />
+          <label class="visually-hidden" for={id}>{t.range}</label>
+          <input id={id} class="ba__range" type="range" min="0" max="100" value="50" />
+        </div>
+      ) : (
+        <div class="ba__single">
+          <Image class="ba__img" src={afterImg} alt={alt} widths={[640, 1200]} sizes="(min-width: 72rem) 68rem, 94vw" />
+          <span class="ba__tag ba__tag--after" aria-hidden="true">UA</span>
+        </div>
+      )}
+      {caption && <figcaption>{caption}</figcaption>}
+    </figure>
+  )
+}
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-before-after] .ba__stage').forEach((stage) => {
+    const range = stage.querySelector<HTMLInputElement>('.ba__range')!;
+    const update = () => stage.style.setProperty('--pos', `${range.value}%`);
+    range.addEventListener('input', update);
+    update();
+  });
+</script>
+
+<style>
+  .ba {
+    margin: 0;
+    padding: 0.5rem;
+    background: var(--paper-raised);
+    border-radius: 0.35rem;
+    box-shadow: var(--shadow);
+  }
+
+  .ba__stage,
+  .ba__single {
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.2rem;
+    line-height: 0;
+  }
+
+  .ba :global(.ba__img) {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .ba__after {
+    position: absolute;
+    inset: 0;
+    clip-path: inset(0 0 0 var(--pos));
+  }
+
+  .ba__handle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: var(--pos);
+    width: 4px;
+    translate: -50% 0;
+    background: var(--brick-yellow);
+    box-shadow: 0 0 0 1px rgb(0 0 0 / 0.35);
+    pointer-events: none;
+  }
+
+  .ba__handle::after {
+    content: '⇆';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font: 800 1.2rem/1 var(--font-display);
+    color: #2b1d12;
+    background: var(--brick-yellow);
+    box-shadow: 0 3px 0 var(--brick-yellow-side);
+  }
+
+  .ba__range {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: ew-resize;
+  }
+
+  .ba__range:focus-visible ~ .ba__handle,
+  .ba__stage:has(.ba__range:focus-visible) .ba__handle::after {
+    outline: 3px solid var(--sl-color-white);
+  }
+
+  .ba__tag {
+    position: absolute;
+    top: 0.6rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.3rem;
+    font: 800 0.8rem/1.2 var(--font-display);
+    letter-spacing: 0.08em;
+    color: var(--on-brick);
+    background: var(--brick-red-face);
+  }
+
+  .ba__tag--before {
+    left: 0.6rem;
+    background: #2b1d12;
+    color: #f3e6c8;
+  }
+
+  .ba__tag--after {
+    right: 0.6rem;
+  }
+
+  figcaption {
+    padding: 0.5rem 0.2rem 0.1rem;
+    font-size: 0.88rem;
+    color: var(--ink-muted);
+  }
+</style>

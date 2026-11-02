@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<title>Glyph viewer / editor — PC_FONT_PC.FNT</title>
+<style>
+  :root {
+    --bg: #1e1e1e;
+    --panel-bg: #2a2a2a;
+    --border: #444;
+    --text: #ddd;
+    --muted: #999;
+    --accent: #4ea1ff;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, Segoe UI, Arial, sans-serif;
+    font-size: 13px;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+  }
+  #topRow {
+    flex: 1 1 auto;
+    display: flex;
+    min-height: 0;
+  }
+  #previewPanel {
+    flex: 0 0 260px;
+    display: flex;
+    flex-direction: column;
+    background: var(--panel-bg);
+    border-top: 1px solid var(--border);
+    padding: 10px 12px;
+    gap: 6px;
+  }
+  #previewPanel .row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  #previewText {
+    flex: 1;
+    min-width: 240px;
+    height: 44px;
+    resize: vertical;
+    background: #333; color: var(--text); border: 1px solid var(--border);
+    border-radius: 3px; padding: 6px; font-family: Consolas, monospace; font-size: 14px;
+  }
+  #previewCanvasWrap {
+    flex: 1;
+    overflow: auto;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+  }
+  #previewCanvas {
+    display: block;
+    image-rendering: pixelated;
+  }
+  #sidebar {
+    width: 340px;
+    flex: 0 0 340px;
+    background: var(--panel-bg);
+    border-right: 1px solid var(--border);
+    padding: 12px;
+    overflow-y: auto;
+  }
+  #main {
+    flex: 1;
+    overflow: auto;
+    position: relative;
+    background:
+      linear-gradient(45deg, #2b2b2b 25%, transparent 25%),
+      linear-gradient(-45deg, #2b2b2b 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, #2b2b2b 75%),
+      linear-gradient(-45deg, transparent 75%, #2b2b2b 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+    background-color: #232323;
+  }
+  #main.bg-green {
+    background: #0f0;
+  }
+  #stage {
+    position: relative;
+  }
+  #atlasImg {
+    display: block;
+    image-rendering: pixelated;
+  }
+  .box {
+    position: absolute;
+    border: 1px solid;
+    box-sizing: content-box;
+    cursor: pointer;
+    pointer-events: auto;
+  }
+  .box:hover { outline: 2px solid #fff; outline-offset: 1px; z-index: 5; }
+  .box.selected { outline: 2px solid #fff; z-index: 10; box-shadow: 0 0 0 1px #000; }
+  .box.hidden { display: none; }
+  .box .lbl {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    font-size: 9px;
+    line-height: 1;
+    padding: 1px 2px;
+    background: rgba(0,0,0,0.75);
+    color: #fff;
+    white-space: nowrap;
+    display: none;
+    pointer-events: none;
+  }
+  .box.selected .lbl, .box:hover .lbl { display: block; }
+  #boxLayer.forceLabels .lbl { display: block; }
+
+  h1 { font-size: 15px; margin: 0 0 4px; }
+  h2 { font-size: 12px; margin: 16px 0 6px; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+  p.hint { color: var(--muted); font-size: 12px; line-height: 1.4; margin: 4px 0 0; }
+
+  fieldset { border: 1px solid var(--border); border-radius: 4px; margin: 0 0 10px; padding: 8px; }
+  legend { color: var(--muted); font-size: 11px; padding: 0 4px; }
+  label.cat { display: flex; align-items: center; gap: 6px; padding: 2px 0; cursor: pointer; }
+  .swatch { width: 12px; height: 12px; border: 1px solid #000; flex: 0 0 12px; }
+
+  button, input[type=text], input[type=number] {
+    background: #333; color: var(--text); border: 1px solid var(--border);
+    border-radius: 3px; padding: 4px 6px; font-size: 12px;
+  }
+  button { cursor: pointer; }
+  button:hover { background: #3d3d3d; }
+  button.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  button.primary:hover { filter: brightness(1.1); }
+
+  .zoomRow { display: flex; gap: 4px; align-items: center; flex-wrap: wrap; }
+  .zoomRow button.active { background: var(--accent); color: #fff; }
+
+  #detail { border: 1px solid var(--border); border-radius: 4px; padding: 8px; }
+  #detail .row { display: flex; align-items: center; gap: 6px; margin: 6px 0; }
+  #detail .row label { width: 70px; color: var(--muted); }
+  #detail .row input { width: 90px; }
+  #detail .charBig { font-size: 32px; text-align: center; padding: 6px 0; border: 1px dashed var(--border); border-radius: 4px; margin-bottom: 6px; background: #111; }
+  #detail .placeholder { color: var(--muted); font-style: italic; }
+
+  #editedList { max-height: 160px; overflow-y: auto; font-size: 11px; }
+  #editedList div { padding: 2px 0; border-bottom: 1px solid #333; display: flex; justify-content: space-between; gap: 4px; }
+  #editedList button { padding: 0 4px; font-size: 10px; }
+
+  textarea#exportBox {
+    width: 100%; height: 160px; background: #111; color: #9f9;
+    font-family: Consolas, monospace; font-size: 11px; border: 1px solid var(--border);
+    border-radius: 4px; margin-top: 6px;
+  }
+  #searchResults { max-height: 120px; overflow-y: auto; font-size: 12px; margin-top: 4px; }
+  #searchResults div { padding: 2px 4px; cursor: pointer; border-radius: 2px; }
+  #searchResults div:hover { background: #3d3d3d; }
+</style>
+</head>
+<body>
+
+<div id="topRow">
+<div id="sidebar">
+  <h1>Glyph viewer / editor</h1>
+  <p class="hint" id="sourceLabel">—</p>
+
+  <h2>Шрифт</h2>
+  <div class="zoomRow" id="fontRow">
+    <button data-font="1" class="active">Шрифт 1 (UI)</button>
+    <button data-font="2">Шрифт 2 (Adventure)</button>
+  </div>
+
+  <h2>Масштаб</h2>
+  <div class="zoomRow" id="zoomRow">
+    <button data-zoom="1">100%</button>
+    <button data-zoom="2">200%</button>
+    <button data-zoom="4" class="active">400%</button>
+    <button data-zoom="8">800%</button>
+    <button data-zoom="16">1600%</button>
+  </div>
+
+  <h2>Фон атласу</h2>
+  <div class="zoomRow" id="atlasBgRow">
+    <button data-bg="tile" class="active">Клітинка</button>
+    <button data-bg="green">Зелений (#0f0)</button>
+  </div>
+
+  <h2>Пошук</h2>
+  <input type="text" id="searchInput" placeholder="символ або U+XXXX" style="width:100%">
+  <div id="searchResults"></div>
+
+  <h2>Категорії (клац, щоб сховати/показати)</h2>
+  <fieldset>
+    <legend>Показувати</legend>
+    <label class="cat"><input type="checkbox" data-cat="patched" checked><span class="swatch" style="background:#ff3b3b"></span>Наші 8 українських гліфів</label>
+    <label class="cat"><input type="checkbox" data-cat="cyrillic" checked><span class="swatch" style="background:#4ea1ff"></span>Кирилиця (решта)</label>
+    <label class="cat"><input type="checkbox" data-cat="latinUpper" checked><span class="swatch" style="background:#ffd24e"></span>Latin A-Z</label>
+    <label class="cat"><input type="checkbox" data-cat="latinLower" checked><span class="swatch" style="background:#c8ff4e"></span>Latin a-z</label>
+    <label class="cat"><input type="checkbox" data-cat="digit" checked><span class="swatch" style="background:#4effd2"></span>Цифри</label>
+    <label class="cat"><input type="checkbox" data-cat="extended" checked><span class="swatch" style="background:#c14eff"></span>Latin Extended (донори)</label>
+    <label class="cat"><input type="checkbox" data-cat="other" checked><span class="swatch" style="background:#999999"></span>Інше (пунктуація, іконки)</label>
+  </fieldset>
+  <button id="showLabels">Підписи: увімк/вимк</button>
+
+  <h2>Вибраний гліф</h2>
+  <div id="detail"><p class="placeholder">Клацни на прямокутник на атласі зліва, щоб побачити й відредагувати його координати.</p></div>
+
+  <h2>Змінені гліфи (<span id="editedCount">0</span>)</h2>
+  <div id="editedList"></div>
+  <div style="margin-top:6px; display:flex; gap:6px; flex-wrap:wrap;">
+    <button id="exportJson">Експорт JSON</button>
+    <button id="exportPy" class="primary">Копіювати Python-код для застосування</button>
+  </div>
+  <textarea id="exportBox" style="display:none"></textarea>
+</div>
+
+<div id="main">
+  <div id="stage">
+    <img id="atlasImg" src="atlas.png" alt="font atlas">
+    <div id="boxLayer"></div>
+  </div>
+</div>
+</div><!-- /topRow -->
+
+<div id="previewPanel">
+  <div class="row">
+    <strong>Тестовий текст</strong>
+    <span class="hint">рендериться прямо з атласу, живими координатами (враховує будь-які твої правки вище)</span>
+  </div>
+  <div class="row">
+    <textarea id="previewText">Щастям б'єш жук їх глицю в фон й ґедзь пріч.
+The quick brown fox jumps over the lazy dog.</textarea>
+    <label>Розмір: <input type="range" id="previewScale" min="1" max="10" step="0.5" value="1.5"></label>
+    <span id="previewScaleLabel">1.5x</span>
+    <label>Тло: <input type="color" id="previewBg" value="#8a6a45"></label>
+    <label><input type="checkbox" id="previewShowBoxes"> рамки гліфів</label>
+  </div>
+  <div id="previewCanvasWrap">
+    <canvas id="previewCanvas" width="10" height="10"></canvas>
+  </div>
+</div>
+
+<script src="glyph_data.js"></script>
+<script src="glyph_data2.js"></script>
+<script>
+"use strict";
+
+const DATA_BY_FONT = { "1": window.GLYPH_DATA, "2": window.GLYPH_DATA_2 };
+const ATLAS_SRC_BY_FONT = { "1": "atlas.png", "2": "atlas2.png" };
+let DATA = DATA_BY_FONT["1"];
+const state = {
+  font: "1",
+  zoom: 4,
+  labels: false,
+  selected: null,       // glyph object (edited in place)
+  edits: new Map(),      // codepoint -> {before, glyph}
+  visibleCats: new Set(["patched","cyrillic","latinUpper","latinLower","digit","extended","other"]),
+  previewScale: 1.5,
+  previewBg: "#8a6a45",
+  previewShowBoxes: false,
+};
+
+const CAT_COLOR = {
+  patched: "#ff3b3b",
+  cyrillic: "#4ea1ff",
+  latinUpper: "#ffd24e",
+  latinLower: "#c8ff4e",
+  digit: "#4effd2",
+  extended: "#c14eff",
+  other: "#999999",
+};
+
+function categorize(g) {
+  if (g.patched) return "patched";
+  const cp = g.codepoint;
+  if (cp >= 0x30 && cp <= 0x39) return "digit";
+  if (cp >= 0x41 && cp <= 0x5A) return "latinUpper";
+  if (cp >= 0x61 && cp <= 0x7A) return "latinLower";
+  if (cp >= 0x0400 && cp <= 0x04FF) return "cyrillic";
+  if ((cp >= 0x00A0 && cp <= 0x02FF)) return "extended"; // Latin-1 Supplement / Latin Extended-A/B (Polish etc. donors)
+  return "other";
+}
+
+function fmtCp(cp) {
+  return "U+" + cp.toString(16).toUpperCase().padStart(4, "0");
+}
+
+function updateSourceLabel() {
+  document.getElementById("sourceLabel").textContent =
+    DATA.source + "  •  " + DATA.glyphs.length + " гліфів  •  height=" + DATA.font_height;
+}
+
+function switchFont(fontKey) {
+  if (!DATA_BY_FONT[fontKey]) return;
+  state.font = fontKey;
+  DATA = DATA_BY_FONT[fontKey];
+  state.selected = null;
+  state.selectedEl = null;
+  state.edits = new Map();
+  updateSourceLabel();
+  renderDetail();
+  renderEditedList();
+  const img = document.getElementById("atlasImg");
+  img.src = ATLAS_SRC_BY_FONT[fontKey]; // triggers img.onload -> render()
+}
+
+function main() {
+  updateSourceLabel();
+
+  const img = document.getElementById("atlasImg");
+  img.onload = () => { render(); };
+  if (img.complete) render();
+
+  document.querySelectorAll("#fontRow button").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll("#fontRow button").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      switchFont(btn.dataset.font);
+    });
+  });
+
+  document.querySelectorAll("#zoomRow button").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll("#zoomRow button").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      state.zoom = parseFloat(btn.dataset.zoom);
+      layout();
+    });
+  });
+
+  document.querySelectorAll("#atlasBgRow button").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll("#atlasBgRow button").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      document.getElementById("main").classList.toggle("bg-green", btn.dataset.bg === "green");
+    });
+  });
+
+  document.querySelectorAll("[data-cat]").forEach(cb => {
+    cb.addEventListener("change", () => {
+      const cat = cb.dataset.cat;
+      if (cb.checked) state.visibleCats.add(cat); else state.visibleCats.delete(cat);
+      applyVisibility();
+    });
+  });
+
+  document.getElementById("showLabels").addEventListener("click", () => {
+    state.labels = !state.labels;
+    document.getElementById("boxLayer").classList.toggle("forceLabels", state.labels);
+  });
+
+  document.getElementById("searchInput").addEventListener("input", onSearch);
+  document.getElementById("exportJson").addEventListener("click", exportJson);
+  document.getElementById("exportPy").addEventListener("click", exportPy);
+
+  document.getElementById("previewText").addEventListener("input", renderTextPreview);
+  document.getElementById("previewScale").addEventListener("input", (e) => {
+    state.previewScale = parseFloat(e.target.value);
+    document.getElementById("previewScaleLabel").textContent = state.previewScale + "x";
+    renderTextPreview();
+  });
+  document.getElementById("previewBg").addEventListener("input", (e) => {
+    state.previewBg = e.target.value;
+    renderTextPreview();
+  });
+  document.getElementById("previewShowBoxes").addEventListener("change", (e) => {
+    state.previewShowBoxes = e.target.checked;
+    renderTextPreview();
+  });
+
+  render();
+}
+
+const glyphByCp = new Map();
+const elByCp = new Map();
+// glyph_index -> array of glyph objects (multiple codepoints can share ONE
+// glyph_index, e.g. this font's own Latin a-z -> A-Z convention, and our
+// new Cyrillic а-я -> А-Я aliases in Font 2) -- editing one edits them all,
+// since they're really just different names for the same underlying glyph.
+const glyphsByGlyphIndex = new Map();
+
+function render() {
+  const layer = document.getElementById("boxLayer");
+  layer.innerHTML = "";
+  glyphByCp.clear();
+  elByCp.clear();
+  glyphsByGlyphIndex.clear();
+
+  for (const g of DATA.glyphs) {
+    glyphByCp.set(g.codepoint, g);
+    if (!glyphsByGlyphIndex.has(g.glyph_index)) glyphsByGlyphIndex.set(g.glyph_index, []);
+    glyphsByGlyphIndex.get(g.glyph_index).push(g);
+    const cat = categorize(g);
+    const el = document.createElement("div");
+    el.className = "box cat-" + cat;
+    el.dataset.cat = cat;
+    el.dataset.codepoint = g.codepoint;
+    el.style.borderColor = CAT_COLOR[cat];
+
+    const lbl = document.createElement("div");
+    lbl.className = "lbl";
+    lbl.textContent = (g.char.trim() ? g.char : "␣") + " " + fmtCp(g.codepoint);
+    el.appendChild(lbl);
+
+    el.addEventListener("click", (e) => { e.stopPropagation(); select(g, el); });
+    layer.appendChild(el);
+    elByCp.set(g.codepoint, el);
+  }
+  applyVisibility();
+  layout();
+  renderTextPreview();
+}
+
+// Zoom is applied by scaling every box's pixel position/size directly (not
+// via a CSS transform on #stage) -- a transform-scaled element's true
+// rendered footprint doesn't reliably drive its scrollable parent's
+// scrollWidth/Height across browsers, which would silently clip access to
+// most of the atlas at any zoom above 100%.
+function layout() {
+  const img = document.getElementById("atlasImg");
+  const z = state.zoom;
+  const w = img.naturalWidth * z;
+  const h = img.naturalHeight * z;
+  img.style.width = w + "px";
+  img.style.height = h + "px";
+  document.getElementById("stage").style.width = w + "px";
+  document.getElementById("stage").style.height = h + "px";
+
+  for (const [cp, g] of glyphByCp) {
+    const el = elByCp.get(cp);
+    el.style.left = (g.x * z) + "px";
+    el.style.top = (g.y * z) + "px";
+    el.style.width = (g.width * z) + "px";
+    el.style.height = (g.height * z) + "px";
+  }
+}
+
+// Renders the textarea's current text using the REAL atlas pixels and the
+// LIVE glyph rects (glyphByCp -- same objects the editor mutates), so any
+// X/Y/Width edit above shows up here immediately without touching the
+// game or re-running any build script. Each character advances the pen by
+// exactly its glyph's Width, same as the game's own renderer.
+function renderTextPreview() {
+  const canvas = document.getElementById("previewCanvas");
+  const ctx = canvas.getContext("2d");
+  const text = document.getElementById("previewText").value;
+  const scale = state.previewScale;
+  const lineHeight = DATA.font_height * scale;
+  const lines = text.length ? text.split("\n") : [""];
+  const MISSING_ADVANCE = 6;
+
+  const lineWidths = lines.map(line => {
+    let w = 0;
+    for (const ch of line) {
+      const g = glyphByCp.get(ch.codePointAt(0));
+      w += (g ? g.width : MISSING_ADVANCE) * scale;
+    }
+    return w;
+  });
+  canvas.width = Math.max(20, Math.ceil(Math.max(...lineWidths))) + 4;
+  canvas.height = Math.max(20, Math.ceil(lineHeight * lines.length)) + 4;
+
+  ctx.imageSmoothingEnabled = false; // keep the bitmap font crisp, not blurred, when scaled up
+  ctx.fillStyle = state.previewBg;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  const img = document.getElementById("atlasImg");
+  lines.forEach((line, li) => {
+    let x = 2;
+    const y = 2 + li * lineHeight;
+    for (const ch of line) {
+      const cp = ch.codePointAt(0);
+      const g = glyphByCp.get(cp);
+      if (g) {
+        const dw = g.width * scale, dh = g.height * scale;
+        // IMPORTANT: whitespace codepoints (space, etc.) have a rect in the
+        // metrics table like every other glyph, but the game never actually
+        // draws it -- it only uses the Width to advance the pen. That rect's
+        // pixels are effectively unused leftover atlas space (in this font,
+        // space's declared rect happens to catch the edge of an unrelated
+        // neighboring glyph, e.g. "/"), so drawing it produces a stray glyph
+        // fragment between words that never appears in the actual game.
+        if (!/\s/.test(ch) && g.width > 0 && g.height > 0) {
+          ctx.drawImage(img, g.x, g.y, g.width, g.height, x, y, dw, dh);
+        }
+        if (state.previewShowBoxes) {
+          ctx.strokeStyle = "rgba(255,59,59,0.7)";
+          ctx.lineWidth = 1;
+          ctx.strokeRect(x + 0.5, y + 0.5, Math.max(1, dw - 1), Math.max(1, dh - 1));
+        }
+        x += dw;
+      } else {
+        const dw = MISSING_ADVANCE * scale;
+        ctx.strokeStyle = "#f33";
+        ctx.strokeRect(x + 0.5, y + 0.5, dw - 1, lineHeight - 1);
+        x += dw;
+      }
+    }
+  });
+}
+
+function applyVisibility() {
+  document.querySelectorAll("#boxLayer .box").forEach(el => {
+    el.classList.toggle("hidden", !state.visibleCats.has(el.dataset.cat));
+  });
+}
+
+function select(g, el) {
+  document.querySelectorAll(".box.selected").forEach(b => b.classList.remove("selected"));
+  el.classList.add("selected");
+  state.selected = g;
+  state.selectedEl = el;
+  renderDetail();
+}
+
+// All glyph objects that share the currently-selected glyph's glyph_index
+// (usually 1, but e.g. 2 for an upper/lower-case alias pair) -- editing
+// applies to every one of them at once, since they're the same real glyph.
+function siblingGlyphs(g) {
+  return glyphsByGlyphIndex.get(g.glyph_index) || [g];
+}
+
+function renderDetail() {
+  const g = state.selected;
+  const box = document.getElementById("detail");
+  if (!g) { box.innerHTML = '<p class="placeholder">Нічого не вибрано.</p>'; return; }
+  const siblings = siblingGlyphs(g);
+  const charsLabel = siblings.map(s => s.char.trim() || "␣").join(" / ");
+  const cpLabel = siblings.map(s => fmtCp(s.codepoint)).join(" / ");
+  box.innerHTML = `
+    <div class="charBig">${escapeHtml(charsLabel)}</div>
+    <div class="row"><label>Codepoint</label><div>${cpLabel} (glyph_index ${g.glyph_index})</div></div>
+    <div class="row"><label>X</label><input type="number" id="fX" value="${g.x}" step="1"></div>
+    <div class="row"><label>Y</label><input type="number" id="fY" value="${g.y}" step="1"></div>
+    <div class="row"><label>Width</label><input type="number" id="fW" value="${g.width}" step="1"></div>
+    <div class="row"><label>Height</label><div>${g.height} <span style="color:var(--muted)">(спільна для всього шрифту, не редагується тут)</span></div></div>
+    ${siblings.length > 1 ? `<p class="hint" style="margin:6px 0 0">Ці ${siblings.length} коди (${charsLabel}) ділять один гліф — правка застосується до всіх одразу.</p>` : ""}
+    <p class="hint" style="margin:6px 0 0">Зміни застосовуються одразу, під час набору.</p>
+    <div style="margin-top:8px; display:flex; gap:6px;">
+      <button id="resetEdit">Скинути</button>
+    </div>
+  `;
+  // Auto-apply on every keystroke/change -- no separate "apply" click needed.
+  ["fX", "fY", "fW"].forEach(id => {
+    document.getElementById(id).addEventListener("input", applyEditToPreview);
+  });
+  document.getElementById("resetEdit").addEventListener("click", resetEdit);
+}
+
+function applyEditToPreview() {
+  const g = state.selected;
+  const newX = parseFloat(document.getElementById("fX").value);
+  const newY = parseFloat(document.getElementById("fY").value);
+  const newW = parseFloat(document.getElementById("fW").value);
+  // Ignore transiently-empty/invalid input (e.g. user cleared a field to
+  // retype it) rather than snapping the box to NaN mid-edit.
+  if (!Number.isFinite(newX) || !Number.isFinite(newY) || !Number.isFinite(newW)) return;
+
+  const gi = g.glyph_index;
+  const before = state.edits.has(gi) ? state.edits.get(gi).before : { x: g.x, y: g.y, width: g.width };
+  for (const sib of siblingGlyphs(g)) {
+    sib.x = newX;
+    sib.y = newY;
+    sib.width = newW;
+  }
+
+  layout();
+  renderTextPreview();
+
+  const changed = before.x !== newX || before.y !== newY || before.width !== newW;
+  if (changed) {
+    state.edits.set(gi, { before, glyph: g });
+  } else {
+    state.edits.delete(gi);
+  }
+  renderEditedList();
+}
+
+function resetEdit() {
+  const g = state.selected;
+  const gi = g.glyph_index;
+  const rec = state.edits.get(gi);
+  if (rec) {
+    for (const sib of siblingGlyphs(g)) {
+      sib.x = rec.before.x; sib.y = rec.before.y; sib.width = rec.before.width;
+    }
+    state.edits.delete(gi);
+  }
+  layout();
+  renderTextPreview();
+  renderDetail();
+  renderEditedList();
+}
+
+function renderEditedList() {
+  document.getElementById("editedCount").textContent = state.edits.size;
+  const list = document.getElementById("editedList");
+  list.innerHTML = "";
+  for (const [gi, rec] of state.edits) {
+    const chars = siblingGlyphs(rec.glyph).map(s => s.char.trim() || "␣").join("/");
+    const div = document.createElement("div");
+    div.innerHTML = `<span>${chars} (gi=${gi}) → x=${rec.glyph.x} y=${rec.glyph.y} w=${rec.glyph.width}</span>`;
+    list.appendChild(div);
+  }
+}
+
+function onSearch() {
+  const q = document.getElementById("searchInput").value.trim();
+  const results = document.getElementById("searchResults");
+  results.innerHTML = "";
+  if (!q) return;
+  let matches;
+  const hexMatch = /^u\+?([0-9a-f]{2,6})$/i.exec(q);
+  if (hexMatch) {
+    const cp = parseInt(hexMatch[1], 16);
+    matches = DATA.glyphs.filter(g => g.codepoint === cp);
+  } else {
+    matches = DATA.glyphs.filter(g => g.char === q[0]);
+  }
+  matches.slice(0, 20).forEach(g => {
+    const div = document.createElement("div");
+    div.textContent = (g.char.trim() || "␣") + "  " + fmtCp(g.codepoint) + "  x=" + g.x + " y=" + g.y + " w=" + g.width;
+    div.addEventListener("click", () => {
+      const el = document.querySelector('.box[data-codepoint="' + g.codepoint + '"]');
+      if (el) {
+        select(g, el);
+        el.scrollIntoView({ block: "center", inline: "center", behavior: "smooth" });
+      }
+    });
+    results.appendChild(div);
+  });
+}
+
+function exportJson() {
+  const out = Array.from(state.edits.values()).map(r => ({
+    codepoint: r.glyph.codepoint, char: r.glyph.char, glyph_index: r.glyph.glyph_index,
+    x: r.glyph.x, y: r.glyph.y, width: r.glyph.width,
+    also: siblingGlyphs(r.glyph).filter(s => s !== r.glyph).map(s => ({ codepoint: s.codepoint, char: s.char })),
+  }));
+  const box = document.getElementById("exportBox");
+  box.style.display = "block";
+  box.value = JSON.stringify(out, null, 1);
+  box.select();
+}
+
+function exportPy() {
+  const path = DATA.source;
+  const lines = [
+    "# Auto-generated by tools/glyph_viewer/viewer.html -- paste into a Python",
+    "# session or a small script, next to tools/fnt_tool.py, e.g.:",
+    "#   import sys; sys.path.insert(0, 'tools'); from fnt_tool import FntFile",
+    `#   f = FntFile('${path}')`,
+    "#   <paste the lines below>",
+    `#   f.save('${path}')`,
+  ];
+  for (const rec of state.edits.values()) {
+    const g = rec.glyph;
+    const chars = siblingGlyphs(g).map(s => `${fmtCp(s.codepoint)} '${s.char.trim() || " "}'`).join(", ");
+    lines.push(`f.set_glyph_metrics(${g.glyph_index}, x=${g.x}, y=${g.y}, w=${g.width})  # ${chars}`);
+  }
+  const box = document.getElementById("exportBox");
+  box.style.display = "block";
+  box.value = lines.join("\n");
+  box.select();
+}
+
+function escapeHtml(s) {
+  const d = document.createElement("div");
+  d.textContent = s;
+  return d.innerHTML;
+}
+
+document.getElementById("main").addEventListener("click", () => {
+  document.querySelectorAll(".box.selected").forEach(b => b.classList.remove("selected"));
+  state.selected = null;
+  renderDetail();
+});
+
+main();
+</script>
+</body>
+</html>
