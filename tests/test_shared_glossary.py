@@ -13,7 +13,9 @@ class SharedGlossaryTest(unittest.TestCase):
 
     def test_translations_have_no_forbidden_forms(self):
         from ua.pipeline.text import load_translations
-        pairs = [(str(k), "", v) for k, v in load_translations()["english"].items()]
+        tr = load_translations()
+        pairs = [(str(k), "", v) for k, v in tr["english"].items()]
+        pairs += [(k, "", v) for part in ("trc", "pc_menu") for k, v in tr[part].items()]
         self.assertEqual(shared_glossary.check(pairs, GAME), [])
 
     def test_vendored_copy_matches_the_source_repository(self):
