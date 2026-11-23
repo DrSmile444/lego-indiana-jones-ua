@@ -5,8 +5,10 @@ import re
 from dataclasses import dataclass, field
 
 from .. import paths
+from ..formats import trc_csv, txt
 from ..util import read_json
 from . import index as string_index
+from . import shared_glossary
 from .text import PC_MENU_COUNT, load_translations
 
 # Characters the engine handles itself or that never reach a glyph lookup.
@@ -96,6 +98,7 @@ def run() -> Report:
         report.error(f"PC menu: expected exactly {PC_MENU_COUNT} entries")
 
     _check_glossary(report, tr["english"])
+    _check_shared_glossary(report, tr)
     return report
 
 
@@ -128,3 +131,32 @@ def glossary_ids_from_notes(glossary: dict) -> int:
                 entry["ids"] = ids
                 added += 1
     return added
+
+
+def english_source() -> dict[int, str]:
+    """English text of the extracted game, or {} when the game is not extracted."""
+    try:
+        path = paths.game_file(paths.ENGLISH_TXT)
+    except FileNotFoundError:
+        return {}
+    return {entry.id: entry.text for entry in txt.parse_file(path) if entry.matched}
+
+
+def trc_source() -> dict[str, str]:
+    """English column of the extracted TRC.CSV, or {} when the game is not extracted."""
+    try:
+        return trc_csv.read_labels(paths.game_file(paths.TRC_CSV))
+    except FileNotFoundError:
+        return {}
+
+
+def _check_shared_glossary(report: Report, tr: dict) -> None:
+    english = english_source()
+    pairs = [(f"ENGLISH.TXT {k}", english.get(int(k), ""), v) for k, v in tr["english"].items()]
+    trc_english = trc_source()
+    pairs += [(f"TRC.CSV {k}", trc_english.get(k, ""), v) for k, v in tr["trc"].items()]
+    pairs += [(f"PC menu {k}", "", v) for k, v in tr["pc_menu"].items()]
+    for problem in shared_glossary.check(pairs, "indy"):
+        report.error(f"shared glossary: {problem}")
+    if not english:
+        report.warn("shared glossary: menu rules skipped, the game is not extracted")

@@ -1,7 +1,8 @@
 {
   "_meta": {
     "description": "Terminology glossary of the Ukrainian localization: approved names, places, artifacts and game terms. Keys are the English source terms; `ids` lists ENGLISH.TXT strings checked by `python -m ua validate`.",
-    "confidence": "team-approved = decided by the author; other values are proposals kept for context."
+    "confidence": "team-approved = decided by the author; other values are proposals kept for context.",
+    "shared": "Rules shared with the other LEGO localizations live in vendor/lego-ua-glossary/glossary.json (copied from the lego-ua-glossary repository); `python -m ua validate` checks them."
   },
   "characters": {
     "Bandit": {
@@ -202,8 +203,9 @@
       "confidence": "low-proposal"
     },
     "Red Brick": {
-      "uk": "Червона цеглинка",
-      "confidence": "low-proposal"
+      "uk": "Червона суперцеглинка",
+      "confidence": "team-approved",
+      "note": "Shared rule Q39: суперцеглинка in every game."
     },
     "Stud": {
       "uk": "круглик",

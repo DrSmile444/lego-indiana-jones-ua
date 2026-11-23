@@ -12,3 +12,11 @@
 
 Після правки: `python -m ua validate`, потім `python -m ua build`. Імена людей і студій у титрах не перекладаються, тому їх тут немає.
 П'ять посад локалізаційної команди в `PC_ENGLISH_CREDITS.TXT` навмисно лишилися англійською (див. `index/credits.json`, `translate: false`).
+
+## Спільний глосарій
+
+`vendor/lego-ua-glossary/` — копія репозиторію `lego-ua-glossary`, спільного для
+українізаторів LEGO Star Wars: The Complete Saga, LEGO Indiana Jones і LEGO Star Wars III.
+`glossary.json` задає однакові рядки меню (англійський рядок → українська форма) і
+заборонені форми термінів; `python -m ua validate` звітує кожне порушення як помилку.
+Правила змінюємо в `lego-ua-glossary`, потім `python sync.py` оновлює копії в усіх іграх.
