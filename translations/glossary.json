@@ -141,12 +141,12 @@
       "confidence": "high"
     },
     "The Holy Grail": {
-      "uk": "Святий Ґрааль",
+      "uk": "Святий Грааль",
       "confidence": "medium",
-      "note": "team decision: use Ґ spelling consistently, not Грааль"
+      "note": "Owner decision 2026-11-23: Грааль, the dictionary form of a common noun (shared rule Q34)."
     },
     "Holy Grail": {
-      "uk": "Ґрааль",
+      "uk": "Грааль",
       "confidence": "medium"
     },
     "Crystal Skull": {

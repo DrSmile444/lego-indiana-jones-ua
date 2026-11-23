@@ -72,7 +72,7 @@ saves stay unchanged.
 | Posted | Відправлено | parcel status |
 | Parcel / Parcel Detector / Mail Room | Посилка / Детектор посилок / Поштова кімната | |
 | Fast Build | Швидке будівництво | |
-| Holy Grail | Святий Ґрааль | consistently with `Ґ`, per the current Ukrainian orthography |
+| Holy Grail | Святий Грааль | dictionary form; Ґ only in personal names (shared rule of the LEGO localizations) |
 
 ![The «Круглики» (kruhlyky) currency on the map](../../screenshots/studs-krugliky.jpg)
 
