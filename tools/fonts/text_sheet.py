@@ -54,6 +54,14 @@ class GameFont:
         self.height = int(self.font.height)
         self.glyphs = {chr(e.codepoint): e.glyph_index for e in self.font.list_mapping()}
 
+    @classmethod
+    def rendered(cls, font, atlas: Image.Image, k: int) -> GameFont:
+        """The font as font_hd.render or render2 returns it: repacked metrics and the k-times atlas."""
+        self = cls.__new__(cls)
+        self.font, self.atlas, self.k, self.height = font, atlas.convert("RGBA"), k, int(font.height)
+        self.glyphs = {chr(e.codepoint): e.glyph_index for e in font.list_mapping()}
+        return self
+
     def chars(self) -> str:
         return "".join(sorted(c for c in self.glyphs if c.isprintable() and c != " "))
 
