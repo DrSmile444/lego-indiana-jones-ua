@@ -11,7 +11,7 @@
       "mip_count": 10,
       "original_sha256": "53b3464ab9f3b5df31d41633dffed5ba36163c6e57810f37f53cd2a2b1817eec",
       "uap_key": "53B40F43D7A105A173706A09DD2E73930CD8F2C050B2D01BABC0FE303FBAD9AA",
-      "dds_sha256": "c654efd7595662fde6f14eeda1639f555161af4e9a82ce9b2ec40e56f3242a6e",
+      "dds_sha256": "806df2ea003d0a42caed06f7e79aab195a282eb8189b45a45247e81a1792155a",
       "occurrences": [
         {
           "archive": "CRUSADE",
@@ -37,7 +37,7 @@
       "mip_count": 11,
       "original_sha256": "755d81fd59b17f106f6fcb77dbe743d3ddd62e786a574c9ad9005f26b2756a19",
       "uap_key": "D1A8B8958762F8E3232A85F2CC00891CEC04A4BFA2538AAA05763EE2D77B6009",
-      "dds_sha256": "f7b055a800603e37cb3ca7f5f579864bbe1e7d5e2765d6361eb0cfdf3f688f46",
+      "dds_sha256": "6645d2ed5f4aea4e7162fb74894d3ced1518c7f767a9aaa4d6fc54c4f063a203",
       "occurrences": [
         {
           "archive": "CRUSADE",
@@ -63,7 +63,7 @@
       "mip_count": 11,
       "original_sha256": "f160674f2f159f3cab87343dfbf3249e4c0281d0bfecc770f42a78062b6555e2",
       "uap_key": "52F414B900969A5AD75B591F7C9D6C1CB1631348429123C62A4E2B89B6D46F77",
-      "dds_sha256": "6a6af254dc222ad7d7d557f1e1a8837148b04f8bee5b6bc6e4c52577d0b7d147",
+      "dds_sha256": "2b4af67339d9ec7081688fe4fac45741b8349a0cb62ed8419cfb43b416105017",
       "occurrences": [
         {
           "archive": "CRUSADE",
@@ -107,7 +107,7 @@
       "mip_count": 9,
       "original_sha256": "04741ecd9157aa3349e3c1bb02d29a4d91741ccefc4626cce23068f13739a611",
       "uap_key": "E788B53B927AA044C2B54FCB1420790E80794C65C313A204AD6746918428BF70",
-      "dds_sha256": "53c4a1980e1c35a603f8e934c37735d9edf6b959b65d72451314faa3d1b07a60",
+      "dds_sha256": "3a74d52c38a8be00ca11555e717dc7b24e94718b5f6e813f0c5f031c9b446bea",
       "occurrences": [
         {
           "archive": "GAME",
@@ -133,7 +133,7 @@
       "mip_count": 10,
       "original_sha256": "b15d8d51e793a57893038b37866f52f99536ae1c5d13fe92992f594fdbb8dd6b",
       "uap_key": "7A83F3185E33D5A1F36956605A9751917D0A7ECB02F298D593D6166AB9FC684A",
-      "dds_sha256": "8da9fa541014d8a2dadb2bf14ebce351119a6e3fd4a0d3c650c9e643cbe16a6b",
+      "dds_sha256": "2e3d4322e0dab9fe8dbf0bf829ff1d3d12d894cc532de95001f139a9d06bacd1",
       "occurrences": [
         {
           "archive": "GAME",
@@ -153,7 +153,7 @@
       "mip_count": 11,
       "original_sha256": "6801a1bc5486a81b05d8ff7e3a303f488e2f637c25757e3201ba6110defc19fe",
       "uap_key": "0CAA8CC70A9A32EB9B270AFCD99ACC09DE8544C5D45AA7E8268A49910363CF4C",
-      "dds_sha256": "afd3ba5291a30570395d713ebe752696f9d3e7f07fed57356a6ca1a32dc8d261",
+      "dds_sha256": "fe57ae5ea87a239f925dc8bb3e871835cee62b18369a69ed2061daa9c4970445",
       "occurrences": [
         {
           "archive": "GAME",
@@ -209,7 +209,7 @@
       "mip_count": 10,
       "original_sha256": "3722105365303e57648e8a38164236acc618184f2cd82f749b18af4207ec9e8d",
       "uap_key": "1480BB9060E13B8D5BFCDC84C24BD6C29338812DA907DB029072E3B2B2395F33",
-      "dds_sha256": "b59b67d4ce1c9d88e1d25fa999f8075b8a7b3615e6e8e8b331296b650c789cce",
+      "dds_sha256": "c3f755d79f80d51a5652ff2227248208eeed87d7129a673741736a04dadca427",
       "occurrences": [
         {
           "archive": "GAME",
@@ -241,7 +241,7 @@
       "mip_count": 11,
       "original_sha256": "67e1fc991d0600c83098018384200ebce8013d31a2b6b8837c6bc9d87ab89820",
       "uap_key": "C0AD731B815A312D7DDE978229DE42A7E8623D6E25BBF09AB7DD64DE06F60F20",
-      "dds_sha256": "6a375c5a8aac29f27ad2f374798573fb0670d078ed60fc2efd26caac60a83b83",
+      "dds_sha256": "e4ed4a9682ecf3769d65817f667fb4063341b2ff44ebc056d0dcf24e22b485a5",
       "occurrences": [
         {
           "archive": "GAME",
@@ -261,7 +261,7 @@
       "mip_count": 11,
       "original_sha256": "b8afa8fe3de6e60ed7331b42f1f70e8a92f444eed4d24db5d0db6fddf07530ce",
       "uap_key": "D3642A1486EE5B78350CA822A9D61EFD56FACEBB2376E0B39478C2A1866DACE1",
-      "dds_sha256": "841e1464fe935c1bcff7135745dd6db15dca93d9a197d1835a640796e68b14d3",
+      "dds_sha256": "d95c35228c68404f3053e392fc373129820942f2b6d36c6502884e030ee35fdb",
       "occurrences": [
         {
           "archive": "GAME",

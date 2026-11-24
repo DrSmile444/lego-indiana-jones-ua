@@ -12,7 +12,7 @@ from pathlib import Path
 
 from PIL import Image
 
-from ua.formats.bc_color import encode_block
+from ua.formats.bc_encode import encode_bc3
 
 REPO = Path(__file__).resolve().parents[2]
 if str(REPO) not in sys.path:
@@ -26,7 +26,7 @@ def encode_dds(image, original, mip_count):
     chunks = [original[:128]]
     for level in range(mip_count):
         width, height = max(1, image.width >> level), max(1, image.height >> level)
-        mip = image if level == 0 else image.resize((width, height), Image.Resampling.LANCZOS)
+        mip = image if level == 0 else image.convert("RGBa").resize((width, height), Image.Resampling.LANCZOS).convert("RGBA")
         pixels = list(mip.get_flattened_data())
         for y in range(0, height, 4):
             for x in range(0, width, 4):
@@ -34,7 +34,7 @@ def encode_dds(image, original, mip_count):
                     pixels[min(y + dy, height - 1) * width + min(x + dx, width - 1)]
                     for dy in range(4) for dx in range(4)
                 ]
-                chunks.append(encode_block(block))
+                chunks.append(encode_bc3(block))
     result = b"".join(chunks)
     if len(result) != len(original):
         raise ValueError("Encoded DDS length differs from original")

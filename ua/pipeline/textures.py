@@ -13,7 +13,7 @@ import struct
 from PIL import Image, ImageChops, ImageFilter
 
 from .. import paths
-from ..formats.bc_color import encode_block
+from ..formats.bc_encode import encode_bc1, encode_bc3
 from ..util import UaError, read_json, sha256
 
 MANIFEST = paths.ASSETS / "textures/manifest.json"
@@ -36,7 +36,8 @@ def pack(image: Image.Image, original: bytes, compression: str, mip_count: int) 
     changed = 0
     for level in range(mip_count):
         width, height = max(1, image.width >> level), max(1, image.height >> level)
-        mip = image if level == 0 else image.resize((width, height), Image.Resampling.LANCZOS)
+        # Premultiplied alpha keeps transparent pixels from darkening the edges of smaller mips.
+        mip = image if level == 0 else image.convert("RGBa").resize((width, height), Image.Resampling.LANCZOS).convert("RGBA")
         mip_mask = mask if level == 0 else mask.resize((width, height), Image.Resampling.BOX)
         pixels = list(mip.get_flattened_data())
         start = position
@@ -47,8 +48,7 @@ def pack(image: Image.Image, original: bytes, compression: str, mip_count: int) 
                              for dy in range(4) for dx in range(4)]
                     if block_size == 8 and any(p[3] != 255 for p in block):
                         raise UaError("DXT1 translations must remain opaque")
-                    encoded = encode_block(block)
-                    result[position:position + block_size] = encoded[-8:] if block_size == 8 else encoded
+                    result[position:position + block_size] = encode_bc1(block) if block_size == 8 else encode_bc3(block)
                     changed += 1
                 position += block_size
         # Decode each mip independently to validate its dimensions and payload.
