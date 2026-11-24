@@ -12,10 +12,24 @@ import zipfile
 from pathlib import Path
 
 from ..util import UaError, read_json, sha256, sha256_file, write_json
-from .package import FILES, SUPPORTED_EXE_SHA256, loader
+from .package import FILES, SUPPORTED_EXE_SHA256, TEST_CONFIG, build_bundle, loader
 
 STATE_DIR = "ukrainian-localization-backup"
 STATE = "install-state.json"
+TEST_INI = """; Development only. Never shipped to players.
+[Test]
+; 1 = borderless window over the whole monitor instead of exclusive fullscreen.
+Borderless=1
+; Key (Windows virtual-key code) that saves the next frame to scripts/screens/. 0 = off.
+; 0x7B = F12.
+ScreenshotKey=0x7B
+; 1 = keep updating and rendering while the window is in the background.
+KeepRunning=1
+; 1 = keyboard input from scripts/screens/keys.txt (DirectInput scan codes), no focus needed.
+VirtualKeys=1
+; Pretend the system locale is this LCID (0x0409 en-US, 0x0809 en-GB, 0x0422 uk-UA). 0 = off.
+Locale=0
+"""
 
 
 def _check_game(game: Path) -> None:
@@ -35,9 +49,15 @@ def read_package(source: Path) -> dict[str, bytes]:
     return files
 
 
-def install(game: Path, source: Path, allow_foreign_loader: bool = False) -> Path:
+def install(game: Path, source: Path | None, allow_foreign_loader: bool = False,
+            test_mode: bool = False) -> Path:
+    """Install a release ZIP, or the current build/ output when `source` is None."""
     _check_game(game)
-    files = read_package(source)
+    if (game / STATE_DIR / STATE).exists():
+        raise UaError("Already installed; run `python -m ua uninstall` first")
+    files = read_package(source) if source else build_bundle()
+    if test_mode:
+        files[TEST_CONFIG] = TEST_INI.replace("\n", "\r\n").encode("ascii")
     known_loader = sha256(loader()[0])
     current_loader = game / "dinput8.dll"
     if current_loader.exists() and sha256_file(current_loader) != known_loader and not allow_foreign_loader:
@@ -46,7 +66,7 @@ def install(game: Path, source: Path, allow_foreign_loader: bool = False) -> Pat
                       "or rerun with --allow-foreign-loader to replace it (it will be backed up).")
     stamp = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
     backup = game / STATE_DIR / stamp
-    state = {"package": source.name, "installed_at": stamp, "files": {}}
+    state = {"package": source.name if source else "build/", "installed_at": stamp, "files": {}}
     written: list[Path] = []
     try:
         for name, data in files.items():
@@ -76,6 +96,10 @@ def _restore(game: Path, state: dict) -> None:
             shutil.copy2(game / previous["backup"], target)
         elif target.exists():
             target.unlink()
+    # Test-mode output of the plugin (frames, virtual keys) goes with it.
+    screens = game / "scripts" / "screens"
+    if TEST_CONFIG in state["files"] and screens.exists():
+        shutil.rmtree(screens)
     scripts_dir = game / "scripts" / "UKRAINIAN"
     for folder in (scripts_dir, game / "scripts"):
         if folder.exists() and not any(folder.iterdir()):

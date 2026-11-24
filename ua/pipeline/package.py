@@ -16,6 +16,8 @@ SUPPORTED_EXE_SHA256 = "c12f7348ec63aed61f56eb15d825f15b8340500668fa8c8dcf06c2f3
 FILES = ("dinput8.dll", "scripts/UKRAINIAN.asi", "scripts/UKRAINIAN.uap",
          "scripts/UKRAINIAN/README.txt", "scripts/UKRAINIAN/LICENSE.txt",
          "scripts/UKRAINIAN/LICENSE-ASI-Loader.txt")
+# Written only by `install --test-mode`; never part of the player package.
+TEST_CONFIG = "scripts/UKRAINIAN.test.ini"
 ZIP_DATE = (1980, 1, 1, 0, 0, 0)
 
 
@@ -54,8 +56,18 @@ def bundle(ver: str, package: bytes, asi: bytes) -> dict[str, bytes]:
         "scripts/UKRAINIAN/LICENSE.txt": project_license(),
         "scripts/UKRAINIAN/LICENSE-ASI-Loader.txt": loader_license,
     }
-    assert tuple(files) == FILES
+    assert tuple(files) == FILES and TEST_CONFIG not in files
     return files
+
+
+def build_bundle() -> dict[str, bytes]:
+    """Files from the current build/ output (for development installs)."""
+    uap_path = paths.BUILD / "UKRAINIAN.uap"
+    asi_path = paths.BUILD / "native/asi/UKRAINIAN.asi"
+    for path in (uap_path, asi_path):
+        if not path.exists():
+            raise UaError(f"{path} not found; run `python -m ua build --native` first")
+    return bundle(version(), uap_path.read_bytes(), asi_path.read_bytes())
 
 
 def write_zip(target: Path, files: dict[str, bytes]) -> None:

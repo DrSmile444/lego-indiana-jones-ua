@@ -85,6 +85,7 @@ struct Entry { DWORD id; const char *text; };
 
 #ifdef UAP_EXPERIMENT
 #include "overlay.h"
+#include "test_mode.h"
 #include "font_hd.h"
 #endif
 
@@ -111,6 +112,7 @@ static void TranslatePcTables() {
     }
     BYTE *base = (BYTE *)GetModuleHandleW(NULL);
 #ifdef UAP_EXPERIMENT
+    InitializeTestMode();
     if (!InitializeUap(base)) return;
     InitializeFontHd();
     const char *const *translated = uap_pc_strings;

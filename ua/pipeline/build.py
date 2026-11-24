@@ -69,10 +69,13 @@ def native_asi() -> bytes:
     return (paths.BUILD / "native/asi/UKRAINIAN.asi").read_bytes()
 
 
-def run(level: str, release: str | None) -> Path:
+def run(level: str, release: str | None, native: bool = False) -> Path:
     data, changed, base_version = build_uap(level)
     say(f"UKRAINIAN.uap: {len(data)} bytes, SHA-256 {sha256(data)}")
     say(f"Changed against baseline {base_version}: {', '.join(changed) if changed else 'nothing (byte-identical)'}")
+    if native and not release:
+        say("Native: building and testing UKRAINIAN.asi")
+        say(f"UKRAINIAN.asi: SHA-256 {sha256(native_asi())}")
     if not release:
         return OUTPUT
     if release != package.version():

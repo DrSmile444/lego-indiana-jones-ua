@@ -3,9 +3,11 @@
   doctor                  what can be built on this machine, and what is missing
   validate                translation checks (no game files needed; runs in CI)
   build [--level full]    UKRAINIAN.uap from the baseline release (+ fonts/textures)
+  build --native          also build and smoke-test the ASI in build/native/asi/
   build --release X.Y.Z   also build the ASI and the release ZIP in dist/
   extract --game DIR      unpack the needed files from Steam DAT archives into game/
   install --game DIR      install a release ZIP with backups
+  install --test-mode     install the build/ output plus scripts/UKRAINIAN.test.ini (live tests)
   uninstall --game DIR    restore the state recorded by install
   verify --game DIR       installed files still match the package
   index                   regenerate index/ from the baseline release
@@ -36,7 +38,7 @@ def _validate(_args) -> int:
 
 def _build(args) -> int:
     from .pipeline import build
-    build.run(args.level, args.release)
+    build.run(args.level, args.release, args.native)
     return 0
 
 
@@ -47,9 +49,11 @@ def _extract(args) -> int:
     return 0
 
 
-def _package_path(args) -> Path:
+def _package_path(args) -> Path | None:
     if args.package:
         return args.package
+    if args.test_mode:
+        return None  # the current build/ output
     from .pipeline import package
     ver = package.version()
     candidate = paths.DIST / ver / package.archive_name(ver)
@@ -60,8 +64,8 @@ def _package_path(args) -> Path:
 
 def _install(args) -> int:
     from .pipeline import install
-    backup = install.install(args.game, _package_path(args), args.allow_foreign_loader)
-    say(f"Installed. Backups of replaced files: {backup}")
+    backup = install.install(args.game, _package_path(args), args.allow_foreign_loader, args.test_mode)
+    say(f"Installed{' (test mode)' if args.test_mode else ''}. Backups of replaced files: {backup}")
     return 0
 
 
@@ -111,6 +115,7 @@ def main(argv: list[str] | None = None) -> int:
     p = sub.add_parser("build", help="build UKRAINIAN.uap (and a release)")
     p.add_argument("--level", choices=("text", "full"), default="text")
     p.add_argument("--release", metavar="VERSION")
+    p.add_argument("--native", action="store_true", help="also build and smoke-test UKRAINIAN.asi")
     p.set_defaults(func=_build)
     p = sub.add_parser("extract", help="extract needed game files into game/")
     p.add_argument("--game", type=Path, required=True)
@@ -125,6 +130,8 @@ def main(argv: list[str] | None = None) -> int:
         if name == "install":
             p.add_argument("--package", type=Path)
             p.add_argument("--allow-foreign-loader", action="store_true")
+            p.add_argument("--test-mode", action="store_true",
+                           help="install build/ output and scripts/UKRAINIAN.test.ini (borderless, frames, keys)")
         p.set_defaults(func=func)
     sub.add_parser("index", help="regenerate index/ from the baseline").set_defaults(func=_index)
     p = sub.add_parser("unpack", help="extract a UAP package")

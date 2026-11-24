@@ -9,7 +9,7 @@
 | `fonts/glyph_viewer/` | веб-переглядач прямокутників гліфів поверх атласу; `export_glyph_atlas.py` генерує дані в `build/` | зібраний FNT |
 | `textures/` | експорт усіх текстур з GSC, OCR-каталог тексту на текстурах, робота з логотипом | `game/` (повне видобування `ua extract --all`), Tesseract для OCR |
 | `pc-menu/` | пошук і перевірка таблиці PC-меню в `LEGOIndy.exe` | встановлена гра |
-| `runtime/` | живі тести в копії гри (`live_test.ps1`), читання пам'яті процесу (`verify_runtime.py --pid`), скриншоти | копія гри в `local/test-game` |
+| `runtime/` | керування грою без фокуса й кадри з гри (`live.py`, див. [docs/setup.md](../docs/setup.md#7-жива-перевірка-тестовий-режим)), живі тести в копії гри (`live_test.ps1`), читання пам'яті процесу (`verify_runtime.py --pid`) | `live.py`: встановлення `--test-mode`; решта: копія гри в `local/test-game` |
 | `saves/` | перейменування власних персонажів у сейві, тест цього скрипта | файл сейву |
 
 Для ширшої роботи з FNT є браузерний редактор TT Font Studio: https://drsmile444.github.io/tt-font-studio/.
