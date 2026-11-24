@@ -1,5 +1,5 @@
 {
-  "_note": "Files `python -m ua extract` takes from the Steam DAT archives (layout: game/<DAT name>/<path>). Level 1 only. SHA-256 of the Steam release used for 0.1.10/1.1.10.",
+  "_note": "Files `python -m ua extract` takes from the Steam DAT archives (layout: game/<DAT name>/<path>). Level 1 only. SHA-256 of the Steam release used for 0.1.10/1.1.10. BUTTONS_PC_PC.FNT holds the controller button icons. lsw3_files: taken by `extract --lsw3` from LEGO Star Wars III: The Clone Wars (Steam) into game/LSW3/ — the same button icons drawn at 2x.",
   "steam_exe_sha256": "c12f7348ec63aed61f56eb15d825f15b8340500668fa8c8dcf06c2f332e5e5fd",
   "files": {
     "CRUSADE/LEVELS/CRUSADE/CASTLE/CASTLE_A/CASTLE_A_PC.GSC": "568a8664338224d856730f0f2b8aae2fa928d2b3ee7b577260b2581b59d124c9",
@@ -25,6 +25,7 @@
     "GAME/STUFF/LEGAL/PC/LEGAL_US_PC.GSC": "0e16883d17c5152f060852178170dfa3ece13af111784ffc75bf5896e71e8e85",
     "GAME/STUFF/TEXT/AMERICAN.TXT": "b8771ea6871430395c44ca54d4bd02bfa6ee52e94667c365d00f20f3ecdbc2cd",
     "GAME/STUFF/TEXT/AMERICAN_CREDITS.TXT": "a6af41b5b4c0bad3268c94dfaf2603bdb5707a3882d2064cda23cdeb02d23ea9",
+    "GAME/STUFF/TEXT/BUTTONS_PC_PC.FNT": "cbb0e4bc16156e7ee63ee5bbcc8b08dfd08bc3903589c1be0d1df1a874901b25",
     "GAME/STUFF/TEXT/ENGLISH.TXT": "ab520f2a283326f9266eb586d716f5e58fdd54e7e9cc7feddb3b430a1ca0b603",
     "GAME/STUFF/TEXT/ENGLISH_CREDITS.TXT": "63dccba8b15f4d49e9282231fd59b28bcc0a1cf7f4d40595b8db588b44c9ae4c",
     "GAME/STUFF/TEXT/FONT2_PC.FNT": "e9b3baed4640e9595ae6ca7ed6cdc2c7562935b15608508a152b05ebdf920e65",
@@ -32,5 +33,8 @@
     "GAME/STUFF/TEXT/PC_ENGLISH_CREDITS.TXT": "b57e22448409ffff77fbba90a54455535350f1b29700d81a6b8f0a5792cacc0d",
     "GAME/STUFF/TEXT/PC_FONT_PC.FNT": "6f3d395fbc5be1a7c2086b23b51e2035e854a21222878d831de5b842598093e2",
     "GAME/STUFF/TEXT/TRC.CSV": "544e99873373b20f0046d37a00e0e0b3cdf184aeb92070425ea91a4196e0ddd9"
+  },
+  "lsw3_files": {
+    "GAME/FRAMEWORK-DATA/GUI/FONT/BUTTONS_PC_NXG.FT2": "d3ed8fcdbe5d9c1bd9d9bb742fdf7ba077e2d32ca09aa4676b7f126ed0b72a13"
   }
 }

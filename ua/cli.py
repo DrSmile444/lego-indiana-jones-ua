@@ -6,6 +6,7 @@
   build --native          also build and smoke-test the ASI in build/native/asi/
   build --release X.Y.Z   also build the ASI and the release ZIP in dist/
   extract --game DIR      unpack the needed files from Steam DAT archives into game/
+  extract --lsw3 DIR      unpack the 2x button icons from LEGO Star Wars III into game/LSW3/
   install --game DIR      install a release ZIP with backups
   install --test-mode     install the build/ output plus scripts/UKRAINIAN.test.ini (live tests)
   uninstall --game DIR    restore the state recorded by install
@@ -17,6 +18,7 @@
 from __future__ import annotations
 
 import argparse
+import os
 import sys
 from pathlib import Path
 
@@ -44,7 +46,13 @@ def _build(args) -> int:
 
 def _extract(args) -> int:
     from .pipeline import extract
-    extract.extract(args.game, everything=args.all, force=args.force)
+    lsw3 = args.lsw3 or (Path(os.environ["UA_LSW3_GAME"]) if os.environ.get("UA_LSW3_GAME") else None)
+    if not (args.game or lsw3):
+        raise UaError("extract needs --game, --lsw3 or both")
+    if args.game:
+        extract.extract(args.game, everything=args.all, force=args.force)
+    if lsw3:
+        extract.extract_lsw3(lsw3)
     say(f"Extracted and verified into {paths.GAME}")
     return 0
 
@@ -118,7 +126,8 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--native", action="store_true", help="also build and smoke-test UKRAINIAN.asi")
     p.set_defaults(func=_build)
     p = sub.add_parser("extract", help="extract needed game files into game/")
-    p.add_argument("--game", type=Path, required=True)
+    p.add_argument("--game", type=Path)
+    p.add_argument("--lsw3", type=Path, help="LEGO Star Wars III Steam folder (default: UA_LSW3_GAME)")
     p.add_argument("--all", action="store_true", help="extract complete DAT archives")
     p.add_argument("--force", action="store_true", help="replace different content in game/")
     p.set_defaults(func=_extract)

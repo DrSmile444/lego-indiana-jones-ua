@@ -7,7 +7,8 @@ Inputs (see manifests/inputs.json and docs/setup.md):
           (local/donors/) + assets/fonts/font2/overrides.json
 The scripts in tools/fonts/ do the actual work; this module runs them in order. Then
 font_hd.py draws every glyph of both fonts again at four times the resolution and adds
-the atlases UKRAINIAN/FONT_HD.DDS and UKRAINIAN/FONT2_HD.DDS.
+the atlases UKRAINIAN/FONT_HD.DDS and UKRAINIAN/FONT2_HD.DDS; buttons_hd.py adds the button
+icons at four times the resolution (BUTTONS_PC_PC.FNT and UKRAINIAN/BUTTONS_HD.DDS).
 Intermediates and results live in build/fonts/.
 """
 from __future__ import annotations
@@ -22,7 +23,7 @@ from PIL import Image
 from .. import paths
 from ..formats.fnt import FntFile
 from ..util import UaError, say
-from . import font_hd
+from . import buttons_hd, font_hd
 
 FONT_TOOLS = paths.REPO / "tools/fonts"
 WORK = paths.BUILD / "fonts"
@@ -46,7 +47,7 @@ def _prepare_font1_atlas() -> None:
 
 
 def build() -> dict[str, bytes]:
-    """Return {resource path in UAP: bytes} for all seven FNT files."""
+    """Return {resource path in UAP: bytes} for all seven FNT files, the button font and the HD atlases."""
     WORK.mkdir(parents=True, exist_ok=True)
     say("  Font 1: donor atlas -> Franklin Gothic glyphs -> DXT5 -> FNT")
     _prepare_font1_atlas()
@@ -74,4 +75,9 @@ def build() -> dict[str, bytes]:
     for name in paths.FONT2_FILES:
         result[f"{paths.TEXT_DIR}/{name}"] = font2
     result[font_hd.HD2_RESOURCE] = hd2
+    say("  Buttons: LEGO Star Wars III icon art, x4 atlas")
+    buttons, hd3, _ = buttons_hd.build(paths.game_file(buttons_hd.RESOURCE).read_bytes(), buttons_hd.source(),
+                                       buttons_hd.art())
+    result[buttons_hd.RESOURCE] = buttons
+    result[buttons_hd.HD_RESOURCE] = hd3
     return result

@@ -49,6 +49,25 @@
       ]
     },
     {
+      "id": "realesrgan",
+      "path": null,
+      "file": "realesrgan-ncnn-vulkan.exe + models/realesr-animevideov3-x4",
+      "source": "https://github.com/xinntao/Real-ESRGAN (realesrgan-ncnn-vulkan release). Folder from UA_REALESRGAN; only tools/fonts/upscale_buttons.py runs it.",
+      "license": "BSD-3-Clause (Xintao Wang)",
+      "levels": [
+        "tools: button icons"
+      ]
+    },
+    {
+      "id": "buttons-x4",
+      "path": "local/buttons/BUTTONS_PC_NXG_X4.png",
+      "sha256": "214dd7bd0bcf8eda61e4f8e45987f746a116c138d10427a1d5e8464a48b511cb",
+      "source": "tools/fonts/upscale_buttons.py: the LEGO Star Wars III button font in game/LSW3/ enlarged four times with Real-ESRGAN. Derived from game art, so it stays in local/.",
+      "levels": [
+        "build: buttons"
+      ]
+    },
+    {
       "id": "msvc",
       "path": null,
       "source": "Visual Studio 2022 Build Tools: MSVC x86 + Windows 10/11 SDK",

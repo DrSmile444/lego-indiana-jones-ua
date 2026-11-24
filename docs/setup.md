@@ -143,6 +143,20 @@ python -m pytest
    їхні SHA-256 і перевіряє, що DAT та EXE до й після не змінилися.
    `--all` розпаковує архіви повністю (кілька ГБ; потрібно для каталогу текстур).
 
+4. Іконки кнопок геймпада беруться з LEGO Star Wars III: The Clone Wars
+   (та сама графіка студії, удвічі більша) і збільшуються Real-ESRGAN:
+
+   ```powershell
+   python -m ua extract --lsw3 "<тека LEGO Star Wars III>"
+   python tools/fonts/upscale_buttons.py
+   ```
+
+   Перша команда бере шрифт кнопок у `game/LSW3/`. Друга потребує
+   [realesrgan-ncnn-vulkan](https://github.com/xinntao/Real-ESRGAN) у теці зі
+   змінної `UA_REALESRGAN` (типово `E:\AI-Tools\Real-ESRGAN-Full`) і пише
+   `local/buttons/BUTTONS_PC_NXG_X4.png`. Очікуваний SHA-256 — у
+   `manifests/inputs.json`. Подробиці — у [research/buttons.md](research/buttons.md).
+
 ### 4.2. Донори й шрифти
 
 | Файл у `local/` | Що це | Де взяти |

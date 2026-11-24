@@ -43,7 +43,7 @@ def build_uap(level: str) -> tuple[bytes, list[str], str]:
         say("Level 1: rebuilding fonts and textures from game/ and local/")
         built = fonts.build()
         present = {name for name, _ in resources}
-        added = [(n, d) for n, d in built.items() if n.startswith("UKRAINIAN/") and n not in present]
+        added = [(n, d) for n, d in built.items() if n not in present]  # HD atlases, button font
         resources = _replace(resources, {n: d for n, d in built.items() if n in present}) + added
         texture_resources, differences = textures.build()
         resources = _replace(resources, dict(texture_resources))

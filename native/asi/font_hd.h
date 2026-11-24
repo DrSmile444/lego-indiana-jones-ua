@@ -1,7 +1,8 @@
-// High-resolution fonts. The package carries UKRAINIAN/FONT_HD.DDS (Font 1) and
-// UKRAINIAN/FONT2_HD.DDS (Font 2): each font atlas drawn k times larger, DXT5 with a full
-// mip chain. The FNT files keep their original atlas size and metrics; their DDS header holds
-// "UAHD", k and the atlas slot (0 = Font 1, 1 = Font 2) in dwReserved1[0..2]. The game loads
+// High-resolution fonts. The package carries UKRAINIAN/FONT_HD.DDS (Font 1),
+// UKRAINIAN/FONT2_HD.DDS (Font 2) and UKRAINIAN/BUTTONS_HD.DDS (button icons): each font atlas
+// drawn k times larger, DXT5 with a full mip chain. The FNT files keep their original atlas size
+// and metrics; their DDS header holds "UAHD", k and the atlas slot (0 = Font 1, 1 = Font 2,
+// 2 = buttons) in dwReserved1[0..2]. The game loads
 // font atlases with D3DXCreateTextureFromFileInMemory(Ex). When the source DDS has that mark
 // and k times its size equals the slot's atlas, the plugin hands D3DX the large atlas instead
 // and reports the original size in D3DXIMAGE_INFO and in GetLevelDesc of that texture
@@ -26,7 +27,7 @@ typedef HRESULT(WINAPI *FontCreate_t)(IDirect3DDevice9 *, const void *, UINT, ID
 static const char FONT_HD_DLL[] = "d3dx9_35.dll";
 static const UINT D3DX_DEFAULT_VALUE = (UINT)-1;  // D3DX_DEFAULT
 struct FontHdAtlas { const char *path; const BYTE *dds; UINT size, width, height; };
-static FontHdAtlas font_hd[] = {{"UKRAINIAN/FONT_HD.DDS"}, {"UKRAINIAN/FONT2_HD.DDS"}};
+static FontHdAtlas font_hd[] = {{"UKRAINIAN/FONT_HD.DDS"}, {"UKRAINIAN/FONT2_HD.DDS"}, {"UKRAINIAN/BUTTONS_HD.DDS"}};
 static const UINT FONT_HD_SLOTS = sizeof(font_hd) / sizeof(font_hd[0]);
 static FontCreateEx_t font_real_create_ex;
 static FontCreate_t font_real_create;
@@ -95,7 +96,7 @@ static HRESULT WINAPI FontCreateEx(IDirect3DDevice9 *device, const void *data, U
         }
         if (SUCCEEDED(hr)) {
             if (info) { info->Width = small_w; info->Height = small_h; info->MipLevels = small_levels ? small_levels : 1; }
-            if (InterlockedIncrement(&font_hd_hits) <= 4) {
+            if (InterlockedIncrement(&font_hd_hits) <= 8) {
                 char message[200];
                 sprintf_s(message, "FONT HD: %s %ux%u x%u texture for the %ux%u font atlas (format %d, pool %d).",
                           atlas->path, atlas->width, atlas->height, k, small_w, small_h, (int)format, (int)pool);
