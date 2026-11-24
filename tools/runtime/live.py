@@ -6,6 +6,7 @@ the plugin then runs the game borderless and saves frames on request.
   python tools/runtime/live.py start
   python tools/runtime/live.py keys ENTER DOWN DOWN ENTER     # key presses (virtual keyboard, no focus)
   python tools/runtime/live.py hold W 2                      # hold a key for 2 seconds
+  python tools/runtime/live.py pad A B                        # gamepad presses (VirtualPad=1 in the test ini)
   python tools/runtime/live.py shot main-menu                # -> build/screens/main-menu.png
   python tools/runtime/live.py log
   python tools/runtime/live.py stop
@@ -37,6 +38,9 @@ SCAN = {"ESC": 0x01, "ENTER": 0x1C, "SPACE": 0x39, "UP": 0xC8, "DOWN": 0xD0, "LE
         "TAB": 0x0F, "BACK": 0x0E, "Z": 0x2C, "X": 0x2D, "C": 0x2E, "V": 0x2F, "Q": 0x10, "E": 0x12,
         "F1": 0x3B, "U": 0x16, "H": 0x23, "F2": 0x3C, "M": 0x32, "1": 0x02, "2": 0x03, "3": 0x04, "4": 0x05}
 EXTENDED = {"UP", "DOWN", "LEFT", "RIGHT"}
+# XINPUT_GAMEPAD wButtons of the test-mode virtual pad.
+PAD = {"UP": 0x0001, "DOWN": 0x0002, "LEFT": 0x0004, "RIGHT": 0x0008, "START": 0x0010, "BACK": 0x0020,
+       "LB": 0x0100, "RB": 0x0200, "A": 0x1000, "B": 0x2000, "X": 0x4000, "Y": 0x8000}
 # Test mode feeds keys straight into the game's DirectInput keyboard (VirtualKeys=1),
 # so the game needs no focus. UA_LIVE_FOCUS=1 falls back to SendInput with focus.
 VIRTUAL = os.environ.get("UA_LIVE_FOCUS") != "1"
@@ -130,6 +134,19 @@ def keys(names: list[str], hold: float = 0.12, gap: float = 0.35) -> None:
         time.sleep(gap)
 
 
+def pad(names: list[str], hold: float = 0.15, gap: float = 0.4) -> None:
+    """Press gamepad buttons one after another (WAIT<s> pauses)."""
+    SCREENS.mkdir(parents=True, exist_ok=True)
+    for name in names:
+        if name.startswith("WAIT"):
+            time.sleep(float(name[4:] or 1))
+            continue
+        (SCREENS / "pad.txt").write_text(f"{PAD[name.upper()]:04X}", encoding="ascii")
+        time.sleep(hold)
+        (SCREENS / "pad.txt").write_text("0", encoding="ascii")
+        time.sleep(gap)
+
+
 def hold(name: str, seconds: float) -> None:
     if not VIRTUAL:
         focus()
@@ -192,6 +209,8 @@ def main(argv: list[str]) -> int:
         stop()
     elif command == "keys":
         keys(rest)
+    elif command == "pad":
+        pad(rest)
     elif command == "hold":
         hold(rest[0], float(rest[1]))
     elif command == "shot":

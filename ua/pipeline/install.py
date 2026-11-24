@@ -27,6 +27,8 @@ ScreenshotKey=0x7B
 KeepRunning=1
 ; 1 = keyboard input from scripts/screens/keys.txt (DirectInput scan codes), no focus needed.
 VirtualKeys=1
+; 1 = Xbox 360 pad (DirectInput + XInput) with buttons from scripts/screens/pad.txt (hex wButtons).
+VirtualPad=0
 ; Pretend the system locale is this LCID (0x0409 en-US, 0x0809 en-GB, 0x0422 uk-UA). 0 = off.
 Locale=0
 """
