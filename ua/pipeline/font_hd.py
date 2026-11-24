@@ -76,6 +76,7 @@ class Renderer:
         self.stretch = spec["stretch"]
         self.outline = spec["outline"] * scale
         self.baseline = spec["baseline"]
+        self.marks = spec.get("marks", {})
         self._masks: dict[str, tuple[Image.Image, Image.Image]] = {}
 
     def _probe(self, char: str) -> bytes:
@@ -92,9 +93,21 @@ class Renderer:
         """(fill, outline) coverage at k-scale, one cell tall, ink starting near x = 0."""
         if char in self._masks:
             return self._masks[char]
+        fill, outline = self._draw(char)
+        base = mark_base(char, self.marks)
+        if base:
+            fill, outline = seat_mark([fill, outline], list(self._draw(base, char)), self.k,
+                                      (self.cell_height + 1) * self.k, self.marks, self.outline + 2)
+        result = self._fit_height(fill, outline)
+        self._masks[char] = result
+        return result
+
+    def _draw(self, char: str, like: str | None = None) -> tuple[Image.Image, Image.Image]:
+        """(fill, outline) at k-scale, three cells tall with the cell in the middle; the ink
+        is placed where the ink of `like` (default `char`) starts."""
         ss, k = self.ss, self.k
         stroke = round(self.outline * ss)
-        box = self.font.getbbox(char, anchor="ls", stroke_width=stroke)
+        box = self.font.getbbox(like or char, anchor="ls", stroke_width=stroke)
         width = box[2] - box[0] + 4 * ss
         pad = self.cell_height * k * ss  # a free cell above and below: marks stay whole until fitted
         origin = (2 * ss - box[0], pad + round(self.baseline * k * ss))
@@ -104,10 +117,7 @@ class Renderer:
         ImageDraw.Draw(outline).text(origin, char, font=self.font, fill=255, anchor="ls",
                                      stroke_width=stroke, stroke_fill=255)
         size = (max(1, round(width * self.stretch / ss)), 3 * self.cell_height * k)
-        result = self._fit_height(fill.resize(size, Image.Resampling.LANCZOS),
-                                  outline.resize(size, Image.Resampling.LANCZOS))
-        self._masks[char] = result
-        return result
+        return fill.resize(size, Image.Resampling.LANCZOS), outline.resize(size, Image.Resampling.LANCZOS)
 
     def _fit_height(self, fill: Image.Image, outline: Image.Image) -> tuple[Image.Image, Image.Image]:
         """Crop the cell; marks and descenders it cannot hold are pulled in with one clear row.
@@ -177,6 +187,43 @@ def ink(mask: Image.Image) -> tuple[int, int, int, int]:
 def visible(mask: Image.Image) -> tuple[int, int, int, int] | None:
     """Bounding box of every pixel that shows on screen, soft edges included."""
     return mask.point(lambda v: 255 if v > 16 else 0).getbbox()
+
+
+def mark_base(char: str, marks: dict) -> str:
+    """Base letter of `char` when `char` is listed in the style's "marks" section, else ""."""
+    return unicodedata.normalize("NFD", char)[0] if char in marks.get("chars", "") else ""
+
+
+def seat_mark(full: list[Image.Image], base: list[Image.Image], k: int, limit: int, spec: dict,
+              reach: float = 0.0) -> list[Image.Image]:
+    """Masks of a capital with a mark above it: the base letter whole, the mark resized into the room
+    between row `limit` and the top of the base letter.
+
+    `full` and `base` hold the same masks of the accented glyph and of its base letter, drawn at
+    one origin; the first is the fill, the last bounds the visible ink. The mark is the fill of
+    `full` above the fill of `base`; each further mask keeps its pixels within `reach` pixels of
+    that fill (its outline). The mark keeps its centre, is spec["scale"] as wide and as tall as fits
+    with its fill spec["gap"] x1 px above the base fill."""
+    body = ink(base[0])[1]
+    mark = ImageChops.subtract(full[0], base[0])
+    mark.paste(0, (0, body, mark.width, mark.height))
+    layers = [mark]
+    if full[1:]:
+        near = mark.point(lambda v: 255 if v > 16 else 0).filter(ImageFilter.MaxFilter(2 * math.ceil(reach) + 1))
+        layers += [ImageChops.multiply(m, near) for m in full[1:]]
+    fill, edge = ink(layers[0]), visible(layers[-1])
+    if not fill:
+        return base
+    bottom = body - round(spec["gap"] * k)
+    sy = min(spec["scale"], (bottom - limit) / (fill[3] - edge[1]))
+    size = (max(1, round((edge[2] - edge[0]) * spec["scale"])), max(1, round((edge[3] - edge[1]) * sy)))
+    at = (round((edge[0] + edge[2] - size[0]) / 2), bottom - round((fill[3] - edge[1]) * sy))
+    out = []
+    for b, layer in zip(base, layers):
+        moved = Image.new("L", b.size, 0)
+        moved.paste(layer.crop(edge).resize(size, Image.Resampling.LANCZOS), at)
+        out.append(ImageChops.lighter(b, moved))
+    return out
 
 
 def _share(fill: Image.Image, alpha: Image.Image) -> Image.Image:
@@ -454,6 +501,7 @@ class Adventure:
 
     def __init__(self, spec: dict, k: int, cell: int):
         self.spec, self.k, self.cell_h, self.ss = spec, k, cell, 2
+        self.marks = spec.get("marks", {})
         path = typeface_path(spec["files"])
         probe = ImageFont.truetype(str(path), 400)
         self.probe = ImageFont.truetype(str(path), 100)
@@ -464,22 +512,38 @@ class Adventure:
         self.font = ImageFont.truetype(str(path), round(self.size * k * self.ss))
 
     def fill(self, char: str) -> Image.Image:
-        """Fill mask at k-scale, one cell tall, ink from x = 0."""
-        k, ss = self.k, self.ss
-        pad = self.cell_h * k  # a free cell above: marks stay whole until fitted
-        base = round((self.spec["baseline"] - self.spec["outline"]) * k * ss)
-        box = self.font.getbbox(char, anchor="ls")
-        image = Image.new("L", (box[2] - box[0] + 2 * ss, 2 * pad * ss), 0)
-        ImageDraw.Draw(image).text((ss - box[0], pad * ss + base), char, font=self.font, fill=255, anchor="ls")
-        image = image.resize((max(1, image.width // ss), 2 * pad), Image.Resampling.LANCZOS)
-        top, line = pad + round(self.spec["outline"] * k) + k, pad + base // ss
+        """Fill mask at k-scale, one cell tall, ink from x = 0. Marks above and descenders the cell
+        cannot hold are pulled in, so the outline _paint2 adds stays inside with one clear row."""
+        k, pad = self.k, self.cell_h * self.k
+        image = self._draw(char)
+        top = pad + round(self.spec["outline"] * k) + k
+        bottom = 2 * pad - round(self.spec["outline"] * k) - k
+        line = pad + round((self.spec["baseline"] - self.spec["outline"]) * k)
+        base = mark_base(char, self.marks)
+        if base:
+            image = seat_mark([image], [self._draw(base, char)], k, top, self.marks)[0]
         bbox = visible(image)
-        if bbox and bbox[1] < top:  # marks above capitals stay inside the cell
-            above = image.crop((0, bbox[1], image.width, line))
-            squeezed = above.resize((image.width, line - top), Image.Resampling.LANCZOS)
+        if bbox and bbox[1] < top:
+            above = image.crop((0, bbox[1], image.width, line)).resize((image.width, line - top),
+                                                                       Image.Resampling.LANCZOS)
             image.paste(0, (0, 0, image.width, line))
-            image.paste(squeezed, (0, top))
+            image.paste(above, (0, top))
+        if bbox and bbox[3] > bottom:
+            below = image.crop((0, line, image.width, bbox[3])).resize((image.width, bottom - line),
+                                                                       Image.Resampling.LANCZOS)
+            image.paste(0, (0, line, image.width, image.height))
+            image.paste(below, (0, line))
         return image.crop((0, pad, image.width, 2 * pad))
+
+    def _draw(self, char: str, like: str | None = None) -> Image.Image:
+        """Fill mask at k-scale, three cells tall with the cell in the middle; the ink is placed
+        where the ink of `like` (default `char`) starts."""
+        k, ss, pad = self.k, self.ss, self.cell_h * self.k
+        base = round((self.spec["baseline"] - self.spec["outline"]) * k * ss)
+        box = self.font.getbbox(like or char, anchor="ls")
+        image = Image.new("L", (box[2] - box[0] + 2 * ss, 3 * pad * ss), 0)
+        ImageDraw.Draw(image).text((ss - box[0], pad * ss + base), char, font=self.font, fill=255, anchor="ls")
+        return image.resize((max(1, image.width // ss), 3 * pad), Image.Resampling.LANCZOS)
 
 
 def render2(data: bytes) -> tuple[FntFile, Image.Image, Image.Image, list[str]]:
@@ -515,6 +579,7 @@ def render2(data: bytes) -> tuple[FntFile, Image.Image, Image.Image, list[str]]:
             if not adventure.has(char) or not ink:
                 raise UaError(f"Font 2: the Adventure typeface has no {char!r}")
             w = round((ink[2] - ink[0]) / k + 2 * spec["outline"] + margin)
+            w = max(w, math.ceil((ink[2] - ink[0] + 2 * round(spec["outline"] * k) + 2) / k))  # outline whole
             canvas = Image.new("L", (w * k, cell_h * k), 0)
             canvas.paste(fill, (round((w * k - (ink[2] - ink[0])) / 2) - ink[0], 0))
             cells.append((index, _paint2(canvas, spec, k)))

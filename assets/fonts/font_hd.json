@@ -38,7 +38,19 @@
     ],
     "cap_top": 4,
     "baseline": 45,
-    "scale": 4
+    "scale": 4,
+    "marks": {
+      "_note": "Ukrainian Font 2 capitals whose base letter is drawn whole, as the plain capital, with the mark fill scaled into the room above it: scale is the mark's width share, gap the x1 pixels between its fill and the base letter's fill (_paint2 adds the outline around both).",
+      "chars": "ЙЇ",
+      "scale": 0.8,
+      "gap": 1.0
+    }
   },
-  "tighten": 0.375
+  "tighten": 0.375,
+  "marks": {
+    "_note": "Capitals whose base letter is drawn whole, as the plain capital, with the mark (fill and outline) scaled into the room above it: scale is the mark's width share, gap the x1 pixels between its fill and the base letter's fill; the height is what fits below the clear top row.",
+    "chars": "ЙЇЁÄËÏÖÜŸÂÊÎÔÛÃÑÕ",
+    "scale": 0.8,
+    "gap": 1.0
+  }
 }

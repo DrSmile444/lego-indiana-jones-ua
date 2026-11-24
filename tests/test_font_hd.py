@@ -77,6 +77,29 @@ class FontHdTests(unittest.TestCase):
         for c in "НЕПТ":
             self.assertAlmostEqual(height(c), latin, delta=3 * K, msg=c)
 
+    def test_capitals_with_marks_keep_the_plain_body(self):
+        # fill rows of the drawn glyph: the run that ends on the baseline is the body, the runs above it the mark
+        font1 = font_hd.Renderer(K, {**font_hd.style(), "scale": K}, int(self.one[0].height))
+        font2 = font_hd.Adventure({**font_hd.font2_style(), "scale": K}, K, int(self.two[0].height))
+
+        def runs(fill):
+            rows = "".join("#" if fill.crop((0, y, fill.width, y + 1)).getextrema()[1] > 128 else "."
+                           for y in range(fill.height))
+            return [len(run) for run in rows.split(".") if run]
+
+        for name, fill in (("Font 1", lambda c: font1.masks(c)[0]), ("Font 2", font2.fill)):
+            for accented, plain in (("Й", "И"), ("Ї", "І")):
+                self.assertEqual(runs(fill(accented))[-1], runs(fill(plain))[-1], f"{name} {accented}")
+                self.assertGreaterEqual(len(runs(fill(accented))), 2, f"{name} {accented}: mark joined the body")
+
+    def test_font2_descenders_stay_inside_the_cell(self):
+        # the outline _paint2 adds around the fill keeps one clear row at the bottom of the cell
+        font2 = font_hd.Adventure({**font_hd.font2_style(), "scale": K}, K, int(self.two[0].height))
+        outline = round(font_hd.font2_style()["outline"] * K)
+        for c in "ДЦЩ":
+            fill = font2.fill(c)
+            self.assertLessEqual(font_hd.visible(fill)[3], fill.height - outline - K, c)
+
     def test_font2_file_keeps_size_and_carries_mark(self):
         data, hd, _ = self.packed
         self.assertEqual(len(data), len(FONT2.read_bytes()))
