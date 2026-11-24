@@ -5,7 +5,9 @@ Inputs (see manifests/inputs.json and docs/setup.md):
           + Franklin Gothic Medium (local/fonts/) + assets/fonts/font1/overrides.json
   Font 2: original game FONT2_PC.FNT (game/GAME/STUFF/TEXT/) + fan font "Adventure"
           (local/donors/) + assets/fonts/font2/overrides.json
-The scripts in tools/fonts/ do the actual work; this module runs them in order.
+The scripts in tools/fonts/ do the actual work; this module runs them in order. Then
+font_hd.py draws every glyph of both fonts again at four times the resolution and adds
+the atlases UKRAINIAN/FONT_HD.DDS and UKRAINIAN/FONT2_HD.DDS.
 Intermediates and results live in build/fonts/.
 """
 from __future__ import annotations
@@ -20,6 +22,7 @@ from PIL import Image
 from .. import paths
 from ..formats.fnt import FntFile
 from ..util import UaError, say
+from . import font_hd
 
 FONT_TOOLS = paths.REPO / "tools/fonts"
 WORK = paths.BUILD / "fonts"
@@ -61,4 +64,14 @@ def build() -> dict[str, bytes]:
             if not path.exists():
                 raise UaError(f"Font build did not produce {path}")
             result[f"{paths.TEXT_DIR}/{name}"] = path.read_bytes()
+    say("  Font 1: every glyph drawn again from the typeface, x4 atlas")
+    font1, hd, _ = font_hd.compose(result[f"{paths.TEXT_DIR}/{paths.FONT1_FILES[0]}"])
+    for name in paths.FONT1_FILES:
+        result[f"{paths.TEXT_DIR}/{name}"] = font1
+    result[font_hd.HD_RESOURCE] = hd
+    say("  Font 2: game shapes and Adventure letters drawn again, x4 atlas")
+    font2, hd2, _ = font_hd.compose2(result[f"{paths.TEXT_DIR}/{paths.FONT2_FILES[0]}"])
+    for name in paths.FONT2_FILES:
+        result[f"{paths.TEXT_DIR}/{name}"] = font2
+    result[font_hd.HD2_RESOURCE] = hd2
     return result

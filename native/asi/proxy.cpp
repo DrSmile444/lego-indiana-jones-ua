@@ -85,6 +85,7 @@ struct Entry { DWORD id; const char *text; };
 
 #ifdef UAP_EXPERIMENT
 #include "overlay.h"
+#include "font_hd.h"
 #endif
 
 #ifdef FONT_UPSCALE_EXPERIMENT
@@ -111,6 +112,7 @@ static void TranslatePcTables() {
     BYTE *base = (BYTE *)GetModuleHandleW(NULL);
 #ifdef UAP_EXPERIMENT
     if (!InitializeUap(base)) return;
+    InitializeFontHd();
     const char *const *translated = uap_pc_strings;
 #else
     const char *const *translated = ukrainian_text;

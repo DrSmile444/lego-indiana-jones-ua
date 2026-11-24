@@ -1,0 +1,44 @@
+{
+  "_note": "Typeface and style of Font 1 (PC_FONT_PC.FNT and its aliases), fitted to its English glyphs. Sizes are in 1x atlas pixels; baseline is the pixel row inside the 48-pixel cell; scale is the atlas resolution factor. files: typeface file names in search order. tighten: each Latin glyph drawn from the typeface gets the side bearings of the game glyph less this many pixels, so the sharp glyphs keep the visual spacing of the game's soft-edged ones.",
+  "typeface": "Franklin Gothic Medium",
+  "files": [
+    "Franklin Gothic Medium Regular.ttf",
+    "framd.ttf"
+  ],
+  "size": 48.0,
+  "stretch": 1.0,
+  "outline": 3.0,
+  "baseline": 38,
+  "scale": 4,
+  "font2": {
+    "_note": "Font 2 (FONT2_PC.FNT and its aliases). gradient: [cell row, R, G, B] at the top and the bottom of the fill, measured on the game's capitals. cap_top and baseline bound the outlined capitals in the 50-pixel cell.",
+    "typeface": "Adventure",
+    "files": [
+      "Adventure_Indiana_Jones.ttf"
+    ],
+    "outline": 2.0,
+    "outline_colour": [
+      23,
+      13,
+      2
+    ],
+    "gradient": [
+      [
+        5,
+        238,
+        72,
+        15
+      ],
+      [
+        41,
+        244,
+        191,
+        33
+      ]
+    ],
+    "cap_top": 4,
+    "baseline": 45,
+    "scale": 4
+  },
+  "tighten": 0.375
+}
