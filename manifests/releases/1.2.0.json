@@ -1,25 +1,25 @@
 {
-  "version": "1.1.11",
+  "version": "1.2.0",
   "date": "2026-11-24",
-  "archive": "lego-indiana-jones-ua-1.1.11.zip",
-  "archive_size": 4924890,
-  "archive_sha256": "8227399a8fa27b47a84d6279fb16d1a8d36dc84ca04d56cf05589111fe298dec",
+  "archive": "lego-indiana-jones-ua-1.2.0.zip",
+  "archive_size": 5070991,
+  "archive_sha256": "14547c66e4e742f99686385ae2092b67458f9d953bc4924190fc342684ea6c11",
   "files": {
     "dinput8.dll": {
       "size": 2407648,
       "sha256": "ec2f4824eca58dd40f425756a4a7cec77b8e381f21d11d7c846ec4b339b617ab"
     },
     "scripts/UKRAINIAN.asi": {
-      "size": 139776,
-      "sha256": "38f67234c861aae9fc208823fe780416f4969c6b499f711dca9434a901511e8e"
+      "size": 144896,
+      "sha256": "332124abc1805e81e76de361cf49952491400cffc8f0fb748b8a9fc3dd7b104f"
     },
     "scripts/UKRAINIAN.uap": {
-      "size": 51368357,
-      "sha256": "3e143dc02163dabe555d320f4cb39ab97172ddafa8fb326341b8d342139d0965"
+      "size": 52113113,
+      "sha256": "b70e2c2312ada204d43fcd3c2cc4952321c441b71f77be302926bc717505fa34"
     },
     "scripts/UKRAINIAN/README.txt": {
-      "size": 2582,
-      "sha256": "078217f557ad913267d4da574ddb65d153a1cb98d2fe8d2a6cc6aac12aedb11c"
+      "size": 2581,
+      "sha256": "349f48a0f14f99407260380a18f49a7466129d498a4bda47cf241debbb8c4f8f"
     },
     "scripts/UKRAINIAN/LICENSE.txt": {
       "size": 22464,
@@ -52,7 +52,9 @@
     "UKRAINIAN/TEXTURES/D3642A1486EE5B78350CA822A9D61EFD56FACEBB2376E0B39478C2A1866DACE1.DDS",
     "STUFF/TEXT/AMERICAN.TXT",
     "UKRAINIAN/FONT_HD.DDS",
-    "UKRAINIAN/FONT2_HD.DDS"
+    "UKRAINIAN/FONT2_HD.DDS",
+    "STUFF/TEXT/BUTTONS_PC_PC.FNT",
+    "UKRAINIAN/BUTTONS_HD.DDS"
   ],
   "supported_exe_sha256": "c12f7348ec63aed61f56eb15d825f15b8340500668fa8c8dcf06c2f332e5e5fd",
   "loader": {

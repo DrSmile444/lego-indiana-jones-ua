@@ -6,11 +6,11 @@ Defines how localization releases are versioned, packaged, published and announc
 ## Requirements
 
 ### Requirement: Version scheme
-Public releases SHALL be numbered `1.1.X`. The first public release SHALL be 1.1.10. Versions 0.1.x SHALL remain in the changelog as research releases.
+Public releases SHALL be numbered `1.X.Y`. The first public release SHALL be 1.1.10; a release with new features raises X, a release with fixes only raises Y. Versions 0.1.x SHALL remain in the changelog as research releases.
 
 #### Scenario: Next update
-- **WHEN** a fix ships after 1.1.10
-- **THEN** it is numbered 1.1.11
+- **WHEN** the x4 fonts and button icons ship after 1.1.10
+- **THEN** the release is numbered 1.2.0
 
 ### Requirement: Package content
 The release ZIP SHALL contain exactly `dinput8.dll` (Ultimate ASI Loader, unchanged), `scripts/UKRAINIAN.asi`, `scripts/UKRAINIAN.uap`, `scripts/UKRAINIAN/README.txt`, `scripts/UKRAINIAN/LICENSE.txt` and `scripts/UKRAINIAN/LICENSE-ASI-Loader.txt`, and SHALL NOT contain saves, logs or test settings.
