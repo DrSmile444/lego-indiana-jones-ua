@@ -123,6 +123,8 @@ engine runs as usual. The log is written to `scripts/legoindy-ua-pc.log`.
 | `native/asi/texture_buffer.h` | finding DDS in a buffer, pixel hashing, copying the Ukrainian DDS |
 | `native/asi/custom_names.h` | character editor adapters and the default-name formatter for «Форелька»/«Льоля» |
 | `native/asi/custom_name_utf8.h` | selecting a whole UTF-8 letter for a name cell |
+| `native/asi/test_mode.h` | test mode only: borderless window, frame capture, work without focus, virtual keys |
+| `native/asi/font_hd.h` | x4 atlases for Font 1 and Font 2: hooks `D3DXCreateTextureFromFileInMemory(Ex)` and `GetLevelDesc` |
 | `native/asi/practice_cutscenes.h` | test mode for auto-completing cutscenes; tests only, not in the release |
 | `native/asi/generate_strings.py` | generates the PC-menu C strings and addresses from `translations/pc_menu_ua.json` and `pc_menu_table.json` |
 | `native/asi/pc_menu_table.json` | the verified table of the EXE's PC strings: addresses and the original English strings |
@@ -154,6 +156,7 @@ engine runs as usual. The log is written to `scripts/legoindy-ua-pc.log`.
 | `ua/pipeline/text.py` | text level: JSON → TXT/CSV/credits/PC menu on top of the template |
 | `ua/pipeline/extract.py` | extraction from DAT via QuickBMS and the `game-files.json` check |
 | `ua/pipeline/fonts.py` | full level: Font 1 and Font 2 using `tools/fonts/` |
+| `ua/pipeline/font_hd.py` | Font 1 and Font 2 drawn k times larger: atlases `UKRAINIAN/FONT_HD.DDS` and `FONT2_HD.DDS` |
 | `ua/pipeline/textures.py` | full level: 9 DDS from PNG layers, re-encoding only changed blocks |
 | `ua/pipeline/package.py` | reproducible six-file ZIP |
 | `ua/pipeline/install.py` | installation with backup, rollback, static verification |

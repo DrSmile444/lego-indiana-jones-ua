@@ -118,6 +118,8 @@ scripts/UKRAINIAN/LICENSE-ASI-Loader.txt  повідомлення loader-а т�
 | `native/asi/overlay.h` | читання й перевірка UAP, detour-и ресурсних функцій, memory streams, корекція розміру, перехоплення цілого файла для CSV |
 | `native/asi/textures.h` | detour функції читання ресурсу для підміни DDS |
 | `native/asi/texture_buffer.h` | пошук DDS у буфері, хеш пікселів, копіювання українського DDS |
+| `native/asi/test_mode.h` | лише тестовий режим: вікно без рамки, знімки кадрів, робота без фокусу, віртуальні клавіші |
+| `native/asi/font_hd.h` | атласи x4 для Font 1 і Font 2: хук `D3DXCreateTextureFromFileInMemory(Ex)` і `GetLevelDesc` |
 | `native/asi/custom_names.h` | адаптери редактора персонажів і форматер початкових імен «Форелька»/«Льоля» |
 | `native/asi/custom_name_utf8.h` | вибір цілої UTF-8 літери для комірки імені |
 | `native/asi/practice_cutscenes.h` | тестовий режим автозавершення катсцен; лише в тестах, у реліз не входить |
@@ -151,6 +153,7 @@ scripts/UKRAINIAN/LICENSE-ASI-Loader.txt  повідомлення loader-а т�
 | `ua/pipeline/text.py` | текстовий рівень: JSON → TXT/CSV/титри/PC-меню поверх шаблону |
 | `ua/pipeline/extract.py` | видобування з DAT через QuickBMS і перевірка `game-files.json` |
 | `ua/pipeline/fonts.py` | повний рівень: Font 1 і Font 2 за допомогою `tools/fonts/` |
+| `ua/pipeline/font_hd.py` | Font 1 і Font 2 у k разів більші: атласи `UKRAINIAN/FONT_HD.DDS` і `FONT2_HD.DDS` |
 | `ua/pipeline/textures.py` | повний рівень: 9 DDS з PNG-шарів, перекодування лише змінених блоків |
 | `ua/pipeline/package.py` | відтворюваний ZIP із шести файлів |
 | `ua/pipeline/install.py` | встановлення з резервною копією, відкат, статична перевірка |

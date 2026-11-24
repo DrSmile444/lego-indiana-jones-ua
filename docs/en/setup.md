@@ -213,6 +213,42 @@ package contains exactly six files: the loader, `UKRAINIAN.asi`,
 overwritten. A published release becomes the baseline for the next text
 update via `manifests/baseline.json`.
 
+## 7. Live check: test mode
+
+```powershell
+python -m ua build --native
+python -m ua install --game "<game folder>" --test-mode
+$env:UA_STEAM_GAME = "<game folder>"
+python tools/runtime/live.py start
+python tools/runtime/live.py shot main-menu        # -> build/screens/main-menu.png
+python tools/runtime/live.py keys ENTER DOWN       # key presses without focus
+python tools/runtime/live.py hold W 2              # hold a key for 2 s
+python tools/runtime/live.py log
+python tools/runtime/live.py stop
+python -m ua uninstall --game "<game folder>"
+```
+
+`install --test-mode` installs the current `build/` output (without
+`--package`) and adds `scripts/UKRAINIAN.test.ini`. This file is for
+development only: it is not part of the player package, and without it the
+plugin turns on nothing from test mode. Settings of the `[Test]` section:
+
+- `Borderless=1` — a borderless window over the whole monitor instead of exclusive fullscreen;
+- `KeepRunning=1` — the game updates and renders in the background. The window
+  procedure `0x5205C0` writes 0 to the active flag `[0x921B00]` on
+  `WM_KILLFOCUS` and on an inactive `WM_ACTIVATE`/`WM_ACTIVATEAPP`; after a byte
+  check the plugin changes that value to 1;
+- `VirtualKeys=1` — keyboard input from `scripts/screens/keys.txt` (DirectInput
+  scan codes). The game sees real key presses only in the foreground, so typing
+  in other windows does not reach it;
+- `ScreenshotKey=0x7B` — F12 saves a frame to `scripts/screens/`;
+- `Locale=0x0409` — the game sees this system locale (0 = off).
+
+`live.py shot` asks the plugin to save the next frame from the Direct3D back
+buffer, so a capture contains only the game, never the desktop. Turn off other
+ASI mods that also change the window or focus while you test. `uninstall`
+removes the ini and the `scripts/screens/` folder.
+
 ## Common problems
 
 | Symptom | Cause and fix |

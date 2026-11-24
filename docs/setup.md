@@ -201,6 +201,42 @@ python -m ua build --release 1.1.10
 Наявний реліз не перезаписується. Опублікований реліз стає базою для наступного
 текстового оновлення через `manifests/baseline.json`.
 
+## 7. Жива перевірка: тестовий режим
+
+```powershell
+python -m ua build --native
+python -m ua install --game "<тека гри>" --test-mode
+$env:UA_STEAM_GAME = "<тека гри>"
+python tools/runtime/live.py start
+python tools/runtime/live.py shot main-menu        # -> build/screens/main-menu.png
+python tools/runtime/live.py keys ENTER DOWN       # натискання без фокуса
+python tools/runtime/live.py hold W 2              # тримати клавішу 2 с
+python tools/runtime/live.py log
+python tools/runtime/live.py stop
+python -m ua uninstall --game "<тека гри>"
+```
+
+`install --test-mode` ставить поточний вивід `build/` (без `--package`) і
+додає `scripts/UKRAINIAN.test.ini`. Цей файл лише для розробки: до пакета
+гравця він не входить, а без нього плагін нічого з тестового режиму не вмикає.
+Параметри секції `[Test]`:
+
+- `Borderless=1` — вікно без рамки на весь монітор замість ексклюзивного повного екрана;
+- `KeepRunning=1` — гра оновлюється й малює кадри у фоні. Віконна процедура
+  `0x5205C0` на `WM_KILLFOCUS` і неактивних `WM_ACTIVATE`/`WM_ACTIVATEAPP`
+  записує 0 у прапорець активності `[0x921B00]`; плагін після перевірки байтів
+  змінює це значення на 1;
+- `VirtualKeys=1` — клавіатура з `scripts/screens/keys.txt` (скан-коди
+  DirectInput). Справжні натискання гра бачить лише на передньому плані, тож
+  набір в інших вікнах до неї не доходить;
+- `ScreenshotKey=0x7B` — F12 зберігає кадр у `scripts/screens/`;
+- `Locale=0x0409` — гра бачить цю мову системи (0 — вимкнено).
+
+`live.py shot` просить плагін зберегти наступний кадр із бекбуфера Direct3D,
+тож знімок містить лише гру, без робочого столу. Інші ASI-моди, які теж
+змінюють вікно чи фокус, на час перевірки краще вимкнути. `uninstall`
+прибирає ini й теку `scripts/screens/`.
+
 ## Типові проблеми
 
 | Симптом | Причина й рішення |
