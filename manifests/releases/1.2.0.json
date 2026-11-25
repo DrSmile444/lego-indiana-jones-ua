@@ -1,9 +1,9 @@
 {
   "version": "1.2.0",
-  "date": "2026-11-24",
+  "date": "2026-11-25",
   "archive": "lego-indiana-jones-ua-1.2.0.zip",
-  "archive_size": 5070991,
-  "archive_sha256": "14547c66e4e742f99686385ae2092b67458f9d953bc4924190fc342684ea6c11",
+  "archive_size": 5070534,
+  "archive_sha256": "63341a7cc01583a37def5c12d91753c843932d1ef876deb552ec650b752693e0",
   "files": {
     "dinput8.dll": {
       "size": 2407648,
@@ -15,7 +15,7 @@
     },
     "scripts/UKRAINIAN.uap": {
       "size": 52113113,
-      "sha256": "b70e2c2312ada204d43fcd3c2cc4952321c441b71f77be302926bc717505fa34"
+      "sha256": "89c7baf8cbce4933ee516e47f7cae0523ef746daa5606fca75316a0c5ba62401"
     },
     "scripts/UKRAINIAN/README.txt": {
       "size": 2581,
