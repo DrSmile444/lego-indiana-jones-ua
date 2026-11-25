@@ -40,6 +40,8 @@ def _run(script: str, *args: str) -> None:
 def _prepare_font1_atlas() -> None:
     """Slice the donor DDS chunk and decode its mip 0 — the Font 1 painting canvas."""
     donor = paths.DONORS / "cyrillic-font-patch/PC_FONT_PC.FNT"
+    if not donor.exists():
+        raise UaError(f"{donor} not found; see docs/setup.md")
     font = FntFile(str(donor))
     chunk = bytes(font.data[font.dds_offset:])
     (WORK / "pcfont_0.dds").write_bytes(chunk)
