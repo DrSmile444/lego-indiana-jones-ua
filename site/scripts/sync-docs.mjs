@@ -662,8 +662,17 @@ function findZipName(obj) {
   return found;
 }
 
+// Versions the changelog marks "не випущено" have a local manifest but no GitHub release yet.
+function unreleasedVersions() {
+  const file = path.join(REPO_DIR, 'CHANGELOG.md');
+  if (!fs.existsSync(file)) return new Set();
+  const heads = fs.readFileSync(file, 'utf8').matchAll(/^##\s+v?(\d+\.\d+\.\d+)\s*[—-]\s*не випущено/gm);
+  return new Set([...heads].map((m) => m[1]));
+}
+
 function syncRelease() {
   const dir = path.join(REPO_DIR, 'manifests', 'releases');
+  const unreleased = unreleasedVersions();
   const candidates = [];
   if (fs.existsSync(dir)) {
     for (const name of fs.readdirSync(dir)) {
@@ -675,6 +684,7 @@ function syncRelease() {
           warn(`manifests/releases/${name}: не вдалося визначити версію`);
           continue;
         }
+        if (unreleased.has(version)) continue;
         candidates.push({ version, asset: (typeof json.archive === 'string' ? json.archive : findZipName(json)) ?? `lego-indiana-jones-ua-${version}.zip` });
       } catch (e) {
         fail(`manifests/releases/${name} не розбирається: ${e.message}`);
