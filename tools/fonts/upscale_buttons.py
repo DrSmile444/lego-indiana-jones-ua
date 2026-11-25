@@ -8,13 +8,16 @@ The SHA-256 of each output goes to manifests/inputs.json by hand after a check.
 
 Each glyph is upscaled alone, with a transparent border, so no ink runs into the next cell;
 the colour under transparent pixels is the nearest ink colour, so edges get no dark fringe.
-Tool: realesrgan-ncnn-vulkan, model realesr-animevideov3, scale 4; folder from UA_REALESRGAN
-(default E:\\AI-Tools\\Real-ESRGAN-Full). It is third-party and stays outside the repository.
+The round face buttons (A B X Y) then get their letter centred in the circle and a clean
+round edge (round_button). Settings: assets/fonts/buttons.json.
+Tool: realesrgan-ncnn-vulkan; folder from UA_REALESRGAN (default E:\\AI-Tools\\Real-ESRGAN-Full).
+It is third-party and stays outside the repository.
 """
 from __future__ import annotations
 
 import hashlib
 import io
+import json
 import os
 import struct
 import subprocess
@@ -22,18 +25,19 @@ import sys
 import tempfile
 from pathlib import Path
 
-from PIL import Image, ImageChops, ImageFilter
+from PIL import Image, ImageChops, ImageDraw, ImageFilter
 
 REPO = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(REPO))
 from ua import paths  # noqa: E402
 
 TOOL = Path(os.environ.get("UA_REALESRGAN", r"E:\AI-Tools\Real-ESRGAN-Full"))
-MODEL = "realesr-animevideov3"
-SCALE = 4
-MARGIN = 3  # px left and right of each glyph cell that may hold its ink (2x atlas)
-BORDER = 8  # transparent px around each glyph before upscaling
-FAINT = 6  # alpha at or below this after upscaling is noise and becomes 0
+CONFIG = json.loads((paths.ASSETS / "fonts" / "buttons.json").read_text(encoding="utf-8"))
+UPSCALE, ROUND = CONFIG["upscale"], CONFIG["round"]
+MODEL, SCALE = UPSCALE["model"], UPSCALE["scale"]
+MARGIN = UPSCALE["margin"]  # px left and right of each glyph cell that may hold its ink (2x atlas)
+BORDER = UPSCALE["border"]  # transparent px around each glyph before upscaling
+FAINT = UPSCALE["faint_alpha"]  # alpha at or below this after upscaling is noise and becomes 0
 FONTS = ("BUTTONS_PC_NXG.FT2",)
 SOURCE = paths.GAME / "LSW3" / "GAME" / "FRAMEWORK-DATA" / "GUI" / "FONT"
 OUTPUT = paths.LOCAL / "buttons"
@@ -67,6 +71,37 @@ def bleed(image: Image.Image) -> Image.Image:
         known = reach
     out = rgb.copy()
     out.putalpha(alpha)
+    return out
+
+
+def round_button(cell: Image.Image, correction: tuple[float, float]) -> Image.Image:
+    """Letter to the circle centre plus `correction` (2x px), content grown by 1 / (1 - trim) about
+    the centre, alpha cut by an anti-aliased disc of the circle radius."""
+    alpha = cell.getchannel("A")
+    box = alpha.point(lambda v: 255 if v > ROUND["circle_alpha"] else 0).getbbox()
+    cx, cy = (box[0] + box[2]) / 2, (box[1] + box[3]) / 2
+    r = ((box[2] - box[0]) / 2 + (box[3] - box[1]) / 2) / 2
+    inner = (ROUND["letter_radius"] * r) ** 2
+    hsv = cell.convert("RGB").convert("HSV")
+    s, v, a = hsv.getchannel("S").load(), hsv.getchannel("V").load(), alpha.load()
+    letter = Image.new("L", cell.size)
+    mark = letter.load()
+    for y in range(cell.height):
+        for x in range(cell.width):
+            if ((x - cx) ** 2 + (y - cy) ** 2 < inner and a[x, y] >= ROUND["letter_alpha"]
+                    and v[x, y] > ROUND["letter_value"] and s[x, y] < ROUND["letter_saturation"]):
+                mark[x, y] = 255
+    lbox = letter.getbbox()
+    lx, ly = (lbox[0] + lbox[2]) / 2, (lbox[1] + lbox[3]) / 2
+    k = 1 - ROUND["trim"]
+    dx = cx - lx + correction[0] * SCALE / 2 * k
+    dy = cy - ly + correction[1] * SCALE / 2 * k
+    out = cell.transform(cell.size, Image.Transform.AFFINE,
+                         (k, 0, cx - k * cx - dx * k, 0, k, cy - k * cy - dy * k), Image.Resampling.BICUBIC)
+    n = ROUND["disc_supersample"]
+    disc = Image.new("L", (cell.width * n, cell.height * n))
+    ImageDraw.Draw(disc).ellipse(((cx - r) * n, (cy - r) * n, (cx + r) * n, (cy + r) * n), fill=255)
+    out.putalpha(ImageChops.multiply(out.getchannel("A"), disc.resize(cell.size, Image.Resampling.LANCZOS)))
     return out
 
 
@@ -105,6 +140,10 @@ def upscale(ft2: Path) -> Path:
             alpha = up.getchannel("A").point(lambda a: 0 if a <= FAINT else a)
             up.putalpha(alpha)
             big.paste(up, (box[0] * SCALE, box[1] * SCALE))
+    for index in ROUND["glyphs"]:
+        x, y, w = glyphs[index]
+        cell = (int(x) * SCALE, int(y) * SCALE, int(x + w) * SCALE, int(y + height) * SCALE)
+        big.paste(round_button(big.crop(cell), tuple(ROUND["correction"][str(index)])), cell[:2])
     for index, box in boxes.items():
         cell = big.crop(tuple(v * SCALE for v in box)).convert("RGBa").resize(
             (box[2] - box[0], box[3] - box[1]), Image.Resampling.BOX)

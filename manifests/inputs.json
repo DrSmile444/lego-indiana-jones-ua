@@ -61,7 +61,7 @@
     {
       "id": "buttons-x4",
       "path": "local/buttons/BUTTONS_PC_NXG_X4.png",
-      "sha256": "214dd7bd0bcf8eda61e4f8e45987f746a116c138d10427a1d5e8464a48b511cb",
+      "sha256": "549ec085e29c4b19ba1779bccf04e431f95dc66453c7f89dc94b9c54014bb477",
       "source": "tools/fonts/upscale_buttons.py: the LEGO Star Wars III button font in game/LSW3/ enlarged four times with Real-ESRGAN. Derived from game art, so it stays in local/.",
       "levels": [
         "build: buttons"

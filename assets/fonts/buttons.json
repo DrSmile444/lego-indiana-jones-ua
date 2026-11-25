@@ -1,0 +1,27 @@
+{
+  "_note": "Button icons x4 (tools/fonts/upscale_buttons.py, docs/research/buttons.md). Identical in the Saga, Indiana Jones and Star Wars III repositories. Pixel values are in the 2x atlas of LEGO Star Wars III unless named otherwise.",
+  "upscale": {
+    "model": "realesr-animevideov3",
+    "scale": 4,
+    "margin": 3,
+    "border": 8,
+    "faint_alpha": 6
+  },
+  "round": {
+    "_note": "Face buttons A B X Y: the letter goes to the circle centre (plus an optical correction), the content grows by 1 / (1 - trim) about that centre, and an anti-aliased disc of the circle radius cuts the alpha.",
+    "glyphs": [1, 2, 3, 4],
+    "trim": 0.08,
+    "circle_alpha": 128,
+    "letter_radius": 0.75,
+    "letter_alpha": 200,
+    "letter_value": 170,
+    "letter_saturation": 110,
+    "disc_supersample": 4,
+    "correction": {
+      "1": [0, 0],
+      "2": [2, 0],
+      "3": [0, 6],
+      "4": [0, 1.5]
+    }
+  }
+}
