@@ -10,6 +10,7 @@ on:
       - 'docs/**'
       - 'translations/glossary.json'
       - 'manifests/releases/**'
+      - 'CHANGELOG.md'
       - '.github/workflows/pages.yml'
   workflow_dispatch:
 
